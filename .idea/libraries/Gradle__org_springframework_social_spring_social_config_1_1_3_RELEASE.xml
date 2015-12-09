@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.social:spring-social-config:1.1.3.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-config/1.1.3.RELEASE/c9e4318f1631365d19f1e0a73373656ed8165957/spring-social-config-1.1.3.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.social/spring-social-config/1.1.3.RELEASE/cdab1c370f29cc58f105186f4417a96f04ad3b05/spring-social-config-1.1.3.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
