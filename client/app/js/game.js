@@ -3,7 +3,7 @@ var castleDash = {
     castleDash.styling();
   },
   styling: function(){
-    game = new Phaser.Game(800, 240, Phaser.AUTO, 'game', { preload: castleDash.preload, create: castleDash.create, update: castleDash.update });
+    game = new Phaser.Game(800, 240, Phaser.AUTO, 'game', { preload: castleDash.preload, create: castleDash.create, update: castleDash.update, render: castleDash.render });
 
   },
   events: function(){
