@@ -7,7 +7,7 @@ var castleDash = {
         castleDash.styling();
     },
     styling: function() {
-        game = new Phaser.Game(800, 240, Phaser.AUTO, 'game', {
+        game = new Phaser.Game(800, 320, Phaser.AUTO, 'game', {
             preload: castleDash.preload,
             create: castleDash.create,
             update: castleDash.update,
@@ -19,9 +19,10 @@ var castleDash = {
 
     },
     preload: function() {
-        game.load.tilemap('map', 'assets/super_mario.json', null,
-            Phaser.Tilemap.TILED_JSON);
-        game.load.image('tiles', 'assets/super_mario.png');
+        castleStage.preload();
+        // game.load.tilemap('map', 'assets/super_mario.json', null,
+        //     Phaser.Tilemap.TILED_JSON);
+        // game.load.image('tiles', 'assets/super_mario.png');
         game.load.spritesheet('ninja',
             'assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
         game.load.spritesheet('sword', 'assets/sprites/Flame_Sword.png');
@@ -29,14 +30,15 @@ var castleDash = {
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
 
-        map = game.add.tilemap('map');
-        map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
+        // map = game.add.tilemap('map');
+        // map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
+        //
+        // layer = map.createLayer('World1');
+        //
+        // layer.resizeWorld();
+        castleStage.createBack();
 
-        layer = map.createLayer('World1');
-
-        layer.resizeWorld();
-
-        player = game.add.sprite(32, 160, 'ninja');
+        player = game.add.sprite(32, 0, 'ninja');
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
 
@@ -44,8 +46,11 @@ var castleDash = {
 
 
         game.physics.ninja.enableAABB(player);
+        game.physics.ninja.gravity = 2;
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
+
+        castleStage.createFront();
 
         cursors = game.input.keyboard.createCursorKeys();
         keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
@@ -60,7 +65,7 @@ var castleDash = {
 
     },
     update: function() {
-
+        castleStage.update();
         if (keyA.isDown || cursors.left.isDown) {
             //This keeps the player from moving to the left of the camera frame.
             //You can't go back, you can only go foward.
@@ -108,12 +113,12 @@ var castleDash = {
 
     },
     render: function() {
-        game.debug.body(player);
-        if (typeof sword === "object") {
-            // game.debug.body(sword);
-            game.debug.rectangle(sword);
-
-        }
+        // game.debug.body(player);
+        // if (typeof sword === "object") {
+        //     // game.debug.body(sword);
+        //     game.debug.rectangle(sword);
+        //
+        // }
 
     },
     game: {},
