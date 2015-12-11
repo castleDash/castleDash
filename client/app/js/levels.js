@@ -8,14 +8,6 @@ var patFormKennyTiles = [0,1,1,32,1,1,33,32,30,1,33,32,1,1,33,1,2,1,1,1,1,1,1,1,
 
 var castleStage = {
 
-// var map;
-// var ground;
-// var layer;
-// var slopeMap;
-// var tiles;
-
-
-
    preload: function(){
     game.load.tilemap('level', 'assets/levels/testLevel.json', null, Phaser.Tilemap.TILED_JSON);//pulls json file of the level
 	  game.load.image('tiles', 'assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art

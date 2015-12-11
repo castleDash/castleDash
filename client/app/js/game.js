@@ -61,6 +61,7 @@ var castleDash = {
 
         game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
         player.body.collideWorldBounds = true;
+        player.
 
 
     },
