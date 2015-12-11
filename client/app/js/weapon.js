@@ -1,3 +1,4 @@
+
 var castleWeapon = {
 
  preload: function(){
@@ -14,22 +15,27 @@ var castleWeapon = {
 
  update: function(){
    sword.visible=false;
-
  },
- attackLeft: function(){
+ attack: function(direction){
    sword.visible=true;
-   sword.scale.x=-1;
    sword.y=player.y;
-   sword.x=player.x-20;
-   player.frame = 3;
-
+   if(direction==="left"){
+     sword.scale.x=-1;
+     sword.x=player.x-20;
+     player.frame = 3;
+    }
+    else {
+      sword.scale.x=1;
+      sword.x=player.x+20;
+      player.frame = 8;
+    }
  },
- attackRight: function(){
-   sword.visible=true;
-   sword.scale.x=1;
-   sword.y=player.y;
-   sword.x=player.x+20;
-   player.frame = 8;
- },
+  swordExists: function(){
+    return (typeof sword === "object");
+  }
 
+  killSword: function(){
+    sword.kill();
+    sword=null;
+  }
 };
