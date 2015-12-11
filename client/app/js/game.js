@@ -45,26 +45,9 @@ var castleDash = {
     update: function() {
 
         if (castleControl.leftCtrl()) {
-            //This keeps the player from moving to the left of the camera frame.
-            //You can't go back, you can only go foward.
-            var gap = player.body.x - game.camera.x;
-            if (gap > 0) {
-                //  Move to the left
-                if (gap < 348) {
-                    player.body.moveLeft(gap - 48);
-
-                } else {
-                    player.body.moveLeft(300);
-                }
-                player.animations.play('left');
-            }
-
+            castlePlayer.moveLeft();
         } else if (castleControl.rightCtrl()) {
-            //  Move to the right
-            player.body.moveRight(300);
-            player.animations.play('right');
-
-
+            castlePlayer.moveRight();
         } else if (castleControl.attackCtrl()) {
 
             if (player.frame < 4) {
@@ -86,7 +69,7 @@ var castleDash = {
             }
         }
         if (castleControl.jumpCtrl()) {
-            player.body.moveUp(350);
+            castlePlayer.jump();
         }
 
     },

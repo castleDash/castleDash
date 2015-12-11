@@ -21,6 +21,32 @@ var castlePlayer= {
 
   },
 
+  moveLeft: function(){
+    //This keeps the player from moving to the left of the camera frame.
+    //You can't go back, you can only go foward.
+    var gap = player.body.x - game.camera.x;
+    if (gap > 0) {
+        //  Move to the left
+        if (gap < 348) {
+            player.body.moveLeft(gap - 48);
+
+        } else {
+            player.body.moveLeft(300);
+        }
+        player.animations.play('left');
+    }
+  },
+
+  moveRight: function(){
+    //  Move to the right
+    player.body.moveRight(300);
+    player.animations.play('right');
+  },
+
+  jump: function(){
+    player.body.moveUp(350);
+  }
+
 
 
 };
