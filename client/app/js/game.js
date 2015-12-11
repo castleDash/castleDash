@@ -7,7 +7,7 @@ var castleDash = {
         castleDash.styling();
     },
     styling: function() {
-        game = new Phaser.Game(800, 240, Phaser.AUTO, 'game', {
+        game = new Phaser.Game(800, 320, Phaser.AUTO, 'game', {
             preload: castleDash.preload,
             create: castleDash.create,
             update: castleDash.update,
@@ -19,30 +19,32 @@ var castleDash = {
 
     },
     preload: function() {
-
+        castleStage.preload();
+        castleWeapon.preload();
         castlePlayer.preload();
-        // castleWeapon.preload();
-        game.load.tilemap('map', 'assets/super_mario.json', null,
-            Phaser.Tilemap.TILED_JSON);
-        game.load.image('tiles', 'assets/super_mario.png');
-
-
+        game.load.spritesheet('sword', 'assets/sprites/Flame_Sword.png');
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
 
+
+        castleStage.createBack();
         castlePlayer.create();
 
+        game.physics.ninja.gravity = 2;
+
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
+
+        castleStage.createFront();
 
         castleControl.create();
 
         game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
 
-
-
     },
     update: function() {
+
+        castleStage.update();
 
         if (castleControl.leftCtrl()) {
             castlePlayer.moveLeft();
@@ -50,16 +52,16 @@ var castleDash = {
             castlePlayer.moveRight();
         } else if (castleControl.attackCtrl()) {
 
+
             if (player.frame < 4) {
-                  sword = castleDash.attack("left");
+                  castleWeapon.attack("left");
 
             } else {
-                  sword = castleDash.attack("right");
+                  castleWeapon.attack("right");
             }
         } else {
-            if (typeof sword === "object") {
-                sword.kill();
-                sword = undefined;
+            if (castleWeapon.swordExists()){
+              castleWeapon.killSword();
             }
             player.animations.stop();
             if (player.frame < 4) {
@@ -68,12 +70,13 @@ var castleDash = {
                 player.frame = 5;
             }
         }
+
         if (castleControl.jumpCtrl()) {
             castlePlayer.jump();
+
         }
 
     },
-
     render: function() {
         // game.debug.body(player);
         // if (typeof sword === "object") {
@@ -84,9 +87,10 @@ var castleDash = {
 
     },
     game: {},
-  };
 
-(function() {
-  castleDash.init();
 
-}());
+};
+
+$(document).ready(function() {
+    castleDash.init();
+});
