@@ -21,7 +21,7 @@ var castleDash = {
     preload: function() {
 
         castlePlayer.preload();
-        // castleWeapon.preload();
+        castleWeapon.preload();
         game.load.tilemap('map', 'assets/super_mario.json', null,
             Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/super_mario.png');
@@ -29,6 +29,7 @@ var castleDash = {
 
     },
     create: function() {
+        // castleWeapon.create();
         game.physics.startSystem(Phaser.Physics.NINJA);
 
         castlePlayer.create();
@@ -68,15 +69,14 @@ var castleDash = {
         } else if (castleControl.attackCtrl()) {
 
             if (player.frame < 4) {
-                  sword = castleDash.attack("left");
+                  castleWeapon.attack("left");
 
             } else {
-                  sword = castleDash.attack("right");
+                  castleWeapon.attack("right");
             }
         } else {
-            if (typeof sword === "object") {
-                sword.kill();
-                sword = undefined;
+            if (castleWeapon.swordExists()) {
+                castleWeapon.killSword();
             }
             player.animations.stop();
             if (player.frame < 4) {
