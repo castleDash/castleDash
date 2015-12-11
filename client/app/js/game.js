@@ -19,49 +19,32 @@ var castleDash = {
 
     },
     preload: function() {
+
+        castlePlayer.preload();
+        // castleWeapon.preload();
         game.load.tilemap('map', 'assets/super_mario.json', null,
             Phaser.Tilemap.TILED_JSON);
         game.load.image('tiles', 'assets/super_mario.png');
-        game.load.spritesheet('ninja',
-            'assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
-        game.load.spritesheet('sword', 'assets/sprites/Flame_Sword.png');
+
+
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
 
-        map = game.add.tilemap('map');
-        map.addTilesetImage('SuperMarioBros-World1-1', 'tiles');
-
-        layer = map.createLayer('World1');
-
-        layer.resizeWorld();
-
-        player = game.add.sprite(32, 160, 'ninja');
-        player.animations.add('left', [0, 1, 2, 3], 10, true);
-        player.animations.add('right', [5, 6, 7, 8], 10, true);
-
-
-
-
-        game.physics.ninja.enableAABB(player);
+        castlePlayer.create();
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
-        cursors = game.input.keyboard.createCursorKeys();
-        keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
-        keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
-        keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
-        keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
-        keyK = game.input.keyboard.addKey(Phaser.Keyboard.K);
+        castleControl.create();
 
         game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
-        player.body.collideWorldBounds = true;
+
 
 
     },
     update: function() {
 
-        if (keyA.isDown || cursors.left.isDown) {
+        if (castleControl.leftCtrl()) {
             //This keeps the player from moving to the left of the camera frame.
             //You can't go back, you can only go foward.
             var gap = player.body.x - game.camera.x;
@@ -76,13 +59,13 @@ var castleDash = {
                 player.animations.play('left');
             }
 
-        } else if (keyD.isDown || cursors.right.isDown) {
+        } else if (castleControl.rightCtrl()) {
             //  Move to the right
             player.body.moveRight(300);
             player.animations.play('right');
 
 
-        } else if (keyK.isDown) {
+        } else if (castleControl.attackCtrl()) {
 
             if (player.frame < 4) {
                   sword = castleDash.attack("left");
@@ -102,54 +85,25 @@ var castleDash = {
                 player.frame = 5;
             }
         }
-        if (keyW.isDown || cursors.up.isDown) {
+        if (castleControl.jumpCtrl()) {
             player.body.moveUp(350);
         }
 
     },
-    render: function() {
-        game.debug.body(player);
-        if (typeof sword === "object") {
-            // game.debug.body(sword);
-            game.debug.rectangle(sword);
 
-        }
+    render: function() {
+        // game.debug.body(player);
+        // if (typeof sword === "object") {
+        //     // game.debug.body(sword);
+        //     game.debug.rectangle(sword);
+        //
+        // }
 
     },
     game: {},
-    createSword: function(direction) {
-      if(direction==="left"){
-        sword = game.add.sprite(-SWORD_X, SWORD_Y, 'sword');
-        sword.scale.setTo(-SWORD_SCALE, SWORD_SCALE);
-      } else {
-        sword = game.add.sprite(SWORD_X, SWORD_Y, 'sword');
-        sword.scale.setTo(SWORD_SCALE, SWORD_SCALE);
-      }
-      player.addChild(sword);
-      game.physics.ninja.enable(sword);
-      sword.body.gravityScale = 0;
-      sword.visible = true;
-      return sword;
-    },
-    attack: function(direction) {
-        if( typeof sword !="object"){
-          sword = castleDash.createSword(direction);
-        }
-        if(direction==="left"){
-          sword.scale.x=-1;
-          sword.anchor.setTo(-.8,1)
-          player.frame = 3;
-        }
-        else{
-          sword.scale.x=1;
-          sword.anchor.setTo(0,1)
-          player.frame = 8;
-        }
-        return sword;
-    }
+  };
 
-};
+(function() {
+  castleDash.init();
 
-$(document).ready(function() {
-    castleDash.init();
-});
+}());
