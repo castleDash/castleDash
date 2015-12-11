@@ -7,35 +7,39 @@ var castleWeapon = {
  },
 
  create: function(){
-   sword = game.add.sprite(0, 0, 'sword');
-   sword.anchor.setTo(0.5,0.5);
-   sword.scale.setTo(1,1);
-   sword.visible=true;
+   castleWeapon.sword = game.add.sprite(0, 0, 'sword');
+   castleWeapon.sword.anchor.setTo(0.5,0.5);
+   castleWeapon.sword.scale.setTo(1,1);
+   castleWeapon.sword.visible=true;
  },
 
  update: function(){
-   sword.visible=false;
+   castleWeapon.sword.visible=false;
  },
  attack: function(direction){
-   sword.visible=true;
-   sword.y=player.y;
+   if(!castleWeapon.swordExists()){
+     castleWeapon.create();
+   }
+   castleWeapon.sword.visible=true;
+   castleWeapon.sword.y=player.y;
    if(direction==="left"){
-     sword.scale.x=-1;
-     sword.x=player.x-20;
+     castleWeapon.sword.scale.x=-1;
+     castleWeapon.sword.x=player.x-20;
      player.frame = 3;
     }
     else {
-      sword.scale.x=1;
-      sword.x=player.x+20;
+      castleWeapon.sword.scale.x=1;
+      castleWeapon.sword.x=player.x+20;
       player.frame = 8;
     }
  },
   swordExists: function(){
-    return (typeof sword === "object");
-  }
+    return (typeof castleWeapon.sword === "object");
+  },
 
   killSword: function(){
-    sword.kill();
-    sword=null;
-  }
+    castleWeapon.sword.kill();
+    castleWeapon.sword=undefined;
+  },
+  sword: ""
 };
