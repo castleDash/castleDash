@@ -56,7 +56,6 @@ var castlePlayer= {
       if (this.jumpCount<=1){
         PLAYER_SPEED = 10;
         player.body.moveUp((this.jumpCount+1)*450);
-        console.log("jumping!", this.jumpCount);
         this.jumpCount++;
       }
 

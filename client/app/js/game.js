@@ -52,6 +52,7 @@ var castleDash = {
         castleStage.update();
         castleHazards.update();
         castlePlayer.update();
+        castleEnemy.update();
         if(player.body.touching.down){
           PLAYER_SPEED = 50;
         }
@@ -86,10 +87,10 @@ var castleDash = {
 
         // ENEMY MOVEMENT
         var dist = enemy.body.x - player.body.x;
-        if(dist < 250 && dist > 0) {
+        if(dist < 250 && dist > 5) {
           castleEnemy.moveLeft();
         }
-        else if(dist < 0 && dist > -250){
+        else if(dist < -5 && dist > -250){
           castleEnemy.moveRight();
         }
         else{

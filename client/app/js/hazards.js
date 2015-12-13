@@ -1,7 +1,7 @@
 var HAZARD_MINGAP = 400;
 var HAZARD_MAXGAP = 100;
-var MIN_HAZARDS = 5;
-var MAX_HAZARDS = 7;
+var MIN_HAZARDS = 0;
+var MAX_HAZARDS = 0;
 
 var castleHazards = {
     preload: function() {

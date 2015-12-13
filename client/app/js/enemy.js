@@ -1,4 +1,4 @@
-var ENEMY_SPEED = 10;
+var ENEMY_SPEED = 15;
 
 var castleEnemy = {
 
@@ -19,7 +19,8 @@ var castleEnemy = {
     enemy.body.collideWorldBounds = true;
   },
 
-  update: function(){},
+  update: function(){
+  },
 
   moveRight:function(){
     enemy.body.moveRight(ENEMY_SPEED);
