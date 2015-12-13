@@ -1,4 +1,4 @@
-var PLAYER_SPEED = 300;
+var PLAYER_SPEED = 50;
 var castlePlayer= {
 
 
@@ -11,13 +11,19 @@ var castlePlayer= {
     player = game.add.sprite(32, 0, 'ninja');
     player.animations.add('left', [0, 1, 2, 3], 10, true);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
-    player.scale.setTo(0.8,1);
+    player.scale.setTo(0.8,0.7);
     game.physics.ninja.enableAABB(player);
     player.scale.setTo(1,1);
+    player.body.bounce = 0;
+    player.body.friction = 0.14;
+    player.anchor.setTo(0.5,0.65);
     player.body.collideWorldBounds = true;
   },
 
   update: function(){
+    if(player.body.touching.down){
+      this.jumpCount=0;
+    }
 
 
   },
@@ -43,11 +49,17 @@ var castlePlayer= {
     //  Move to the right
     player.body.moveRight(PLAYER_SPEED);
     player.animations.play('right');
+
   },
 
   jump: function(){
-    player.body.moveUp(350);
-  }
+
+      PLAYER_SPEED = 10;
+      player.body.moveUp(450);
+
+  },
+
+
 
 
 
