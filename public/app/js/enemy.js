@@ -4,7 +4,7 @@ var castleEnemy = {
 
   preload: function(){
     game.load.spritesheet('orc',
-        'assets/sprites/orc_piratess.png', 64, 64, 36);
+        'app/assets/sprites/orc_piratess.png', 64, 64, 36);
 
   },
 

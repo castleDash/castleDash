@@ -2,7 +2,7 @@
 var castleWeapon = {
 
  preload: function(){
-   game.load.spritesheet('sword', 'assets/sprites/Flame_Sword.png');
+   game.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
 
  },
 
