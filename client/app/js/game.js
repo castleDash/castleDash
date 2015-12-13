@@ -2,7 +2,7 @@ var SWORD_SCALE = 1;
 var SWORD_Y = -15;
 var SWORD_X = 20;
 var SWORD_ANCHOR = .5;
-
+var NINJA_GRAVITY = .5;
 
 
 var castleDash = {
@@ -25,6 +25,7 @@ var castleDash = {
         castleStage.preload();
         castleWeapon.preload();
         castlePlayer.preload();
+        castleHazards.preload();
         castleEnemy.preload();
     },
     create: function() {
@@ -33,9 +34,9 @@ var castleDash = {
 
         castleStage.createBack();
         castlePlayer.create();
+        castleHazards.create();
         castleEnemy.create();
-
-        game.physics.ninja.gravity = 0.5;
+        game.physics.ninja.gravity = NINJA_GRAVITY;
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
@@ -49,11 +50,11 @@ var castleDash = {
     update: function() {
 
         castleStage.update();
+        castleHazards.update();
         castlePlayer.update();
         if(player.body.touching.down){
           PLAYER_SPEED = 50;
         }
-            // PLAYER MOVEMENT
         if (castleControl.leftCtrl()) {
             castlePlayer.moveLeft();
         } else if (castleControl.rightCtrl()) {

@@ -50,12 +50,129 @@
          "name":"deathLayer",
          "opacity":1,
          "type":"tilelayer",
+         "visible":false,
+         "width":100,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "height":10,
+         "name":"trapLayer",
+         "objects":[
+                {
+                 "height":26,
+                 "id":1,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":28,
+                 "x":869,
+                 "y":261
+                }, 
+                {
+                 "height":20,
+                 "id":2,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":24,
+                 "x":915,
+                 "y":266
+                }, 
+                {
+                 "height":18,
+                 "id":3,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":28,
+                 "x":972,
+                 "y":268
+                }, 
+                {
+                 "height":17,
+                 "id":4,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":18,
+                 "x":1023,
+                 "y":270
+                }, 
+                {
+                 "height":1,
+                 "id":5,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":663,
+                 "y":-15
+                }, 
+                {
+                 "height":32,
+                 "id":6,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":34,
+                 "x":700,
+                 "y":111
+                }, 
+                {
+                 "height":35,
+                 "id":7,
+                 "name":"",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":33,
+                 "x":767,
+                 "y":113
+                }],
+         "opacity":1,
+         "type":"objectgroup",
          "visible":true,
          "width":100,
          "x":0,
          "y":0
         }],
- "nextobjectid":1,
+ "nextobjectid":8,
  "orientation":"orthogonal",
  "properties":
     {
