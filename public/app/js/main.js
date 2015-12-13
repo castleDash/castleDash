@@ -18,10 +18,8 @@ var login = {
           $("#login").prepend("Incorrect Login");
         })
         .then(function(data) {
-          var msg = data.responseJSON.message;
-          console.log(data);
           //check for successful login
-          if(msg==="success"){
+          if(data==="success"){
             $("#login").addClass("hidden");
             $("#game").removeClass("hidden");
           }
