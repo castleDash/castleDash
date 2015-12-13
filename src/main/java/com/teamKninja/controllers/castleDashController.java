@@ -65,6 +65,4 @@ public class castleDashController {
         Save save = new Save();
     }
 
-
-
 }
