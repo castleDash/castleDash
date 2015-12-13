@@ -22,6 +22,7 @@ var castleDash = {
         castleStage.preload();
         castleWeapon.preload();
         castlePlayer.preload();
+        castleHazards.preload();
         game.load.spritesheet('sword', 'assets/sprites/Flame_Sword.png');
     },
     create: function() {
@@ -30,8 +31,8 @@ var castleDash = {
 
         castleStage.createBack();
         castlePlayer.create();
-
-        game.physics.ninja.gravity = 2;
+        castleHazards.create();
+        game.physics.ninja.gravity = 0.7;
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
@@ -45,7 +46,7 @@ var castleDash = {
     update: function() {
 
         castleStage.update();
-
+        castleHazards.update();
         if (castleControl.leftCtrl()) {
             castlePlayer.moveLeft();
         } else if (castleControl.rightCtrl()) {
