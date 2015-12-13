@@ -52,17 +52,36 @@ public class castleDashController {
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public void login(HttpSession session, String username, String password) throws Exception {
         User user = users.findOneByUsername(username);
-        if (!PasswordHash.validatePassword(password, user.password)) {
-            throw new Exception("Wrong Password");
+        if (user == null){
+
+        }
+        else if (!PasswordHash.validatePassword(password, user.password)) {
+            wrongPassword();
         }
         else {
+            loginSuccess();
             session.setAttribute("username", username);
         }
     }
 
     @RequestMapping (path = "/createSave", method = RequestMethod.POST)
-    public void saveGame(HttpSession session, String name){
-        Save save = new Save();
+    public void saveGame(HttpSession session, String username, String name){
+
+    }
+
+    public static String wrongPassword(){
+        String wrongPassword = "Wrong password";
+        return wrongPassword;
+    }
+
+    public static String invalidUser(){
+        String invalidUser = "Invalid user";
+        return invalidUser;
+    }
+
+    public static String loginSuccess(){
+        String loginSuccess = "Login success";
+        return loginSuccess;
     }
 
 }
