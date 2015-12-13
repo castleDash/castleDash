@@ -1,15 +1,18 @@
-var HAZARD_MINGAP = 200;
+var HAZARD_MINGAP = 400;
 var HAZARD_MAXGAP = 100;
+var MIN_HAZARDS = 0;
+var MAX_HAZARDS = 0;
+
 var castleHazards = {
     preload: function() {
-        game.load.image('spike', 'assets/sprites/Spike_Pixel.png');
+        game.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     },
     create: function() {
-        var numberOfSpikes = this.getRandomIntInclusive(5, 10);
+        var numberOfSpikes = this.getRandomIntInclusive(MIN_HAZARDS, MAX_HAZARDS);
         this.spikes = [];
         for (var a = 0; a < numberOfSpikes; a++) {
             var randomX = this.generateSpikeX();
-            var randomY = this.getRandomIntInclusive(0, 100);
+            var randomY = this.getRandomIntInclusive(0, HAZARD_MAXGAP);
             testSpike = game.add.sprite(randomX, randomY, 'spike');
             testSpike.scale.setTo(1, 0.5);
             testSpike.enableBody = true;

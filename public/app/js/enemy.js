@@ -1,10 +1,10 @@
-var ENEMY_SPEED = 10;
+var ENEMY_SPEED = 15;
 
 var castleEnemy = {
 
   preload: function(){
     game.load.spritesheet('orc',
-        'assets/sprites/orc_piratess.png', 64, 64, 36);
+        'app/assets/sprites/orc_piratess.png', 64, 64, 36);
 
   },
 
@@ -19,7 +19,8 @@ var castleEnemy = {
     enemy.body.collideWorldBounds = true;
   },
 
-  update: function(){},
+  update: function(){
+  },
 
   moveRight:function(){
     enemy.body.moveRight(ENEMY_SPEED);

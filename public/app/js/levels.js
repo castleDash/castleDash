@@ -11,12 +11,12 @@ var patFormKennyTiles = [0, 1, 1, 32, 1, 1, 33, 32, 30, 1, 33, 32, 1, 1, 33, 1,
 ]; //SERIOUSLY, DO NOT TOUCH THIS, THIS IS USED WITH NINJA PHYSICS AND THE patformkenney-32 TILESET
 var castleStage = {
     preload: function() {
-        game.load.tilemap('level', 'assets/levels/testLevel.json', null,
+        game.load.tilemap('level', 'app/assets/levels/testLevel.json', null,
             Phaser.Tilemap.TILED_JSON); //pulls json file of the level
         game.load.image('tiles',
-            'assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
-        game.load.image('tree', 'assets/tiledMaps/PineTree.png')
-        game.load.image('sky', 'assets/backgroundArt/sky.png');
+            'app/assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
+        game.load.image('tree', 'app/assets/tiledMaps/PineTree.png')
+        game.load.image('sky', 'app/assets/backgroundArt/sky.png');
     },
     createBack: function() {
         //just some  nicer art that's not part of the level object
