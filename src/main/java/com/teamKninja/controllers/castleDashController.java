@@ -50,17 +50,18 @@ public class castleDashController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public void login(HttpSession session, String username, String password) throws Exception {
+    public String login(HttpSession session, String username, String password) throws Exception {
         User user = users.findOneByUsername(username);
         if (user == null){
+            return "Invalid users";
 
         }
         else if (!PasswordHash.validatePassword(password, user.password)) {
-            wrongPassword();
+            return "Wrong password";
         }
         else {
-            loginSuccess();
             session.setAttribute("username", username);
+            return "success";
         }
     }
 
@@ -69,19 +70,5 @@ public class castleDashController {
 
     }
 
-    public static String wrongPassword(){
-        String wrongPassword = "Wrong password";
-        return wrongPassword;
-    }
-
-    public static String invalidUser(){
-        String invalidUser = "Invalid user";
-        return invalidUser;
-    }
-
-    public static String loginSuccess(){
-        String loginSuccess = "Login success";
-        return loginSuccess;
-    }
 
 }
