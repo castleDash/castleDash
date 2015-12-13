@@ -1,1 +1,6 @@
 .DS_Store
+bower_components
+*.bin
+*.DS_Store
+*.db
+*.xml
