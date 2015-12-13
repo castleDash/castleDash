@@ -1,7 +1,9 @@
 var SWORD_SCALE = 1;
 var SWORD_Y = -15;
 var SWORD_X = 20;
-var SWORD_ANCHOR = .5;
+var SWORD_ANCHOR = 0.5;
+
+var WORLD_DEATH = 270;
 
 
 
@@ -47,7 +49,9 @@ var castleDash = {
 
     },
     update: function() {
-
+        if(player.body.y > WORLD_DEATH){
+          player.kill();
+        }
         castleStage.update();
         castlePlayer.update();
         if(player.body.touching.down){
@@ -85,10 +89,10 @@ var castleDash = {
 
         // ENEMY MOVEMENT
         var dist = enemy.body.x - player.body.x;
-        if(dist < 250 && dist > 0) {
+        if(dist < 250 && dist > 5) {
           castleEnemy.moveLeft();
         }
-        else if(dist < 0 && dist > -250){
+        else if(dist < -5 && dist > -250){
           castleEnemy.moveRight();
         }
         else{
