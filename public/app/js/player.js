@@ -4,7 +4,7 @@ var castlePlayer= {
 
   preload: function(){
     game.load.spritesheet('ninja',
-        'assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
+        'app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
   },
 
   create: function(){

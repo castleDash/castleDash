@@ -2,7 +2,7 @@ var HAZARD_MINGAP = 200;
 var HAZARD_MAXGAP = 100;
 var castleHazards = {
     preload: function() {
-        game.load.image('spike', 'assets/sprites/Spike_Pixel.png');
+        game.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     },
     create: function() {
         var numberOfSpikes = this.getRandomIntInclusive(5, 10);
