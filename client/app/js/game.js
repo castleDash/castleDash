@@ -2,6 +2,9 @@ var SWORD_SCALE = 1;
 var SWORD_Y = -15;
 var SWORD_X = 20;
 var SWORD_ANCHOR = .5;
+
+
+
 var castleDash = {
     init: function() {
         castleDash.styling();
@@ -112,5 +115,6 @@ var castleDash = {
 };
 
 $(document).ready(function() {
+    login.init();
     castleDash.init();
 });
