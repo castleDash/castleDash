@@ -1,7 +1,10 @@
-#game {
+#game, #login {
   width: 800px;
   margin: auto;
   text-align: center; }
 
 h1 {
   text-align: center; }
+
+.hidden {
+  display: none; }
