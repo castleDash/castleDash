@@ -11,7 +11,7 @@ var castleStage = {
    preload: function(){
     game.load.tilemap('level', 'assets/levels/testLevel.json', null, Phaser.Tilemap.TILED_JSON);//pulls json file of the level
 	  game.load.image('tiles', 'assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
-		game.load.image('tree', 'assets/tiledMaps/PineTree.png')
+		game.load.image('tree', 'assets/tiledMaps/PineTree.png');
     game.load.image('sky', 'assets/backgroundArt/sky.png');
    },
 
@@ -52,6 +52,7 @@ var castleStage = {
      for (var i = 0; i < tiles.length; i++)
 	{
 	player.body.aabb.collideAABBVsTile(tiles[i].tile);
+  enemy.body.aabb.collideAABBVsTile(tiles[i].tile);
 	}
    }
 
