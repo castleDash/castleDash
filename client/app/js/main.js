@@ -9,18 +9,18 @@ var login = {
       var password = $("input[type='password']");
       $("input[type='username']").val("");
       $("input[type='password']").val("");
-      $.ajax({
-        method: "POST",
-        url: "/login",
-        data: { username: username, password: password}
-      })
-        .success(function( data ) {
-          //check for successful login
-          if (data){
+      // $.ajax({
+      //   method: "POST",
+      //   url: "/login",
+      //   data: { username: username, password: password}
+      // })
+      //   .success(function( data ) {
+      //     //check for successful login
+      //     if (data){
             $("#login").addClass("hidden");
             $("#game").removeClass("hidden");
-          };
-        });
+        //   };
+        // });
     })
     $("#registerBtn").on("click", function () {
       var username = $("input[type='username']");
