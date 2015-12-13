@@ -1,3 +1,4 @@
+
 var castleControl = {
 
 
@@ -31,7 +32,9 @@ var castleControl = {
 
   jumpCtrl: function(){
     if(keyW.isDown || cursors.up.isDown || keyJump.isDown){
-      return true;
+      if(player.body.touching.down){
+        return true;
+      }
     }
   }
 
