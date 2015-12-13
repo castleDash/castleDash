@@ -46,7 +46,8 @@ var castleStage = {
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
+
     },
-    tiles:[]
-};
+    tiles:[]};
