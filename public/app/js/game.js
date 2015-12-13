@@ -58,6 +58,7 @@ var castleDash = {
         castleStage.update();
         castleHazards.update();
         castlePlayer.update();
+        castleEnemy.update();
         if(player.body.touching.down){
           PLAYER_SPEED = 50;
         }

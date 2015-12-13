@@ -53,12 +53,14 @@ var castlePlayer= {
   },
 
   jump: function(){
-
-      PLAYER_SPEED = 10;
-      player.body.moveUp(450);
+      if (this.jumpCount<=1){
+        PLAYER_SPEED = 10;
+        player.body.moveUp((this.jumpCount+1)*450);
+        this.jumpCount++;
+      }
 
   },
-
+  jumpCount:0
 
 
 
