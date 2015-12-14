@@ -5,7 +5,7 @@ var castleStage = {
             Phaser.Tilemap.TILED_JSON); //pulls json file of the level
         game.load.image('tiles',
             'app/assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
-        game.load.image('tree', 'app/assets/tiledMaps/PineTree.png')
+        game.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
         game.load.image('sky', 'app/assets/backgroundArt/sky.png');
         game.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     },
