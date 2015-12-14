@@ -38,13 +38,16 @@ var login = {
         url: "/createUser",
         data: { username: username, password: password}
       })
-        .success(function( data ) {
-          //check for successful login
-          if (data){
-            $("#login").addClass("hidden");
-            $("#game").removeClass("hidden");
-          };
-        });
+      .then(function(data) {
+        //check for successful login
+        if(data==="success"){
+          $("#login").addClass("hidden");
+          $("#game").removeClass("hidden");
+        }
+        else{
+          $("#login").prepend("Username invalid");
+        }
+      });
     })
   }
 
