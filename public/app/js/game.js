@@ -124,5 +124,4 @@ var castleDash = {
 
 $(document).ready(function() {
     login.init();
-    castleDash.init();
 });

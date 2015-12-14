@@ -22,6 +22,7 @@ var login = {
           if(data==="success"){
             $("#login").addClass("hidden");
             $("#game").removeClass("hidden");
+            castleDash.init();
           }
           else{
             $("#login").prepend("Incorrect Login");
@@ -43,6 +44,7 @@ var login = {
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
+          castleDash.init();
         }
         else{
           $("#login").prepend("Username invalid");
