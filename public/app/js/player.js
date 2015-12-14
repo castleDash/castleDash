@@ -45,7 +45,7 @@ var castlePlayer = {
         if (castleControl.jumpCtrl()) {
             castlePlayer.jump();
         }
-        
+
         //world kill if falls
         if (player.body.y > WORLD_DEATH) {
             player.kill();
@@ -84,9 +84,11 @@ var castlePlayer = {
     },
 
     jump: function() {
-
+      if(player.body.touching.down){
         PLAYER_SPEED = 10;
         player.body.moveUp(450);
+      }
+
 
     },
 
