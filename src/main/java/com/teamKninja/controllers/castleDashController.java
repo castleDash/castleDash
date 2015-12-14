@@ -42,11 +42,17 @@ public class castleDashController {
     }
 
     @RequestMapping(path = "/createUser", method = RequestMethod.POST)
-    public void createUser(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        User user = new User();
-        user.username = username;
-        user.password = PasswordHash.createHash(password);
-        users.save(user);
+    public String createUser(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
+        User user = users.findOneByUsername(username);
+        if (user == null) {
+            user = new User();
+            user.username = username;
+            user.password = PasswordHash.createHash(password);
+            users.save(user);
+            return "success";
+        } else{
+            return "User already exists";
+        }
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
