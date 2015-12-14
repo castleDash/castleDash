@@ -18,6 +18,8 @@ var castlePlayer = {
         player.body.friction = 0.14;
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
+        player.frame=5;
+        castlePlayer.updateStatsDash();
     },
 
     update: function() {
@@ -93,7 +95,9 @@ var castlePlayer = {
 
 
     },
+    damagePlayer: function(){
 
+    }
     resolveDeath: function() {
         if (castleWeapon.swordExists()) {
             enemy.kill();
@@ -105,9 +109,28 @@ var castlePlayer = {
     killPlayer: function(){
       player.kill();
       login.gameOver();
+    },
+    health: 6,
+    gold: 100,
+    weapon: 1,
+    potion: 1,
+    getStats: function(){
+      //ajaxy stuff
+      //this.health = stuff;
+    },
+    saveStats: function(){
+      //ajaxy stuff
+      //data.health = this.health
+    },
+    updateStatsDash: function(){
+      //this is where the ajax call will go
+
+      dashplayer = {health:this.health, gold:this.gold, weapon:this.weapon, potion:this.potion};
+
+      var dashTmpl = _.template(dashTemplate);
+      var healthHTML = getHearts(dashplayer.health);
+      $(".messages").html(dashTmpl(dashplayer)+healthHTML);
     }
-
-
 
 
 };
