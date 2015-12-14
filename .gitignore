@@ -3,4 +3,7 @@ bower_components
 *.bin
 *.DS_Store
 *.db
-*.xml
+.idea
+build
+.gradle
+.xml
