@@ -27,5 +27,24 @@ header, footer, .messages {
 footer {
   height: 50px; }
 
+.messages {
+  width: 800px;
+  margin: auto; }
+
 .hidden {
   display: none; }
+
+.weapon, .health, .coin {
+  border: 4px solid gray;
+  margin: 2px;
+  display: inline-block; }
+  .weapon img, .health img, .coin img {
+    height: 64px; }
+
+.coin {
+  height: 72px;
+  vertical-align: top; }
+  .coin img {
+    height: 32px; }
+  .coin p {
+    margin: 8; }

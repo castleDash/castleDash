@@ -18,6 +18,11 @@ var castlePlayer = {
         player.body.friction = 0.14;
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
+        player.frame=5;
+        this.health=6;
+        this.immunity=false;
+        castlePlayer.getStats();
+        castlePlayer.updateStatsDash();
     },
 
     update: function() {
@@ -53,9 +58,9 @@ var castlePlayer = {
 
 
 
-        game.physics.ninja.overlap(player, enemy, castlePlayer.resolveDeath,
+        game.physics.ninja.overlap(player, enemy, castlePlayer.fightEnemy,
             null, this);
-        game.physics.ninja.overlap(player, spikes, castlePlayer.killPlayer,
+        game.physics.ninja.overlap(player, spikes, castlePlayer.damagePlayer,
             null, this);
 
     },
@@ -93,21 +98,54 @@ var castlePlayer = {
 
 
     },
-
-    resolveDeath: function() {
+    damagePlayer: function(){
+      if (!this.immunity){
+        this.health--;
+        this.saveStats();
+        this.updateStatsDash();
+        if(this.health<=0){
+          this.killPlayer();
+        }
+        this.immunity=true;
+        game.time.events.add(Phaser.Timer.SECOND * 5, this.loseImmunity, this);
+      }
+    },
+    loseImmunity: function(){
+      this.immunity=false;
+    },
+    fightEnemy: function() {
         if (castleWeapon.swordExists()) {
             enemy.kill();
         }
         else {
-            this.killPlayer();
+            this.damagePlayer();
         }
     },
     killPlayer: function(){
       player.kill();
       login.gameOver();
+    },
+    health: 6,
+    gold: 100,
+    weapon: 1,
+    potion: 1,
+    getStats: function(){
+      //ajaxy stuff
+      //this.health = stuff;
+    },
+    saveStats: function(){
+      //ajaxy stuff
+      //data.health = this.health
+    },
+    updateStatsDash: function(){
+      //this is where the ajax call will go
+
+      dashplayer = {health:this.health, gold:this.gold, weapon:this.weapon, potion:this.potion};
+
+      var dashTmpl = _.template(dashTemplate);
+      var healthHTML = getHearts(dashplayer.health);
+      $(".messages").html(dashTmpl(dashplayer)+healthHTML);
     }
-
-
 
 
 };
