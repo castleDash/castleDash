@@ -29,8 +29,8 @@ var login = {
         });
     })
     $("#registerBtn").on("click", function () {
-      var username = $("input[type='username']");
-      var password = $("input[type='password']");
+      var username = $("input[type='username']").val();
+      var password = $("input[type='password']").val();
       $("input[type='username']").val("");
       $("input[type='password']").val("");
       $.ajax({
