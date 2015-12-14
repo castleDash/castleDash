@@ -14,12 +14,12 @@ var castleDash = {
         castleDash.styling();
     },
     styling: function() {
-        game = new Phaser.Game(800, 320, Phaser.AUTO, 'game', {
-            preload: castleDash.preload,
-            create: castleDash.create,
-            update: castleDash.update,
-            render: castleDash.render
-        });
+      game = new Phaser.Game(800, 320, Phaser.AUTO, 'game', {
+          preload: castleDash.preload,
+          create: castleDash.create,
+          update: castleDash.update,
+          render: castleDash.render
+      });
 
     },
     events: function() {
@@ -33,8 +33,6 @@ var castleDash = {
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
-
-
         castleStage.createBack();
         castlePlayer.create();
         castleEnemy.create();
@@ -61,6 +59,7 @@ var castleDash = {
     },
 
     game: {},
+
 
 
 };
