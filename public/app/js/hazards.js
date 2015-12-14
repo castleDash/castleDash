@@ -23,10 +23,6 @@ var castleHazards = {
     },
     update: function() {
         for (var i = 0; i < castleStage.tiles.length; i++) {
-            for (var a = 0; a < this.spikes.length; a++) {
-                this.spikes[a].body.aabb.collideAABBVsTile(castleStage.tiles[
-                    i].tile);
-            }
         }
         game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
             null, this);
