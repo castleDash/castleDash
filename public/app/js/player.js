@@ -48,7 +48,7 @@ var castlePlayer = {
 
         //world kill if falls
         if (player.body.y > WORLD_DEATH) {
-            player.kill();
+            this.killPlayer();
         }
 
 
@@ -97,13 +97,13 @@ var castlePlayer = {
             enemy.kill();
         }
         else {
-            player.kill();
-            if (castleWeapon.swordExists()) {
-                castleWeapon.killSword();
-            }
+            this.killPlayer();
         }
     },
-
+    killPlayer: function(){
+      player.kill();
+      login.gameOver();
+    }
 
 
 
