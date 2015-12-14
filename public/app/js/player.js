@@ -19,6 +19,8 @@ var castlePlayer = {
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
         player.frame=5;
+        this.health=6;
+        this.immunity=false;
         castlePlayer.getStats();
         castlePlayer.updateStatsDash();
     },
