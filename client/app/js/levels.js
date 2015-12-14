@@ -17,6 +17,7 @@ var castleStage = {
             'assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
         game.load.image('tree', 'assets/tiledMaps/PineTree.png')
         game.load.image('sky', 'assets/backgroundArt/sky.png');
+        game.load.image('spike', 'assets/sprites/Spike_Pixel.png');
     },
     createBack: function() {
         //just some  nicer art that's not part of the level object

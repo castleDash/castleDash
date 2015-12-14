@@ -5,9 +5,9 @@ var castleHazards = {
         game.load.image('spike', 'assets/sprites/Spike_Pixel.png');
     },
     create: function() {
-        var numberOfSpikes = this.getRandomIntInclusive(5, 10);
+        var numberOfSpikes = this.getRandomIntInclusive(1, 7);
         this.spikes = [];
-        for (var a = 0; a < numberOfSpikes; a++) {
+        for (var a = 0; a < 1; a++) {
             var randomX = this.generateSpikeX();
             var randomY = this.getRandomIntInclusive(0, 100);
             testSpike = game.add.sprite(randomX, randomY, 'spike');

@@ -55,6 +55,8 @@ var castleDash = {
         if(player.body.touching.down){
           PLAYER_SPEED = 50;
         }
+            // PLAYER MOVEMENT
+
         if (castleControl.leftCtrl()) {
             castlePlayer.moveLeft();
         } else if (castleControl.rightCtrl()) {
