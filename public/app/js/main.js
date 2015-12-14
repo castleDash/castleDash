@@ -5,31 +5,13 @@ var login = {
 
   events: function(){
     $("#loginBtn").on("click", function () {
-      var username = $("input[type='username']").val();
-      var password = $("input[type='password']").val();
-      $("input[type='username']").val("");
-      $("input[type='password']").val("");
-      $.ajax({
-        method: "POST",
-        url: "/login",
-        data: { username: username, password: password}
-      })
-        .error(function(data){
-          $("#login").prepend("Incorrect Login");
-        })
-        .then(function(data) {
-          //check for successful login
-          if(data==="success"){
-            $("#login").addClass("hidden");
-            $("#game").removeClass("hidden");
-            castleDash.init();
-          }
-          else{
-            $("#login").prepend("Incorrect Login");
-          }
-        });
+      login.submitLogin();
     })
-    $("#registerBtn").on("click", function () {
+    $('#password').keypress(function (e) {
+      if (e.which == 13) {
+        login.submitLogin();
+    }
+    });    $("#registerBtn").on("click", function () {
       var username = $("input[type='username']").val();
       var password = $("input[type='password']").val();
       $("input[type='username']").val("");
@@ -51,6 +33,31 @@ var login = {
         }
       });
     })
+  },
+  submitLogin: function(){
+    var username = $("input[type='username']").val();
+    var password = $("input[type='password']").val();
+    $("input[type='username']").val("");
+    $("input[type='password']").val("");
+    $.ajax({
+      method: "POST",
+      url: "/login",
+      data: { username: username, password: password}
+    })
+      .error(function(data){
+        $("#login").prepend("Incorrect Login");
+      })
+      .then(function(data) {
+        //check for successful login
+        if(data==="success"){
+          $("#login").addClass("hidden");
+          $("#game").removeClass("hidden");
+          castleDash.init();
+        }
+        else{
+          $("#login").prepend("Incorrect Login");
+        }
+      });
   }
 
 };
