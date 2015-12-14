@@ -1,7 +1,7 @@
-var HAZARD_MINGAP = 400;
-var HAZARD_MAXGAP = 100;
-var MIN_HAZARDS = 0;
-var MAX_HAZARDS = 0;
+var HAZARD_MINGAP = 600;
+var HAZARD_MAXGAP = 500;
+var MIN_HAZARDS = 1;
+var MAX_HAZARDS = 3;
 
 var castleHazards = {
     preload: function() {
@@ -12,8 +12,7 @@ var castleHazards = {
         this.spikes = [];
         for (var a = 0; a < numberOfSpikes; a++) {
             var randomX = this.generateSpikeX();
-            var randomY = this.getRandomIntInclusive(0, HAZARD_MAXGAP);
-            testSpike = game.add.sprite(randomX, randomY, 'spike');
+            testSpike = game.add.sprite(randomX, 0, 'spike');
             testSpike.scale.setTo(1, 0.5);
             testSpike.enableBody = true;
             game.physics.ninja.enable(testSpike);
@@ -29,8 +28,8 @@ var castleHazards = {
                     i].tile);
             }
         }
-        // game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
-        //     null, this);
+        game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
+            null, this);
     },
     generateSpikeX: function() {
         var lastX;
