@@ -19,6 +19,7 @@ var castlePlayer = {
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
         player.frame=5;
+        castlePlayer.getStats();
         castlePlayer.updateStatsDash();
     },
 
@@ -55,9 +56,9 @@ var castlePlayer = {
 
 
 
-        game.physics.ninja.overlap(player, enemy, castlePlayer.resolveDeath,
+        game.physics.ninja.overlap(player, enemy, castlePlayer.fightEnemy,
             null, this);
-        game.physics.ninja.overlap(player, spikes, castlePlayer.killPlayer,
+        game.physics.ninja.overlap(player, spikes, castlePlayer.damagePlayer,
             null, this);
 
     },
@@ -96,14 +97,26 @@ var castlePlayer = {
 
     },
     damagePlayer: function(){
-
-    }
-    resolveDeath: function() {
+      if (!this.immunity){
+        this.health--;
+        this.saveStats();
+        this.updateStatsDash();
+        if(this.health<=0){
+          this.killPlayer();
+        }
+        this.immunity=true;
+        game.time.events.add(Phaser.Timer.SECOND * 5, this.loseImmunity, this);
+      }
+    },
+    loseImmunity: function(){
+      this.immunity=false;
+    },
+    fightEnemy: function() {
         if (castleWeapon.swordExists()) {
             enemy.kill();
         }
         else {
-            this.killPlayer();
+            this.damagePlayer();
         }
     },
     killPlayer: function(){
