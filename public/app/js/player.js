@@ -55,6 +55,8 @@ var castlePlayer = {
 
         game.physics.ninja.overlap(player, enemy, castlePlayer.resolveDeath,
             null, this);
+        game.physics.ninja.overlap(player, spikes, castlePlayer.resolveDeath,
+            null, this);
 
     },
 

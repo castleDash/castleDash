@@ -29,7 +29,6 @@ var castleDash = {
         castleStage.preload();
         castleWeapon.preload();
         castlePlayer.preload();
-        castleHazards.preload();
         castleEnemy.preload();
     },
     create: function() {
@@ -38,7 +37,6 @@ var castleDash = {
 
         castleStage.createBack();
         castlePlayer.create();
-        castleHazards.create();
         castleEnemy.create();
         game.physics.ninja.gravity = NINJA_GRAVITY;
 
@@ -53,7 +51,6 @@ var castleDash = {
     },
     update: function() {
         castleStage.update();
-        castleHazards.update();
         castlePlayer.update();
         castleWeapon.update();
         castleEnemy.update();
