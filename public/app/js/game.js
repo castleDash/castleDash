@@ -34,7 +34,6 @@ var castleDash = {
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
 
-
         castleStage.createBack();
         castlePlayer.create();
         castleEnemy.create();

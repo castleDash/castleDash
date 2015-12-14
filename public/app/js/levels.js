@@ -16,6 +16,8 @@ var castleStage = {
         game.add.sprite(1600, 0, 'sky');
         game.add.sprite(2400, 0, 'sky');
         game.add.sprite(3600, 0, 'sky');
+
+
         map = game.add.tilemap('level'); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
@@ -47,6 +49,19 @@ var castleStage = {
             spikes.push(newSpike);
         }
 
+        enemies = [];
+        enemyLayer = map.createLayer('enemyLayer');
+        enemyLayer.resizeWorld();
+        this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
+        enemyLayer.kill();
+        for (var i = 0; i< this.enemyTiles.length; i++){
+          newEnemy = castleEnemy.createNewEnemy(this.enemyTiles[i].x, this.enemyTiles[i].y);
+          enemies.push(newEnemy);
+        }
+
+
+
+
     },
     createFront: function() {
         layer = map.createLayer('foreground'); //creates foreground layer to render after player is created so you can move behind objects
@@ -60,9 +75,14 @@ var castleStage = {
             for (var j = 0; j < spikes.length; j++) {
                 spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
+            for (var e = 0; e < enemies.length; e++){
+              enemies[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
-    },
+    }
+  },
     tiles: [],
     spikeTiles: [],
-    spikes: []
+    spikes: [],
+    enemies: [],
+    enemyTiles: []
 };
