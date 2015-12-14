@@ -13,7 +13,7 @@ var login = {
       }
     });
     $("#game").on("click","#playAgain", function(){
-      console.log("playing");
+      $("#game").html("");
       castleDash.init();
     });
     $("#registerBtn").on("click", function () {
