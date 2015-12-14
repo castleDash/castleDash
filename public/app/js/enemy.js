@@ -1,4 +1,4 @@
-var ENEMY_SPEED = 10;
+var ENEMY_SPEED = 15;
 
 var castleEnemy = {
 

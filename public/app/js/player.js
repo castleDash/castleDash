@@ -45,6 +45,7 @@ var castlePlayer = {
         if (castleControl.jumpCtrl()) {
             castlePlayer.jump();
         }
+        
         //world kill if falls
         if (player.body.y > WORLD_DEATH) {
             player.kill();
@@ -54,7 +55,6 @@ var castlePlayer = {
 
         game.physics.ninja.overlap(player, enemy, castlePlayer.resolveDeath,
             null, this);
-
 
     },
 
@@ -89,6 +89,7 @@ var castlePlayer = {
         player.body.moveUp(450);
 
     },
+
     resolveDeath: function() {
         if (castleWeapon.swordExists()) {
             enemy.kill();
