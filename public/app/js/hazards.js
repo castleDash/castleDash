@@ -21,7 +21,6 @@ var castleHazards = {
                 i].tile);
           });
         };
->>>>>>> bf121349cdd0bc7f17c2b66ee9a8b4c3b5ab6e88
         game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
             null, this);
     },
