@@ -6,12 +6,17 @@ var login = {
   events: function(){
     $("#loginBtn").on("click", function () {
       login.submitLogin();
-    })
-    $('#password').keypress(function (e) {
+    });
+    $("#password").keypress(function (e) {
       if (e.which == 13) {
         login.submitLogin();
-    }
-    });    $("#registerBtn").on("click", function () {
+      }
+    });
+    $("#game").on("click","#playAgain", function(){
+      $("#game").html("");
+      castleDash.init();
+    });
+    $("#registerBtn").on("click", function () {
       var username = $("input[type='username']").val();
       var password = $("input[type='password']").val();
       $("input[type='username']").val("");
@@ -58,6 +63,11 @@ var login = {
           $("#login").prepend("Incorrect Login");
         }
       });
-  }
+    },
+    gameOver: function(){
+      game.destroy();
+      $("#game").html("<h1>You died</h1>");
+      $("#game").append("<input id='playAgain' type='button' name='playAgain' value='Play Again'>");
+    }
 
 };

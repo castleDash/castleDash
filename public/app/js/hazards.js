@@ -10,20 +10,18 @@ var castleHazards = {
     create: function() {
         var numberOfSpikes = this.getRandomIntInclusive(MIN_HAZARDS, MAX_HAZARDS);
         this.spikes = [];
-        for (var a = 0; a < numberOfSpikes; a++) {
-            var randomX = this.generateSpikeX();
-            testSpike = game.add.sprite(randomX, 0, 'spike');
-            testSpike.scale.setTo(1, 0.5);
-            testSpike.enableBody = true;
-            game.physics.ninja.enable(testSpike);
-            testSpike.scale.setTo(1, 1);
-            testSpike.anchor.setTo(0.5, 0.7);
-            this.spikes.push(testSpike);
-        }
+        _.times(numberOfSpikes, function(){
+          castleHazards.createSpike();
+        });
     },
     update: function() {
         for (var i = 0; i < castleStage.tiles.length; i++) {
-        }
+          _.each(this.spikes, function (spike) {
+            spike.body.aabb.collideAABBVsTile(castleStage.tiles[
+                i].tile);
+          });
+        };
+>>>>>>> bf121349cdd0bc7f17c2b66ee9a8b4c3b5ab6e88
         game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
             null, this);
     },
@@ -39,11 +37,21 @@ var castleHazards = {
             lastX + HAZARD_MAXGAP);
         return newX;
     },
+    createSpike: function(){
+      var randomX = castleHazards.generateSpikeX();
+      newSpike = game.add.sprite(randomX, 0, 'spike');
+      newSpike.scale.setTo(1, 0.5);
+      newSpike.enableBody = true;
+      game.physics.ninja.enable(newSpike);
+      newSpike.scale.setTo(1, 1);
+      newSpike.anchor.setTo(0.5, 0.7);
+      castleHazards.spikes.push(newSpike);
+    },
     getRandomIntInclusive: function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },
     spikeKill: function() {
-      player.kill();
+      castlePlayer.killPlayer();
     },
     spikes:[]
 };
