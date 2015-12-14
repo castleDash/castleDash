@@ -12,9 +12,12 @@ var login = {
         login.submitLogin();
       }
     });
-    $("#game").on("click","#playAgain", function(){
-      $("#game").html("");
-      castleDash.init();
+    $("body").keypress(function (e) {
+      if (e.which == 13 && $(".messages").html().indexOf("You died")!=-1) {
+        $(".messages").html("");
+        console.log("restarting game");
+        castleDash.init();
+      }
     });
     $("#registerBtn").on("click", function () {
       var username = $("input[type='username']").val();
@@ -34,7 +37,7 @@ var login = {
           castleDash.init();
         }
         else{
-          $("#login").prepend("Username invalid");
+          $(".messages").html("Username invalid");
         }
       });
     })
@@ -50,7 +53,7 @@ var login = {
       data: { username: username, password: password}
     })
       .error(function(data){
-        $("#login").prepend("Incorrect Login");
+        $(".messages").html("Incorrect Password");
       })
       .then(function(data) {
         //check for successful login
@@ -60,14 +63,14 @@ var login = {
           castleDash.init();
         }
         else{
-          $("#login").prepend("Incorrect Login");
+          $(".messages").html("Incorrect Password");
         }
       });
     },
     gameOver: function(){
       game.destroy();
-      $("#game").html("<h1>You died</h1>");
-      $("#game").append("<input id='playAgain' type='button' name='playAgain' value='Play Again'>");
+      $("canvas").remove();
+      $(".messages").html("<h2>You died</h2><p>Press enter to play again.</p>");
     }
 
 };
