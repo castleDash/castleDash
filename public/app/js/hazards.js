@@ -26,14 +26,15 @@ var castleHazards = {
                     i].tile);
             }
         }
-        game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
-            null, this);
+        // game.physics.ninja.overlap(player, this.spikes, this.spikeKill,
+        //     null, this);
     },
     generateSpikeX: function() {
         var lastX;
         if (this.spikes.length === 0) {
             lastX = 0;
-        } else {
+        }
+        else {
             lastX = this.spikes[this.spikes.length - 1].x;
         }
         var newX = this.getRandomIntInclusive(lastX + HAZARD_MINGAP,

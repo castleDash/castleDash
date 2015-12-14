@@ -19,7 +19,18 @@ var castleEnemy = {
     enemy.body.collideWorldBounds = true;
   },
 
-  update: function(){},
+  update: function(){
+    var dist = enemy.body.x - player.body.x;
+    if(dist < 250 && dist > 5) {
+      castleEnemy.moveLeft();
+    }
+    else if(dist < -5 && dist > -250){
+      castleEnemy.moveRight();
+    }
+    else{
+      castleEnemy.standStill();
+    }
+  },
 
   moveRight:function(){
     enemy.body.moveRight(ENEMY_SPEED);
