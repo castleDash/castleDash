@@ -10,18 +10,34 @@ var castleWeapon = {
    castleWeapon.sword = game.add.sprite(0, 0, 'sword');
    castleWeapon.sword.anchor.setTo(0.5,0.5);
    castleWeapon.sword.scale.setTo(1,1);
+   castleWeapon.sword.enableBody = true;
    castleWeapon.sword.visible=true;
  },
 
  update: function(){
-   castleWeapon.sword.visible=false;
+   if (castleWeapon.swordExists()){
+     castleWeapon.killSword();
+   }
+
+   if (castleControl.attackCtrl()) {
+       if (player.frame < 4) {
+             castleWeapon.attack("left");
+
+       }
+       else {
+             castleWeapon.attack("right");
+       }
+   }
  },
+
  attack: function(direction){
    if(!castleWeapon.swordExists()){
      castleWeapon.create();
    }
+   
    castleWeapon.sword.visible=true;
    castleWeapon.sword.y=player.y;
+
    if(direction==="left"){
      castleWeapon.sword.scale.x=-1;
      castleWeapon.sword.x=player.x-20;
