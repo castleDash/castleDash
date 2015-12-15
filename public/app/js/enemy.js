@@ -1,7 +1,8 @@
 var ENEMY_SPEED = 15;
 
-var castleEnemy = function(){};
+var castleEnemy = function () {};
 
+castleEnemy.prototype = {
   preload: function(){
     game.load.spritesheet('orc',
         'app/assets/sprites/orc_piratess.png', 64, 64, 36);
@@ -21,13 +22,13 @@ var castleEnemy = function(){};
   update: function(){
     var dist = enemy.body.x - player.body.x;
     if(dist < 250 && dist > 5) {
-      castleEnemy.moveLeft();
+      this.moveLeft();
     }
     else if(dist < -5 && dist > -250){
-      castleEnemy.moveRight();
+      this.moveRight();
     }
     else{
-      castleEnemy.standStill();
+      this.standStill();
     }
   },
 
