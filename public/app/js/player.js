@@ -1,7 +1,7 @@
 var PLAYER_SPEED = 50;
-var castlePlayer = {
+var castlePlayer = function(){};
 
-
+castlePlayer.prototype = {
     preload: function() {
         game.load.spritesheet('ninja',
             'app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
@@ -21,8 +21,8 @@ var castlePlayer = {
         player.frame=5;
         this.health=6;
         this.immunity=false;
-        castlePlayer.getStats();
-        castlePlayer.updateStatsDash();
+        this.getStats();
+        this.updateStatsDash();
     },
 
     update: function() {
@@ -32,10 +32,10 @@ var castlePlayer = {
         }
 
         if (castleControl.leftCtrl()) {
-            castlePlayer.moveLeft();
+            this.moveLeft();
         }
         else if (castleControl.rightCtrl()) {
-            castlePlayer.moveRight();
+            this.moveRight();
         }
         else {
             player.animations.stop();
@@ -48,7 +48,7 @@ var castlePlayer = {
         }
 
         if (castleControl.jumpCtrl()) {
-            castlePlayer.jump();
+            this.jump();
         }
 
         //world kill if falls
@@ -67,9 +67,9 @@ var castlePlayer = {
 
 
 
-        game.physics.ninja.overlap(player, enemy, castlePlayer.fightEnemy,
+        game.physics.ninja.overlap(player, castleStage.enemies, this.fightEnemy,
             null, this);
-        game.physics.ninja.overlap(player, spikes, castlePlayer.damagePlayer,
+        game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
             null, this);
 
     },
@@ -125,7 +125,7 @@ var castlePlayer = {
       this.immunity=false;
     },
     fightEnemy: function() {
-        if (castleWeapon.swordExists()) {
+        if (newSword.swordExists()) {
             enemy.kill();
         }
         else {
