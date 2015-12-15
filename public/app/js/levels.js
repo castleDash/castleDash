@@ -16,6 +16,8 @@ var castleStage = {
         game.add.sprite(1600, 0, 'sky');
         game.add.sprite(2400, 0, 'sky');
         game.add.sprite(3600, 0, 'sky');
+
+
         map = game.add.tilemap('level'); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
@@ -30,22 +32,32 @@ var castleStage = {
         layer.resizeWorld();
 
         //adding spikeLayer for spike hazards
-        spikes = [];
+        this.spikes = [];
         spikeLayer = map.createLayer('spikeLayer');
         spikeLayer.resizeWorld();
         this.spikeTiles = game.physics.ninja.convertTilemap(map,
             spikeLayer, slopeMap);
         spikeLayer.kill();
+        var hazard = new castleHazards();
         for (var i = 0; i < this.spikeTiles.length; i++) {
-            newSpike = game.add.sprite(this.spikeTiles[i].x, this.spikeTiles[
-                i].y, 'spike');
-            newSpike.scale.setTo(1, 0.5);
-            newSpike.enableBody = true;
-            game.physics.ninja.enable(newSpike);
-            newSpike.scale.setTo(1, 1);
-            newSpike.anchor.setTo(0.5, 0.7);
-            spikes.push(newSpike);
+          spike = hazard.createSpike(this.spikeTiles[i].x, this.spikeTiles[i].y);
+             this.spikes.push(spike);
+
         }
+
+        
+        enemyLayer = map.createLayer('enemyLayer');
+        enemyLayer.resizeWorld();
+        this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
+        enemyLayer.kill();
+        var orc = new castleEnemy();
+        for (var i = 0; i< this.enemyTiles.length; i++){
+          newEnemy = orc.createNewEnemy(this.enemyTiles[i].x, this.enemyTiles[i].y);
+          this.enemies.push(newEnemy);
+        }
+
+
+
 
     },
     createFront: function() {
@@ -57,12 +69,19 @@ var castleStage = {
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            for (var j = 0; j < spikes.length; j++) {
-                spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            for (var j = 0; j < this.spikes.length; j++) {
+              // console.log(this.spikes[j]);
+                this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
+            for (var e = 0; e < this.enemies.length; e++){
+              this.enemies[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+
         }
-    },
+    }
+  },
     tiles: [],
     spikeTiles: [],
-    spikes: []
+    spikes: [],
+    enemies: [],
+    enemyTiles: []
 };
