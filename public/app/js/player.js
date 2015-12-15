@@ -125,7 +125,7 @@ castlePlayer.prototype = {
       this.immunity=false;
     },
     fightEnemy: function() {
-        if (castleWeapon.swordExists()) {
+        if (newSword.swordExists()) {
             enemy.kill();
         }
         else {
