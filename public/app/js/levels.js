@@ -41,25 +41,19 @@ var castleStage = {
         var hazard = new castleHazards();
         for (var i = 0; i < this.spikeTiles.length; i++) {
           spike = hazard.createSpike(this.spikeTiles[i].x, this.spikeTiles[i].y);
-            // newSpike = game.add.sprite(this.spikeTiles[i].x, this.spikeTiles[
-            //     i].y, 'spike');
-            // newSpike.scale.setTo(1, 0.5);
-            // newSpike.enableBody = true;
-            // game.physics.ninja.enable(newSpike);
-            // newSpike.scale.setTo(1, 1);
-            // newSpike.anchor.setTo(0.5, 0.7);
              this.spikes.push(spike);
 
         }
 
-        enemies = [];
+        
         enemyLayer = map.createLayer('enemyLayer');
         enemyLayer.resizeWorld();
         this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
         enemyLayer.kill();
+        var orc = new castleEnemy();
         for (var i = 0; i< this.enemyTiles.length; i++){
-          newEnemy = castleEnemy.createNewEnemy(this.enemyTiles[i].x, this.enemyTiles[i].y);
-          enemies.push(newEnemy);
+          newEnemy = orc.createNewEnemy(this.enemyTiles[i].x, this.enemyTiles[i].y);
+          this.enemies.push(newEnemy);
         }
 
 
@@ -79,8 +73,9 @@ var castleStage = {
               // console.log(this.spikes[j]);
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
-            for (var e = 0; e < enemies.length; e++){
-              enemies[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            for (var e = 0; e < this.enemies.length; e++){
+              this.enemies[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+
         }
     }
   },

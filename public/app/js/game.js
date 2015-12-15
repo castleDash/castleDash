@@ -41,7 +41,7 @@ var castleDash = {
 
         castleStage.createBack();
         newPlayer.create();
-        newEnemy.create();
+        //newEnemy.create();
         game.physics.ninja.gravity = NINJA_GRAVITY;
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
@@ -58,7 +58,9 @@ var castleDash = {
         castleStage.update();
         newPlayer.update();
         newSword.update();
-        newEnemy.update();
+        _.each(castleStage.enemies, function(enemy){
+          enemy.update();
+        });
     },
     render: function() {
 

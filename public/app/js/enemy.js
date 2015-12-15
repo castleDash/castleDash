@@ -60,3 +60,4 @@ castleEnemy.prototype = {
     enemy.body.collideWorldBounds = true;
     return enemy;
   }
+};
