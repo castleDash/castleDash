@@ -69,7 +69,7 @@ castlePlayer.prototype = {
 
         game.physics.ninja.overlap(player, enemy, this.fightEnemy,
             null, this);
-        game.physics.ninja.overlap(player, spikes, this.damagePlayer,
+        game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
             null, this);
 
     },

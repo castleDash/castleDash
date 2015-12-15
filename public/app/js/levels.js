@@ -32,21 +32,24 @@ var castleStage = {
         layer.resizeWorld();
 
         //adding spikeLayer for spike hazards
-        spikes = [];
+        this.spikes = [];
         spikeLayer = map.createLayer('spikeLayer');
         spikeLayer.resizeWorld();
         this.spikeTiles = game.physics.ninja.convertTilemap(map,
             spikeLayer, slopeMap);
         spikeLayer.kill();
+        var hazard = new castleHazards();
         for (var i = 0; i < this.spikeTiles.length; i++) {
-            newSpike = game.add.sprite(this.spikeTiles[i].x, this.spikeTiles[
-                i].y, 'spike');
-            newSpike.scale.setTo(1, 0.5);
-            newSpike.enableBody = true;
-            game.physics.ninja.enable(newSpike);
-            newSpike.scale.setTo(1, 1);
-            newSpike.anchor.setTo(0.5, 0.7);
-            spikes.push(newSpike);
+          spike = hazard.createSpike(this.spikeTiles[i].x, this.spikeTiles[i].y);
+            // newSpike = game.add.sprite(this.spikeTiles[i].x, this.spikeTiles[
+            //     i].y, 'spike');
+            // newSpike.scale.setTo(1, 0.5);
+            // newSpike.enableBody = true;
+            // game.physics.ninja.enable(newSpike);
+            // newSpike.scale.setTo(1, 1);
+            // newSpike.anchor.setTo(0.5, 0.7);
+             this.spikes.push(spike);
+
         }
 
         enemies = [];
@@ -72,8 +75,9 @@ var castleStage = {
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            for (var j = 0; j < spikes.length; j++) {
-                spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            for (var j = 0; j < this.spikes.length; j++) {
+              // console.log(this.spikes[j]);
+                this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
             for (var e = 0; e < enemies.length; e++){
               enemies[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);

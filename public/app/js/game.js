@@ -31,13 +31,11 @@ var castleDash = {
         castleWeapon.preload();
         newPlayer.preload();
         castleEnemy.preload();
+
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
-<<<<<<< HEAD
 
-=======
->>>>>>> 69c7f044dc802e97b64d28f59a016badf69b3ec1
         castleStage.createBack();
         newPlayer.create();
         castleEnemy.create();
@@ -49,6 +47,7 @@ var castleDash = {
 
         castleControl.create();
 
+
         // game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
 
     },
@@ -57,6 +56,7 @@ var castleDash = {
         newPlayer.update();
         castleWeapon.update();
         castleEnemy.update();
+
     },
     render: function() {
 

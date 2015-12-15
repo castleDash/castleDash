@@ -1,6 +1,6 @@
 var ENEMY_SPEED = 15;
 
-var castleEnemy = {
+var castleEnemy = function(){};
 
   preload: function(){
     game.load.spritesheet('orc',
@@ -59,5 +59,3 @@ var castleEnemy = {
     enemy.body.collideWorldBounds = true;
     return enemy;
   }
-
-};
