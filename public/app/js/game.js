@@ -8,7 +8,6 @@ var NINJA_GRAVITY = 0.5;
 var WORLD_DEATH = 270;
 var newPlayer;
 var newSword;
-var newEnemy;
 
 
 var castleDash = {
@@ -24,7 +23,7 @@ var castleDash = {
       });
       newPlayer = new castlePlayer();
       newSword = new castleWeapon();
-      newEnemy = new castleEnemy();
+
 
     },
     events: function() {
@@ -34,14 +33,13 @@ var castleDash = {
         castleStage.preload();
         newSword.preload();
         newPlayer.preload();
-        newEnemy.preload();
+
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
 
         castleStage.createBack();
         newPlayer.create();
-        //newEnemy.create();
         game.physics.ninja.gravity = NINJA_GRAVITY;
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
@@ -58,17 +56,20 @@ var castleDash = {
         castleStage.update();
         newPlayer.update();
         newSword.update();
-        _.each(castleStage.enemies, function(enemy){
+        _.each(castleDash.enemies, function(enemy){
           enemy.update();
         });
     },
     render: function() {
-
+      game.debug.body(castleDash.enemies[0]);
+      game.debug.body(castleDash.enemies[1]);
+      game.debug.body(castleDash.enemies[2]);
 
     },
 
     game: {},
-
+    enemies: [],
+    weapons: []
 
 
 };

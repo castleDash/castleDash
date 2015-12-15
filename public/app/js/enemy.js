@@ -1,26 +1,26 @@
 var ENEMY_SPEED = 15;
 
-var castleEnemy = function () {};
+var castleEnemy = function (x,y) {
+  Phaser.Sprite.call(this, game, x, y, 'orc');
+};
 
-castleEnemy.prototype = {
-  preload: function(){
-    game.load.spritesheet('orc',
-        'app/assets/sprites/orc_piratess.png', 64, 64, 36);
-  },
+castleEnemy.prototype = Object.create(Phaser.Sprite.prototype);
+castleEnemy.prototype.constructor = castleEnemy;
 
-  create: function(){
-    enemy = game.add.sprite(1400, 0, 'orc');
-    enemy.animations.add('orcleft', [10,11,12,13,14,15,16,17], 15, true);
-    enemy.animations.add('orcright', [28,29,30,31,32,33,34,35], 15, true);
-    enemy.scale.setTo(0.5,0.7);
-    game.physics.ninja.enableAABB(enemy);
-    enemy.scale.setTo(1,1);
-    enemy.anchor.setTo(0.5,0.6);
-    enemy.body.collideWorldBounds = true;
-  },
 
-  update: function(){
-    var dist = enemy.body.x - player.body.x;
+
+castleEnemy.prototype.create= function(){
+    this.animations.add('orcleft', [10,11,12,13,14,15,16,17], 15, true);
+    this.animations.add('orcright', [28,29,30,31,32,33,34,35], 15, true);
+    this.scale.setTo(0.5,0.7);
+    game.physics.ninja.enableAABB(this);
+    this.scale.setTo(1,1);
+    this.anchor.setTo(0.5,0.5);
+    this.body.collideWorldBounds = true;
+  };
+
+  castleEnemy.prototype.update =  function(){
+    var dist = this.body.x - player.body.x;
     if(dist < 250 && dist > 5) {
       this.moveLeft();
     }
@@ -30,34 +30,19 @@ castleEnemy.prototype = {
     else{
       this.standStill();
     }
-  },
+  };
 
-  moveRight:function(){
-    enemy.body.moveRight(ENEMY_SPEED);
-    enemy.animations.play('orcright');
-  },
+  castleEnemy.prototype.moveRight = function(){
+    this.body.moveRight(ENEMY_SPEED);
+    this.animations.play('orcright');
+  };
 
-  moveLeft: function(){
-    enemy.body.moveLeft(ENEMY_SPEED);
-    enemy.animations.play('orcleft');
-  },
+  castleEnemy.prototype.moveLeft = function(){
+    this.body.moveLeft(ENEMY_SPEED);
+    this.animations.play('orcleft');
+  };
 
-  standStill: function(){
-    enemy.animations.stop();
-    enemy.frame = 18;
-  },
-
-  detectPlayer: function(){},
-
-  createNewEnemy: function(x,y){
-    enemy = game.add.sprite(x, y, 'orc');
-    enemy.animations.add('orcleft', [10,11,12,13,14,15,16,17], 15, true);
-    enemy.animations.add('orcright', [28,29,30,31,32,33,34,35], 15, true);
-    enemy.scale.setTo(0.5,0.7);
-    game.physics.ninja.enableAABB(enemy);
-    enemy.scale.setTo(1,1);
-    enemy.anchor.setTo(0.5,0.6);
-    enemy.body.collideWorldBounds = true;
-    return enemy;
-  }
-};
+  castleEnemy.prototype.standStill =  function(){
+    this.animations.stop();
+    this.frame = 18;
+  };

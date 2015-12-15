@@ -67,7 +67,7 @@ castlePlayer.prototype = {
 
 
 
-        game.physics.ninja.overlap(player, castleStage.enemies, this.fightEnemy,
+        game.physics.ninja.overlap(player, castleDash.enemies, this.fightEnemy,
             null, this);
         game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
             null, this);
@@ -124,7 +124,7 @@ castlePlayer.prototype = {
       player.body.sprite.tint = 16777215;
       this.immunity=false;
     },
-    fightEnemy: function() {
+    fightEnemy: function(player, enemy) {
         if (newSword.swordExists()) {
             enemy.kill();
         }
