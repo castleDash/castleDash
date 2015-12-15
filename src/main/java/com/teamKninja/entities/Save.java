@@ -13,31 +13,28 @@ public class Save {
     int id;
 
     //@Column(nullable = false)
-    int level;
+    public int level;
 
     //@Column(nullable = false)
-    String name;
+    public String name;
 
     //@Column(nullable = false)
-    String swordName;
+    public String swordName;
 
     //@Column(nullable = false)
-    String rangeName;
+    public String rangeName;
 
     //@Column(nullable = false)
-    int healthPotion;
+    public int healthPotion;
 
     //@Column(nullable = false)
-    int shieldPotion;
+    public int shieldPotion;
 
     //@Column(nullable = false)
-    int firePotion;
+    public int firePotion;
 
     //@Column(nullable = false)
-    int currency;
-
-    //@Column(nullable = false)
-    int health;
+    public int currency;
 
     @ManyToOne
     public User user;
