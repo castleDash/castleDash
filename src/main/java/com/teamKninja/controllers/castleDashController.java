@@ -76,6 +76,12 @@ public class castleDashController {
         }
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
+        session.invalidate();
+        response.sendRedirect("/");
+    }
+
     @RequestMapping (path = "/createSave", method = RequestMethod.POST)
     public String createSave(HttpSession session, String name) throws Exception {
         String username =(String) session.getAttribute("username");
