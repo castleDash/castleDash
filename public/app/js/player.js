@@ -55,6 +55,15 @@ var castlePlayer = {
         if (player.body.y > WORLD_DEATH) {
             this.killPlayer();
         }
+        if(this.immunity){
+          player.body.sprite.tint = 0xff0000;
+          if(!player.body.sprite.visible){
+            player.body.sprite.visible = true;
+          }
+          else{
+            player.body.sprite.visible = false;
+          }
+        }
 
 
 
@@ -107,10 +116,12 @@ var castlePlayer = {
           this.killPlayer();
         }
         this.immunity=true;
-        game.time.events.add(Phaser.Timer.SECOND * 5, this.loseImmunity, this);
+        game.time.events.add(Phaser.Timer.SECOND * 1.5, this.loseImmunity, this);
       }
     },
     loseImmunity: function(){
+      player.body.sprite.visible = true;
+      player.body.sprite.tint = 16777215;
       this.immunity=false;
     },
     fightEnemy: function() {
