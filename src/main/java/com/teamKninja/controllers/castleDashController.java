@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.List;
 
 /**
  * Created by holdenhughes on 12/10/15.
@@ -45,11 +46,15 @@ public class castleDashController {
     public String createUser(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         User user = users.findOneByUsername(username);
         if (user == null) {
-            user = new User();
-            user.username = username;
-            user.password = PasswordHash.createHash(password);
-            users.save(user);
-            return "success";
+            if (password == null){
+                return "Empty password field";
+            } else {
+                user = new User();
+                user.username = username;
+                user.password = PasswordHash.createHash(password);
+                users.save(user);
+                return "success";
+            }
         } else{
             return "User already exists";
         }
@@ -72,9 +77,44 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/createSave", method = RequestMethod.POST)
-    public void saveGame(HttpSession session, String username, String name){
-
+    public String createSave(HttpSession session, String name) throws Exception {
+        String username =(String) session.getAttribute("username");
+        User user = users.findOneByUsername(username);
+        if (username == null){
+            throw new Exception("Not logged in");
+        } else {
+            List<Save> saveList = saves.findAllByUser(user);
+            if (saveList.size() < 3){
+                Save save = new Save();
+                save.name = name;
+                save.level = 0;
+                save.health = 3;
+                save.currency = 100;
+                save.firePotion = 3;
+                save.healthPotion = 3;
+                save.swordName = "sword";
+                save.rangeName = "shuriken";
+                saves.save(save);
+                return "success";
+            } else {
+                return "too many saves";
+            }
+        }
     }
 
+    @RequestMapping (path = "/savesList", method = RequestMethod.GET)
+    public List savesList(HttpSession session){
+        String username =(String) session.getAttribute("username");
+        User user = users.findOneByUsername(username);
+        List<Save> saveList = saves.findAllByUser(user);
+        return saveList;
+    }
+
+    @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
+    public String selectSave(HttpSession session, int id){
+        Save save = saves.findOneById(id);
+        session.setAttribute("id", save);
+        return "success";
+    }
 
 }
