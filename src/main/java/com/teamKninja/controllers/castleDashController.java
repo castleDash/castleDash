@@ -128,14 +128,12 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
-    public String saveGame(HttpSession session,
-                           HttpSession saveSession,
+    public String saveGame(HttpSession saveSession,
                            int level,
                            int healthPotion,
                            int shieldPotion,
                            int firePotion,
                            int currency) {
-        String username =(String) session.getAttribute("username");
         int id = (int) saveSession.getAttribute("id");
         Save tempSave = saves.findOneById(id);
         tempSave.level = level+1;
