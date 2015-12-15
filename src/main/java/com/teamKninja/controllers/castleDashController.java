@@ -34,7 +34,7 @@ public class castleDashController {
     public void init() throws InvalidKeySpecException, NoSuchAlgorithmException {
         if (users.count() >0) {
             return;
-        }else {
+        } else {
             User user = new User();
             user.username = "Henry";
             user.password = PasswordHash.createHash("Grenry");
@@ -65,21 +65,19 @@ public class castleDashController {
         User user = users.findOneByUsername(username);
         if (user == null){
             return "Invalid users";
-
-        }
-        else if (!PasswordHash.validatePassword(password, user.password)) {
+        } else if (!PasswordHash.validatePassword(password, user.password)) {
             return "Wrong password";
-        }
-        else {
+        } else {
             session.setAttribute("username", username);
             return "success";
         }
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
+    public String logout(HttpSession session, HttpServletResponse response) throws IOException {
         session.invalidate();
         response.sendRedirect("/");
+        return "success";
     }
 
     @RequestMapping (path = "/createSave", method = RequestMethod.POST)
@@ -94,10 +92,10 @@ public class castleDashController {
                 Save save = new Save();
                 save.name = name;
                 save.level = 0;
-                save.health = 3;
                 save.currency = 100;
                 save.firePotion = 3;
                 save.healthPotion = 3;
+                save.shieldPotion = 3;
                 save.swordName = "sword";
                 save.rangeName = "shuriken";
                 saves.save(save);
@@ -117,10 +115,35 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
-    public String selectSave(HttpSession session, int id){
+    public String selectSave(HttpSession saveSession, int id){
         Save save = saves.findOneById(id);
-        session.setAttribute("id", save);
+        saveSession.setAttribute("id", save);
         return "success";
     }
 
+    @RequestMapping(value = "/exitSave", method = RequestMethod.POST)
+    public String exitSave(HttpSession saveSession) throws IOException {
+        saveSession.setAttribute("id", null);
+        return "success";
+    }
+
+    @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
+    public String saveGame(HttpSession session,
+                           HttpSession saveSession,
+                           int level,
+                           int healthPotion,
+                           int shieldPotion,
+                           int firePotion,
+                           int currency) {
+        String username =(String) session.getAttribute("username");
+        int id = (int) saveSession.getAttribute("id");
+        Save tempSave = saves.findOneById(id);
+        tempSave.level = level+1;
+        tempSave.healthPotion = healthPotion;
+        tempSave.shieldPotion = shieldPotion;
+        tempSave.firePotion = firePotion;
+        tempSave.currency = currency + 20;
+        saves.save(tempSave);
+        return "success";
+    }
 }

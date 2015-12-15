@@ -36,9 +36,6 @@ public class Save {
     //@Column(nullable = false)
     public int currency;
 
-    //@Column(nullable = false)
-    public int health;
-
     @ManyToOne
     public User user;
 
