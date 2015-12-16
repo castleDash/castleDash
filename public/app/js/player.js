@@ -26,7 +26,7 @@ castlePlayer.prototype = {
     },
 
     update: function() {
-        if (player.body.x>=2700){
+        if (player.body.x>=castleStage.endTile[0].x){
           login.winLevel();
         }
         //MOVEMENT
