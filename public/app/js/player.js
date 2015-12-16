@@ -29,51 +29,55 @@ castlePlayer.prototype = {
         if (player.body.x>=castleStage.endTile[0].x){
           login.winLevel();
         }
-        //MOVEMENT
-        if (player.body.touching.down) {
-            PLAYER_SPEED = 50;
-        }
-
-        if (castleControl.leftCtrl()) {
-            this.moveLeft();
-        }
-        else if (castleControl.rightCtrl()) {
-            this.moveRight();
-        }
-        else {
-            player.animations.stop();
-            if (player.frame < 4) {
-                player.frame = 0;
-            }
-            else {
-                player.frame = 5;
-            }
-        }
-
-        if (castleControl.jumpCtrl()) {
-            this.jump();
-        }
-
         //world kill if falls
-        if (player.body.y > WORLD_DEATH) {
+        else if (player.body.y > WORLD_DEATH) {
             this.killPlayer();
         }
-        if(this.immunity){
-          player.body.sprite.tint = 0xff0000;
-          if(!player.body.sprite.visible){
-            player.body.sprite.visible = true;
+        else{
+          //MOVEMENT
+          if (player.body.touching.down) {
+              PLAYER_SPEED = 50;
           }
-          else{
-            player.body.sprite.visible = false;
-          }
-        }
 
-        _.each(castleStage.enemies, function(enemy){
-          game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
+          if (castleControl.leftCtrl()) {
+              this.moveLeft();
+          }
+          else if (castleControl.rightCtrl()) {
+              this.moveRight();
+          }
+          else {
+              player.animations.stop();
+              if (player.frame < 4) {
+                  player.frame = 0;
+              }
+              else {
+                  player.frame = 5;
+              }
+          }
+
+          if (castleControl.jumpCtrl()) {
+              this.jump();
+          }
+
+
+          if(this.immunity){
+            player.body.sprite.tint = 0xff0000;
+            if(!player.body.sprite.visible){
+              player.body.sprite.visible = true;
+            }
+            else{
+              player.body.sprite.visible = false;
+            }
+          }
+
+          _.each(castleStage.enemies, function(enemy){
+            game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
+                null, this);
+          }, this);
+          game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
-        }, this);
-        game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
-            null, this);
+
+        }
 
     },
 

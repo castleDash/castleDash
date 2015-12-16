@@ -71,8 +71,6 @@ var login = {
       });
     },
     gameOver: function(){
-      castleStage=null;
-      
       game.destroy();
       $("canvas").remove();
       $(".messages").html("<h2>You died</h2><p>Press enter to play again.</p>");
