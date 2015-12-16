@@ -1,3 +1,5 @@
+var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
+
 var castleStage = {
     preload: function() {
         game.load.tilemap('level', 'app/assets/levels/testLevel.json',
@@ -58,7 +60,7 @@ var castleStage = {
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
-          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y);
+          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y,DEFAULT_STRENGTH, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }
         endLevelLayer = map.createLayer('levelEnd');

@@ -7,7 +7,7 @@ castleEnemy.prototype = {
     game.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
   },
 
-  create: function(x,y){
+  create: function(x,y,strength,wealth){
     this.enemy = game.add.sprite(x, y, 'orc');
     this.enemy.animations.add('orcleft', [10,11,12,13,14,15,16,17], 15, true);
     this.enemy.animations.add('orcright', [28,29,30,31,32,33,34,35], 15, true);
@@ -16,6 +16,9 @@ castleEnemy.prototype = {
     this.enemy.scale.setTo(1,1);
     this.enemy.anchor.setTo(0.5,0.6);
     this.enemy.body.collideWorldBounds = true;
+    this.enemy.strength = strength;
+    this.enemy.wealth = wealth;
+    this.enemy.immunity = false;
   },
 
   update: function(){
@@ -33,6 +36,15 @@ castleEnemy.prototype = {
       }
 
     }
+    if(this.enemy.immunity){
+      this.enemy.body.sprite.tint = 0xff0000;
+      if(!this.enemy.body.sprite.visible){
+        this.enemy.body.sprite.visible = true;
+      }
+      else{
+        this.enemy.body.sprite.visible = false;
+      }
+    }
   },
 
   moveRight:function(){
@@ -48,6 +60,5 @@ castleEnemy.prototype = {
   standStill: function(){
     this.enemy.animations.stop();
     this.enemy.frame = 18;
-  },
-
+  }
 };
