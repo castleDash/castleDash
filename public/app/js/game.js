@@ -62,7 +62,6 @@ var castleDash = {
       // game.debug.body(castleStage.enemies.children[0]);
       // game.debug.body(castleStage.enemies.children[1]);
       // game.debug.body(castleStage.enemies.children[2]);
-
     },
 
     game: {},

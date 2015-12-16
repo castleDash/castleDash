@@ -19,6 +19,7 @@ castleEnemy.prototype = {
   },
 
   update: function(){
+    // this.enemy.body.collision()
     if(player.alive){
       var dist = this.enemy.body.x - player.body.x;
       if(dist < 250 && dist > 5) {
@@ -30,7 +31,7 @@ castleEnemy.prototype = {
       else{
         this.standStill();
       }
-      
+
     }
   },
 
