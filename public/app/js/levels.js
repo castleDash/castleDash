@@ -37,6 +37,7 @@ var castleStage = {
         layer.resizeWorld();
 
         //adding spikeLayer for spike hazards
+
         spikeLayer = map.createLayer('spikeLayer');
         spikeLayer.resizeWorld();
         this.spikeTiles = game.physics.ninja.convertTilemap(map,
@@ -61,6 +62,11 @@ var castleStage = {
         endLevelLayer = map.createLayer('levelEnd');
         endLevelLayer.resizeWorld();
         this.endTile = game.physics.ninja.convertTilemap(map, endLevelLayer, slopeMap);
+
+        testLayer = map.createLayer('testLayer');
+        if (testLayer!=null){
+          testLayer.resizeWorld();
+        }
 
 
     },
