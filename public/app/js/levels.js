@@ -12,6 +12,8 @@ var castleStage = {
 
     },
     createBack: function() {
+        this.spikes=[];
+        this.enemies=[];
         //just some  nicer art that's not part of the level object
         game.add.sprite(0, 0, 'sky');
         game.add.sprite(800, 0, 'sky');

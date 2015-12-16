@@ -13,7 +13,10 @@ var login = {
       }
     });
     $("body").keypress(function (e) {
-      if (e.which == 13 && $(".messages").html().indexOf("You died")!=-1) {
+      if (e.which == 13
+          &&
+          ($(".messages").html().indexOf("You died")!=-1 ||
+           $(".messages").html().indexOf("You win")!=-1)) {
         $(".messages").html("");
         console.log("restarting game");
         castleDash.init();
