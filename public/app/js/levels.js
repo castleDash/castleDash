@@ -1,6 +1,8 @@
-var castleStage = {
-    preload: function() {
-        game.load.tilemap('level', 'app/assets/levels/testLevel.json',
+var castleStage = function(){};
+
+castleStage.prototype = {
+    preload: function(levelName) {
+        game.load.tilemap('level', 'app/assets/levels/'+levelName,
             null,
             Phaser.Tilemap.TILED_JSON); //pulls json file of the level
         game.load.image('tiles',
@@ -29,18 +31,33 @@ var castleStage = {
         ground = map.createLayer('ground'); //creates layer called ground
         ground.resizeWorld();
 
-        layer = map.createLayer('filler');
-        layer.resizeWorld();
-
         slopeMap = patFormKennyTiles; //assigns master array to slopeMap
         this.tiles = game.physics.ninja.convertTilemap(map, ground,
             slopeMap);
-        layer = map.createLayer('background');
+
+        layer = map.createLayer('filler');
+        if (layer !=null){
         layer.resizeWorld();
+      }
+
+
+
+        layer = map.createLayer('background');
+        if (layer!=null){
+        layer.resizeWorld();
+      }
+
+      playerLayer = map.createLayer('playerSpawn');
+      if (playerLayer!=null){
+        this.playerTile = game.physics.ninja.convertTilemap(map,playerLayer,slopeMap);
+        playerLayer.resizeWorld();
+        playerLayer.kill();
+      }
 
         //adding spikeLayer for spike hazards
 
         spikeLayer = map.createLayer('spikeLayer');
+        if (spikeLayer != null){
         spikeLayer.resizeWorld();
         this.spikeTiles = game.physics.ninja.convertTilemap(map,
             spikeLayer, slopeMap);
@@ -50,9 +67,17 @@ var castleStage = {
           spike = hazard.createSpike(this.spikeTiles[i].x, this.spikeTiles[i].y);
              this.spikes.push(spike);
         }
+      }
+
+        endLevelLayer = map.createLayer('levelEnd');
+        if (endLevelLayer!=null){
+        endLevelLayer.resizeWorld();
+        this.endTile = game.physics.ninja.convertTilemap(map, endLevelLayer, slopeMap);
+      }
 
 
         enemyLayer = map.createLayer('enemyLayer');
+        if (enemyLayer!=null){
         enemyLayer.resizeWorld();
         this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
         enemyLayer.kill();
@@ -61,9 +86,8 @@ var castleStage = {
           newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y);
           this.enemies.push(newEnemy);
         }
-        endLevelLayer = map.createLayer('levelEnd');
-        endLevelLayer.resizeWorld();
-        this.endTile = game.physics.ninja.convertTilemap(map, endLevelLayer, slopeMap);
+      }
+
 
         testLayer = map.createLayer('testLayer');
         if (testLayer!=null){
@@ -74,7 +98,9 @@ var castleStage = {
     },
     createFront: function() {
         layer = map.createLayer('foreground'); //creates foreground layer to render after player is created so you can move behind objects
+        if (layer !=null){
         layer.resizeWorld();
+      }
     },
     update: function() {
 
@@ -82,17 +108,21 @@ var castleStage = {
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             // this.enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
               // console.log(this.spikes[j]);
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
+          }
+          if (this.enemies.length>0){
             for (var e = 0; e < this.enemies.length; e++){
               this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-
         }
+      }
     }
   },
     tiles: [],
+    playerTile: [],
     spikeTiles: [],
     spikes: [],
     enemies: [],
