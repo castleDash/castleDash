@@ -31,7 +31,7 @@ public class castleDashController {
     SaveRepository saves;
 
     @PostConstruct
-    public void init() throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public void init() throws Exception {
         if (users.count() >0) {
             return;
         } else {
@@ -39,6 +39,19 @@ public class castleDashController {
             user.username = "Henry";
             user.password = PasswordHash.createHash("Grenry");
             users.save(user);
+                while (saves.findAllByUser(user).size()<3){
+                    Save save = new Save();
+                    save.name = "RenegadeLima";
+                    save.level = 0;
+                    save.currency = 100;
+                    save.firePotion = 3;
+                    save.healthPotion = 3;
+                    save.shieldPotion = 3;
+                    save.swordName = "sword";
+                    save.rangeName = "shuriken";
+                    save.user = user;
+                    saves.save(save);
+                }
         }
     }
 

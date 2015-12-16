@@ -22,9 +22,6 @@ public class Save {
     public String swordName;
 
     //@Column(nullable = false)
-    public String rangeName;
-
-    //@Column(nullable = false)
     public int healthPotion;
 
     //@Column(nullable = false)
@@ -33,8 +30,6 @@ public class Save {
     //@Column(nullable = false)
     public int firePotion;
 
-    //@Column(nullable = false)
-    public int currency;
 
     @ManyToOne
     public User user;
