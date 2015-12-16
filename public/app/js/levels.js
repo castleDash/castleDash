@@ -51,7 +51,6 @@ var castleStage = {
 
         enemyLayer = map.createLayer('enemyLayer');
         enemyLayer.resizeWorld();
-
         this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
@@ -59,6 +58,10 @@ var castleStage = {
           newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y);
           this.enemies.push(newEnemy);
         }
+        endLevelLayer = map.createLayer('levelEnd');
+        endLevelLayer.resizeWorld();
+        this.endTile = game.physics.ninja.convertTilemap(map, endLevelLayer, slopeMap);
+
 
     },
     createFront: function() {
@@ -86,4 +89,5 @@ var castleStage = {
     spikes: [],
     enemies: [],
     enemyTiles: [],
+    endTile: []
 };
