@@ -7,8 +7,8 @@ castlePlayer.prototype = {
             'app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
     },
 
-    create: function() {
-        player = game.add.sprite(32, 0, 'ninja');
+    create: function(x,y) {
+        player = game.add.sprite(x,y, 'ninja');
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         player.scale.setTo(0.8, 0.7);
@@ -35,9 +35,9 @@ castlePlayer.prototype = {
           login.winLevel();
         }
         //world kill if falls
-        else if (player.body.y > WORLD_DEATH) {
-            this.killPlayer();
-        }
+        // else if (player.body.y > WORLD_DEATH) {
+        //     this.killPlayer();
+        // }
         else{
           //MOVEMENT
           if (player.body.touching.down) {
@@ -116,7 +116,6 @@ castlePlayer.prototype = {
         PLAYER_SPEED = 10;
         player.body.moveUp(450);
       }
-
 
     },
     damagePlayer: function(){

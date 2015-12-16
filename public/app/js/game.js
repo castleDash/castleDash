@@ -8,6 +8,7 @@ var NINJA_GRAVITY = 0.5;
 var WORLD_DEATH = 270;
 var newPlayer;
 var newSword;
+var castleStage = new castleStage;
 
 
 var castleDash = {
@@ -30,7 +31,7 @@ var castleDash = {
 
     },
     preload: function() {
-        castleStage.preload();
+        castleStage.preload('testLevel.json');
         newSword.preload();
         newPlayer.preload();
 
@@ -39,7 +40,7 @@ var castleDash = {
         game.physics.startSystem(Phaser.Physics.NINJA);
 
         castleStage.createBack();
-        newPlayer.create();
+        newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
         game.physics.ninja.gravity = NINJA_GRAVITY;
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
