@@ -47,8 +47,6 @@ var castleDash = {
         castleStage.createFront();
 
         castleControl.create();
-
-
         // game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
 
     },
@@ -56,20 +54,20 @@ var castleDash = {
         castleStage.update();
         newPlayer.update();
         newSword.update();
-        _.each(castleDash.enemies, function(enemy){
+        _.each(castleStage.enemyObjects, function(enemy){
           enemy.update();
         });
     },
     render: function() {
-      game.debug.body(castleDash.enemies[0]);
-      game.debug.body(castleDash.enemies[1]);
-      game.debug.body(castleDash.enemies[2]);
+      game.debug.body(castleStage.enemies.children[0]);
+      game.debug.body(castleStage.enemies.children[1]);
+      game.debug.body(castleStage.enemies.children[2]);
 
     },
 
     game: {},
-    enemies: [],
-    weapons: []
+    weapons: [],
+
 
 
 };

@@ -54,11 +54,12 @@ var castleStage = {
 
         this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
         enemyLayer.kill();
-
+        this.enemies = game.add.group();
         for (var i = 0; i< this.enemyTiles.length; i++){
-          newEnemy = new castleEnemy(this.enemyTiles[i].x, this.enemyTiles[i].y);
-          newEnemy.create();
-          castleDash.enemies.push(newEnemy);
+          newEnemy = new castleEnemy();
+          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y);
+          this.enemyObjects.push(newEnemy);
+          this.enemies.add(newEnemy.enemy);
         }
 
 
@@ -74,18 +75,22 @@ var castleStage = {
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            // enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            // this.enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             for (var j = 0; j < this.spikes.length; j++) {
               // console.log(this.spikes[j]);
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
-            for (var e = 0; e < castleDash.enemies.length; e++){
-              castleDash.enemies[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            for (var e = 0; e < this.enemies.length; e++){
+              this.enemies.children[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+
         }
     }
   },
     tiles: [],
     spikeTiles: [],
     spikes: [],
-    enemyTiles: []
+    enemies: [],
+    enemyObjects:[],
+    enemyTiles: [],
+    enemy:{}
 };
