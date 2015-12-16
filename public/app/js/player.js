@@ -7,8 +7,8 @@ castlePlayer.prototype = {
             'app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
     },
 
-    create: function() {
-        player = game.add.sprite(32, 0, 'ninja');
+    create: function(x,y) {
+        player = game.add.sprite(x,y, 'ninja');
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         player.scale.setTo(0.8, 0.7);
@@ -19,58 +19,70 @@ castlePlayer.prototype = {
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
         player.frame=5;
-        this.health=6;
-        this.immunity=false;
+        player.health=6;
+        player.immunity=false;
         this.getStats();
         this.updateStatsDash();
+        player.fightTimer= game.time.create(false);
+        player.beAttackedTimer= game.time.create(false);
+        player.canAttack= true;
+        player.canBeAttacked=true;
+
     },
 
     update: function() {
-        //MOVEMENT
-        if (player.body.touching.down) {
-            PLAYER_SPEED = 50;
+        if (player.body.x>=castleStage.endTile[0].x){
+          login.winLevel();
         }
-
-        if (castleControl.leftCtrl()) {
-            this.moveLeft();
-        }
-        else if (castleControl.rightCtrl()) {
-            this.moveRight();
-        }
-        else {
-            player.animations.stop();
-            if (player.frame < 4) {
-                player.frame = 0;
-            }
-            else {
-                player.frame = 5;
-            }
-        }
-
-        if (castleControl.jumpCtrl()) {
-            this.jump();
-        }
-
         //world kill if falls
-        if (player.body.y > WORLD_DEATH) {
-            this.killPlayer();
-        }
-        if(this.immunity){
-          player.body.sprite.tint = 0xff0000;
-          if(!player.body.sprite.visible){
-            player.body.sprite.visible = true;
+        // else if (player.body.y > WORLD_DEATH) {
+        //     this.killPlayer();
+        // }
+        else{
+          //MOVEMENT
+          if (player.body.touching.down) {
+              PLAYER_SPEED = 50;
           }
-          else{
-            player.body.sprite.visible = false;
+
+          if (castleControl.leftCtrl()) {
+              this.moveLeft();
+          }
+          else if (castleControl.rightCtrl()) {
+              this.moveRight();
+          }
+          else {
+              player.animations.stop();
+              if (player.frame < 4) {
+                  player.frame = 0;
+              }
+              else {
+                  player.frame = 5;
+              }
           }
         }
+          if (castleControl.jumpCtrl()) {
+              this.jump();
+          }
 
 
+          if(this.immunity){
+            player.body.sprite.tint = 0xff0000;
+            if(!player.body.sprite.visible){
+              player.body.sprite.visible = true;
+            }
+            else{
+              player.body.sprite.visible = false;
+            }
+          }
 
-        game.physics.ninja.overlap(player, castleStage.enemies, this.fightEnemy,
-            null, this);
-        game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
-            null, this);
+          _.each(castleStage.enemies, function(enemy){
+            game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
+                null, this);
+          }, this);
+          game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
+              null, this);
+
+
 
     },
 
@@ -105,7 +117,6 @@ castlePlayer.prototype = {
         player.body.moveUp(450);
       }
 
-
     },
     damagePlayer: function(){
       if (!this.immunity){
@@ -114,21 +125,42 @@ castlePlayer.prototype = {
         this.updateStatsDash();
         if(this.health<=0){
           this.killPlayer();
+        }else{
+          this.immunity=true;
+          game.time.events.add(Phaser.Timer.SECOND * .5, this.loseImmunity, this);
         }
-        this.immunity=true;
-        game.time.events.add(Phaser.Timer.SECOND * 1.5, this.loseImmunity, this);
       }
+    },
+    damageEnemy: function(enemy){
+        enemy.strength--;
+        if(enemy.strength<=0){
+          enemy.kill();
+          this.gold = parseInt(this.gold)+enemy.wealth;
+          this.updateStatsDash();
+        }
     },
     loseImmunity: function(){
       player.body.sprite.visible = true;
       player.body.sprite.tint = 16777215;
       this.immunity=false;
     },
-    fightEnemy: function() {
-        if (newSword.swordExists()) {
-            enemy.kill();
+    enableBeAttacked: function(){
+      player.canBeAttacked=true;
+    },
+    enableAttack: function(){
+      player.canAttack=true;
+    },
+    fightEnemy: function(player, enemy) {
+        if (newSword.swordExists() && player.canAttack) {
+          console.log("attacking");
+          player.canAttack=false;
+          player.fightTimer.loop(500, this.enableAttack, this);
+          player.fightTimer.start();
+          player.beAttackedTimer.loop(200, this.enableAttack, this);
+          player.beAttackedTimer.start();
+          this.damageEnemy(enemy);
         }
-        else {
+        else if(player.canBeAttacked){
             this.damagePlayer();
         }
     },
