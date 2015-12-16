@@ -54,16 +54,11 @@ var castleStage = {
 
         this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
         enemyLayer.kill();
-        this.enemies = game.add.group();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
           newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y);
-          this.enemyObjects.push(newEnemy);
-          this.enemies.add(newEnemy.enemy);
+          this.enemies.push(newEnemy);
         }
-
-
-
 
     },
     createFront: function() {
@@ -81,7 +76,7 @@ var castleStage = {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
             for (var e = 0; e < this.enemies.length; e++){
-              this.enemies.children[e].body.aabb.collideAABBVsTile(this.tiles[i].tile);
+              this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
 
         }
     }
@@ -90,7 +85,5 @@ var castleStage = {
     spikeTiles: [],
     spikes: [],
     enemies: [],
-    enemyObjects:[],
     enemyTiles: [],
-    enemy:{}
 };

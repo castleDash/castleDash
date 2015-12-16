@@ -26,6 +26,9 @@ castlePlayer.prototype = {
     },
 
     update: function() {
+        if (player.body.x>=2700){
+          login.winLevel();
+        }
         //MOVEMENT
         if (player.body.touching.down) {
             PLAYER_SPEED = 50;
@@ -65,10 +68,10 @@ castlePlayer.prototype = {
           }
         }
 
-
-
-        game.physics.ninja.overlap(player, castleStage.enemies, this.fightEnemy,
-            null, this);
+        _.each(castleStage.enemies, function(enemy){
+          game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
+              null, this);
+        }, this);
         game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
             null, this);
 
@@ -114,9 +117,10 @@ castlePlayer.prototype = {
         this.updateStatsDash();
         if(this.health<=0){
           this.killPlayer();
+        }else{
+          this.immunity=true;
+          game.time.events.add(Phaser.Timer.SECOND * 1.5, this.loseImmunity, this);
         }
-        this.immunity=true;
-        game.time.events.add(Phaser.Timer.SECOND * 1.5, this.loseImmunity, this);
       }
     },
     loseImmunity: function(){
