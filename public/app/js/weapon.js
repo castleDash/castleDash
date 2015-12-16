@@ -32,23 +32,23 @@ castleWeapon.prototype = {
  },
 
  attack: function(direction){
-   if(!this.swordExists()){
+   if(!this.swordExists() && player.canAttack){
      this.create();
-   }
 
-   this.sword.visible=true;
-   this.sword.y=player.y;
+     this.sword.visible=true;
+     this.sword.y=player.y;
 
-   if(direction==="left"){
-     this.sword.scale.x=-1;
-     this.sword.x=player.x-20;
-     player.frame = 3;
+     if(direction==="left"){
+       this.sword.scale.x=-1;
+       this.sword.x=player.x-20;
+       player.frame = 3;
+      }
+      else {
+        this.sword.scale.x=1;
+        this.sword.x=player.x+20;
+        player.frame = 8;
     }
-    else {
-      this.sword.scale.x=1;
-      this.sword.x=player.x+20;
-      player.frame = 8;
-    }
+  }
  },
   swordExists: function(){
     return (typeof this.sword === "object");

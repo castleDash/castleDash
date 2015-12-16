@@ -15,9 +15,9 @@ var login = {
     $("body").keypress(function (e) {
       if (e.which == 13
           &&
-          ($(".messages").html().indexOf("You died")!=-1 ||
-           $(".messages").html().indexOf("You win")!=-1)) {
-        $(".messages").html("");
+          ($("#game").html().indexOf("You died")!=-1 ||
+           $("#game").html().indexOf("You win")!=-1)) {
+        $("#game").html("");
         console.log("restarting game");
         castleDash.init();
       }
@@ -73,12 +73,12 @@ var login = {
     gameOver: function(){
       game.destroy();
       $("canvas").remove();
-      $(".messages").html("<h2>You died</h2><p>Press enter to play again.</p>");
+      $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
     },
     winLevel: function(){
       game.destroy();
       $("canvas").remove();
-      $(".messages").html("<h2>You win</h2><p>Press enter to play again.</p>");
+      $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
     }
 
 };
