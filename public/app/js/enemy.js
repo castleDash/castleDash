@@ -19,15 +19,18 @@ castleEnemy.prototype = {
   },
 
   update: function(){
-    var dist = this.enemy.body.x - player.body.x;
-    if(dist < 250 && dist > 5) {
-      this.moveLeft();
-    }
-    else if(dist < -5 && dist > -250){
-      this.moveRight();
-    }
-    else{
-      this.standStill();
+    if(player.alive){
+      var dist = this.enemy.body.x - player.body.x;
+      if(dist < 250 && dist > 5) {
+        this.moveLeft();
+      }
+      else if(dist < -5 && dist > -250){
+        this.moveRight();
+      }
+      else{
+        this.standStill();
+      }
+      
     }
   },
 
@@ -46,17 +49,4 @@ castleEnemy.prototype = {
     this.enemy.frame = 18;
   },
 
-  detectPlayer: function(){},
-
-  createNewEnemy: function(x,y){
-    enemy = game.add.sprite(x, y, 'orc');
-    enemy.animations.add('orcleft', [10,11,12,13,14,15,16,17], 15, true);
-    enemy.animations.add('orcright', [28,29,30,31,32,33,34,35], 15, true);
-    enemy.scale.setTo(0.5,0.7);
-    game.physics.ninja.enableAABB(enemy);
-    enemy.scale.setTo(1,1);
-    enemy.anchor.setTo(0.5,0.6);
-    enemy.body.collideWorldBounds = true;
-    return enemy;
-  }
 };

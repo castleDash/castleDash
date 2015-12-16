@@ -54,14 +54,14 @@ var castleDash = {
         castleStage.update();
         newPlayer.update();
         newSword.update();
-        _.each(castleStage.enemyObjects, function(enemy){
+        _.each(castleStage.enemies, function(enemy){
           enemy.update();
         });
     },
     render: function() {
-      game.debug.body(castleStage.enemies.children[0]);
-      game.debug.body(castleStage.enemies.children[1]);
-      game.debug.body(castleStage.enemies.children[2]);
+      // game.debug.body(castleStage.enemies.children[0]);
+      // game.debug.body(castleStage.enemies.children[1]);
+      // game.debug.body(castleStage.enemies.children[2]);
 
     },
 
