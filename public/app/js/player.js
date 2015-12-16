@@ -54,7 +54,7 @@ castlePlayer.prototype = {
                   player.frame = 5;
               }
           }
-
+        }
           if (castleControl.jumpCtrl()) {
               this.jump();
           }
@@ -77,7 +77,7 @@ castlePlayer.prototype = {
           game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
 
-        }
+
 
     },
 
@@ -123,7 +123,7 @@ castlePlayer.prototype = {
           this.killPlayer();
         }else{
           this.immunity=true;
-          game.time.events.add(Phaser.Timer.SECOND * 1.5, this.loseImmunity, this);
+          game.time.events.add(Phaser.Timer.SECOND * .5, this.loseImmunity, this);
         }
       }
     },

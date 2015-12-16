@@ -88,10 +88,9 @@ var castleStage = {
             }
             for (var e = 0; e < this.enemies.length; e++){
               this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-
-        }
-    }
-  },
+            }
+          }
+        },
     tiles: [],
     spikeTiles: [],
     spikes: [],
