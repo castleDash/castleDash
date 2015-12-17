@@ -43,12 +43,10 @@ public class castleDashController {
                     Save save = new Save();
                     save.name = "RenegadeLima";
                     save.level = 0;
-                    save.currency = 100;
                     save.firePotion = 3;
                     save.healthPotion = 3;
                     save.shieldPotion = 3;
                     save.swordName = "sword";
-                    save.rangeName = "shuriken";
                     save.user = user;
                     saves.save(save);
                 }
@@ -105,12 +103,10 @@ public class castleDashController {
                 Save save = new Save();
                 save.name = name;
                 save.level = 0;
-                save.currency = 100;
                 save.firePotion = 3;
                 save.healthPotion = 3;
                 save.shieldPotion = 3;
                 save.swordName = "sword";
-                save.rangeName = "shuriken";
                 saves.save(save);
                 return "success";
             } else {
@@ -153,7 +149,6 @@ public class castleDashController {
         tempSave.healthPotion = healthPotion;
         tempSave.shieldPotion = shieldPotion;
         tempSave.firePotion = firePotion;
-        tempSave.currency = currency + 20;
         saves.save(tempSave);
         return "success";
     }
