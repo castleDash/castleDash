@@ -32,6 +32,7 @@ var castleDash = {
     },
     preload: function() {
         castleStage.preload('testLevel.json');
+
         newSword.preload();
         newPlayer.preload();
         castleControl.preload();

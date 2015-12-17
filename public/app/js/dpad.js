@@ -1,11 +1,11 @@
-var dpad = function(){};
+var dpad = function() {};
 
 dpad.prototype = {
 
     preload: function() {
 
-        game.load.atlas('d-pad', 'app/assets/sprites/d-pad.png',
-            'app/assets/controller/dpad.json');
+        game.load.atlas('xbox360', 'app/assets/controllers/xbox360.png',
+            'app/assets/controllers/xbox360.json');
 
     },
 
@@ -15,11 +15,13 @@ dpad.prototype = {
     buttonDPadRight: {},
     buttonDPadUp: {},
     buttonDPadDown: {},
+
     imageDPad: {},
 
     create: function() {
 
-        imageDPad = game.add.image(100, game.camera.height-100, 'd-pad', 'DPAD');
+        //  Add some images
+        this.imageDPad = game.add.image(100, 200, 'xbox360', '360_Dpad');
 
         game.input.gamepad.start();
 
@@ -35,7 +37,7 @@ dpad.prototype = {
 
         //  We can't do this until we know that the gamepad has been connected and is started
 
-        //  These won't work in Firefox, sorry! It uses totally different button mappings
+    //  These won't work in Firefox, sorry! It uses totally different button mappings
 
         this.buttonDPadLeft = this.pad.getButton(Phaser.Gamepad.XBOX360_DPAD_LEFT);
         this.buttonDPadRight = this.pad.getButton(Phaser.Gamepad.XBOX360_DPAD_RIGHT);
@@ -56,22 +58,27 @@ dpad.prototype = {
 
     onDown: function(button, value) {
 
-
         if (button.buttonCode === Phaser.Gamepad.XBOX360_DPAD_LEFT) {
-            this.imageDPad.frameName = 'DPAD_Left';
+          console.log("left");
+            this.imageDPad.frameName = '360_Dpad_Left';
         } else if (button.buttonCode === Phaser.Gamepad.XBOX360_DPAD_RIGHT) {
-            this.imageDPad.frameName = 'DPAD_Right';
+          console.log("right");
+            this.imageDPad.frameName = '360_Dpad_Right';
         } else if (button.buttonCode === Phaser.Gamepad.XBOX360_DPAD_UP) {
-            this.imageDPad.frameName = 'DPAD_Up';
+          console.log("up");
+            this.imageDPad.frameName = '360_Dpad_Up';
         } else if (button.buttonCode === Phaser.Gamepad.XBOX360_DPAD_DOWN) {
-            this.imageDPad.frameName = 'DPAD_Down';
+          console.log("down");
+            this.imageDPad.frameName = '360_Dpad_Down';
         }
 
     },
 
     onUp: function(button, value) {
 
-        this.imageDPad.frameName = 'DPAD';
+
+            this.imageDPad.frameName = '360_Dpad';
+
 
     }
 };

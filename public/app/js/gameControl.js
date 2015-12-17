@@ -3,7 +3,8 @@ var castleControl = {
   preload: function () {
     game.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
     game.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
-    game.load.spritesheet('dPad', 'app/assets/sprites/d-pad.png',32,32,5);
+    // game.load.atlas('dPad', 'assets/controllers/d-pad.png', 'assets/controllers/d-pad.json');
+
   },
 
   create: function(){
