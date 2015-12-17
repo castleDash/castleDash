@@ -154,9 +154,10 @@ castlePlayer.prototype = {
         if (newSword.swordExists() && player.canAttack) {
           console.log("attacking");
           player.canAttack=false;
+          player.canBeAttacked=false;
           player.fightTimer.loop(500, this.enableAttack, this);
           player.fightTimer.start();
-          player.beAttackedTimer.loop(200, this.enableAttack, this);
+          player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
           player.beAttackedTimer.start();
           this.damageEnemy(enemy);
         }
