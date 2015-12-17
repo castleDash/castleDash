@@ -34,7 +34,7 @@ var castleDash = {
         castleStage.preload('testLevel.json');
         newSword.preload();
         newPlayer.preload();
-
+        castleControl.preload();
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
@@ -58,6 +58,8 @@ var castleDash = {
         _.each(castleStage.enemies, function(enemy){
           enemy.update();
         });
+        castleControl.update();
+
     },
     render: function() {
       // game.debug.body(castleStage.enemies.children[0]);

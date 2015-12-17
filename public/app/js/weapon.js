@@ -16,22 +16,36 @@ castleWeapon.prototype = {
  },
 
  update: function(){
+  //  if(meleeCtrl){
+  //    this.type=1;
+  //  }
+  //  else if(rangeCtrl){
+  //    this.type=1;
+  //  }
    if (this.swordExists()){
      this.killSword();
    }
 
    if (castleControl.attackCtrl()) {
        if (player.frame < 4) {
-             this.attack("left");
-
+         if(this.type=1){
+             this.swordAttack("left");
+         }else{
+           this.potionAttack("left");
+         }
        }
        else {
-             this.attack("right");
-       }
+         if(this.type=1){
+           this.swordAttack("right");
+         }else{
+           this.potionAttack("right");
+         }
+      }
    }
+
  },
 
- attack: function(direction){
+ swordAttack: function(direction){
    if(!this.swordExists() && player.canAttack){
      this.create();
 
@@ -58,5 +72,7 @@ castleWeapon.prototype = {
     this.sword.kill();
     this.sword=undefined;
   },
-  sword: ""
+  sword: "",
+  potion:"",
+  type: 1
 };
