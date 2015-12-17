@@ -1,15 +1,17 @@
-var login = {
+var Login = function(){};
+
+ Login.prototype ={
   init: function(){
-    login.events();
+    Login.events();
   },
 
   events: function(){
     $("#loginBtn").on("click", function () {
-      login.submitLogin();
+      Login.submitLogin();
     });
     $("#password").keypress(function (e) {
       if (e.which == 13) {
-        login.submitLogin();
+        Login.submitLogin();
       }
     });
     $("body").keypress(function (e) {

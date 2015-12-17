@@ -4,11 +4,18 @@ var Boot = function(){};
 
 Boot.prototype = {
   init:function(){
-    game.load.image('loading','app/assets/sprites/loadingbar.png');
+    console.log('boot');
+
   },
 
-  start: function(){
-    game.state.start("loadSave");
+  preload:function(){
+    console.log("preloading loading bar");
+    game.load.image('loading','app/assets/sprites/loadingBar.png');
+  },
+
+  create: function(){
+
+    game.state.start("LoadSave");
   },
 
 };

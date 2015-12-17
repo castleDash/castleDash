@@ -3,8 +3,10 @@ var loadAssets = function(){};
 
 loadAssets.prototype ={
 
-  init: function(ourSave){
-    this.ourSave = ourSave;
+  init: function(){
+    console.log('assets');
+    // this.ourSave = ourSave;
+    var loadingBar = game.add.sprite(game.world.centerX, 200, 'loading');
   },
   loadScripts:function(){
     game.load.script('player', 'app/js/player.js');
@@ -30,14 +32,15 @@ loadAssets.prototype ={
   },
 
   preload:function(){
+    // game.add.existing(this.loadingBar);
+    // this.load.setPreloadSprite(this.loadingBar);
+
     this.loadScripts();
     this.loadImages();
-    var loadingBar = game.add.sprite
-    this.load.setPreloadSprite(loadingBar);
   },
 
-  startGame: function(){
-    game.state.start("playGame", true, false, this.ourSave);
+  create: function(){
+    game.state.start("PlayGame");
   },
 
 

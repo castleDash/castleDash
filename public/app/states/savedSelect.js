@@ -1,10 +1,11 @@
-var loadSave = function(){};
+var LoadSave = function(){};
 
 
-loadSave.prototype = {
+LoadSave.prototype = {
   init:function(){
-    var file = 1;
-    
+
+    console.log('loaded Save');
+      game.state.start('LoadingAssets');
 
   },
 
@@ -15,15 +16,16 @@ loadSave.prototype = {
     // this.runSave(____)
   },
   create:function(){
-    _.each(saves, function(){
 
-    });
+
+
   },
 
 
 
   runSave:function(ourSave){
-  game.state.start("loadingAssets",true, false, ourSave);
+
+
 
   },
 

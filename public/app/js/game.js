@@ -73,5 +73,5 @@ var castleDash = {
 };
 
 $(document).ready(function() {
-    login.init();
+    Login.init();
 });
