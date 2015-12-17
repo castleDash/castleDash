@@ -3,6 +3,7 @@ var castleControl = {
   preload: function () {
     game.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
     game.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
+    game.load.spritesheet('dPad', 'app/assets/sprites/d-pad.png',32,32,5);
   },
 
   create: function(){
@@ -17,10 +18,10 @@ var castleControl = {
     keyJump = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     jumpButton = game.add.button(game.camera.width - 100, game.camera.height-100, 'jumpBtn', this.buttonJump, this, 0, 0, 1, 0);
     jumpButton.fixedToCamera=true;
-    // jumpButton.onInputUp.add(this.buttonJump,this);
     attackButton = game.add.button(game.camera.width - 125, game.camera.height-75, 'attackBtn', this.buttonAttack, this, 0, 0, 1, 0);
     attackButton.fixedToCamera=true;
-    // attackButton.onInputUp.add(this.buttonAttack,this);
+
+
   },
   update: function(){
     this.attack=false;
@@ -28,6 +29,10 @@ var castleControl = {
   },
   attack: false,
   jump: false,
+  left: false,
+  right: false,
+  up: false,
+  down: false,
   leftCtrl: function(){
      if(keyA.isDown || cursors.left.isDown){
        return true;
@@ -66,8 +71,19 @@ var castleControl = {
   },
   buttonJump: function(){
     this.jump=true;
+  },
+  buttonLeft: function(){
+    this.left=true;
+  },
+  buttonRight: function(){
+    this.right=true;
+  },
+  buttonUp: function(){
+    this.up=true;
+  },
+  buttonDown: function(){
+    this.down=true;
   }
-
 
 
 
