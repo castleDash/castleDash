@@ -176,7 +176,7 @@ castlePlayer.prototype = {
       login.gameOver();
     },
     health: 6,
-    gold: 100,
+    gold: 0,
     weapon: 1,
     potion: 1,
     getStats: function(){
