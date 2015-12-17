@@ -24,7 +24,7 @@ var castleDash = {
       });
       newPlayer = new castlePlayer();
       newSword = new castleWeapon();
-
+      newDpad = new dpad();
 
     },
     events: function() {
@@ -35,6 +35,7 @@ var castleDash = {
         newSword.preload();
         newPlayer.preload();
         castleControl.preload();
+        newDpad.preload();
     },
     create: function() {
         game.physics.startSystem(Phaser.Physics.NINJA);
@@ -49,7 +50,7 @@ var castleDash = {
 
         castleControl.create();
         // game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
-
+        newDpad.create();
     },
     update: function() {
         castleStage.update();
