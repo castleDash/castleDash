@@ -47,7 +47,7 @@ NinjaGame.GameState.prototype = {
       castleStage.createFront();
 
       castleControl.create();
-      game.camera.deadzone = new Phaser.Rectangle(0, 100, 600, 400);
+      
 
   },
   update: function() {
