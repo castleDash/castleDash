@@ -13,7 +13,7 @@ castlePotion.prototype = {
    this.firePot.animations.add('throw', [0, 1, 2, 3], 10, true, true);
    this.firePot.animations.add('splash', [4,5,6,7,8], 2, true, true);
    game.physics.ninja.enableAABB(this.firePot);
-   this.firePot.anchor.setTo(0.5,0.5);
+   this.firePot.anchor.setTo(0.5, 0.5);
    this.firePot.scale.setTo(1,1);
    this.firePot.enableBody = true;
    this.firePot.body.friction = 0.1;
@@ -31,7 +31,7 @@ castlePotion.prototype = {
   //    this.type=1;
   //  }
 
-   if (this.potionExists()){
+   if (this.potionExists() && player.frame>4) {
      this.firePot.animations.play('throw');
      this.firePot.body.moveRight(16);
      if (this.firePot.body.x >= (player.x +25)){
@@ -40,7 +40,20 @@ castlePotion.prototype = {
      if (this.firePot.body.x > (player.x + 75)){
      this.killPotion();
    }
-   }
+ } else {
+    if (this.potionExists() && player.frame <=4){
+     this.firePot.animations.play('throw');
+     this.firePot.body.moveRight(-16);
+     if (this.firePot.body.x <= (player.x -25)){
+       this.firePot.animations.play('splash');
+     }
+     if (this.firePot.body.x < (player.x - 75)){
+     this.killPotion();
+    }
+  }
+ }
+
+
 
    if (castleControl.attackCtrl()) {
        if (player.frame < 4) {
@@ -62,9 +75,8 @@ castlePotion.prototype = {
    if (this.firePot!=null){
      for (var i=0; i<castleStage.tiles.length; i++){
    this.firePot.body.aabb.collideAABBVsTile(castleStage.tiles[i].tile);
-  }
- }
-
+      }
+    }
  },
 
  swordAttack: function(direction){
