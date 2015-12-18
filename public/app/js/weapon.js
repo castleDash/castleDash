@@ -4,7 +4,7 @@ castleWeapon.prototype = {
 
  preload: function(){
    game.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
-
+   
  },
 
  create: function(){
@@ -13,6 +13,13 @@ castleWeapon.prototype = {
    this.sword.scale.setTo(1,1);
    this.sword.enableBody = true;
    this.sword.visible=true;
+ },
+ createFirePot: function(){
+   this.firePot = game.add.sprite(0, 0, 'firepot');
+   this.firePot.anchor.setTo(0.5,0.5);
+   this.firePot.scale.setTo(1,1);
+   this.firePot.enableBody = true;
+   this.firePot.visible=true;
  },
 
  update: function(){
@@ -72,6 +79,14 @@ castleWeapon.prototype = {
     this.sword.kill();
     this.sword=undefined;
   },
+  potionExists: function(){
+    return (typeof this.firePot === "object");
+  },
+  killPotion: function(){
+    this.firePot.kill();
+    this.firePot=undefined;
+  },
+
   sword: "",
   potion:"",
   type: 1

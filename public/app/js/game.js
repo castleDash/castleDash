@@ -8,6 +8,7 @@ var NINJA_GRAVITY = 0.5;
 var WORLD_DEATH = 270;
 var newPlayer;
 var newSword;
+var newFirePot;
 var castleStage = new castleStage;
 
 
@@ -23,7 +24,8 @@ var castleDash = {
           render: castleDash.render
       });
       newPlayer = new castlePlayer();
-      newSword = new castleWeapon();
+      //newSword = new castleWeapon();
+      newFirePot = new castlePotion();
       newDpad = new dpad();
 
     },
@@ -31,8 +33,9 @@ var castleDash = {
 
     },
     preload: function() {
-        castleStage.preload('level1hard.json');
-        newSword.preload();
+        castleStage.preload('testLevel1.json');
+        //newSword.preload();
+        newFirePot.preload();
         newPlayer.preload();
         castleControl.preload();
         newDpad.preload();
@@ -43,6 +46,7 @@ var castleDash = {
         castleStage.createBack();
         newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
         game.physics.ninja.gravity = NINJA_GRAVITY;
+
 
         game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);
 
@@ -55,7 +59,8 @@ var castleDash = {
     update: function() {
         castleStage.update();
         newPlayer.update();
-        newSword.update();
+        //newSword.update();
+        newFirePot.update();
         _.each(castleStage.enemies, function(enemy){
           enemy.update();
         });
@@ -66,6 +71,7 @@ var castleDash = {
       // game.debug.body(castleStage.enemies.children[0]);
       // game.debug.body(castleStage.enemies.children[1]);
       // game.debug.body(castleStage.enemies.children[2]);
+      //game.debug.body(castlePotion.newFirePot);
     },
 
     game: {},

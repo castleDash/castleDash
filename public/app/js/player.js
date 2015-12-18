@@ -157,7 +157,30 @@ castlePlayer.prototype = {
       player.canAttack=true;
     },
     fightEnemy: function(player, enemy) {
-        if (newSword.swordExists() && player.canAttack) {
+        // if (newSword.swordExists() && player.canAttack) {
+        //   console.log("attacking");
+        //   player.canAttack=false;
+        //   player.canBeAttacked=false;
+        //   player.fightTimer.loop(500, this.enableAttack, this);
+        //   player.fightTimer.start();
+        //   player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
+        //   player.beAttackedTimer.start();
+        //   this.damageEnemy(enemy);
+        // }
+        // if (newSword.swordExists() && player.canAttack) {
+        //   console.log("attacking");
+        //   player.canAttack=false;
+        //   player.canBeAttacked=false;
+        //   player.fightTimer.loop(500, this.enableAttack, this);
+        //   player.fightTimer.start();
+        //   player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
+        //   player.beAttackedTimer.start();
+        //   this.damageEnemy(enemy);
+        // }
+        // else if(player.canBeAttacked){
+        //     this.damagePlayer();
+        // }
+        if (newFirePot.potionExists() && player.canAttack) {
           console.log("attacking");
           player.canAttack=false;
           player.canBeAttacked=false;
@@ -165,7 +188,10 @@ castlePlayer.prototype = {
           player.fightTimer.start();
           player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
           player.beAttackedTimer.start();
-          this.damageEnemy(enemy);
+          
+          game.physics.ninja.overlap(newFirePot, enemy, this.damageEnemy(enemy));
+
+          //this.damageEnemy(enemy);
         }
         else if(player.canBeAttacked){
             this.damagePlayer();
