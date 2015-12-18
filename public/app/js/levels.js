@@ -1,21 +1,11 @@
-
+var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
-var castleStage = function(){};
+var mycastleStage = function(){};
 
-castleStage.prototype = {
-    preload: function(levelName) {
-        game.load.tilemap('level', 'app/assets/levels/'+levelName,
-            null,
-            Phaser.Tilemap.TILED_JSON); //pulls json file of the level
-        game.load.image('tiles',
-            'app/assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
-        game.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
-        game.load.image('sky', 'app/assets/backgroundArt/sky.png');
-        game.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
-        game.load.spritesheet('orc', 'app/assets/sprites/orc_piratess.png', 64, 64, 36);
+mycastleStage.prototype = {
 
-    },
-    createBack: function() {
+    createBack: function(levelName) {
+        this.levelName = levelName;
         this.spikes=[];
         this.enemies=[];
         //just some  nicer art that's not part of the level object
@@ -26,7 +16,7 @@ castleStage.prototype = {
         game.add.sprite(3600, 0, 'sky');
 
 
-        map = game.add.tilemap('level'); //puts the level in the map varirable
+        map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
 
@@ -89,12 +79,6 @@ castleStage.prototype = {
           this.enemies.push(newEnemy);
         }
       }
-
-
-        testLayer = map.createLayer('testLayer');
-        if (testLayer!=null){
-          testLayer.resizeWorld();
-        }
 
 
     },

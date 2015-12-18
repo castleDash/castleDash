@@ -3,16 +3,15 @@ var castlePlayer = function(){};
 
 castlePlayer.prototype = {
     preload: function() {
-        game.load.spritesheet('ninja',
-            'app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
+
     },
 
     create: function(x,y) {
-        player = game.add.sprite(x,y, 'ninja');
+        player = NinjaGame.game.add.sprite(x,y, 'ninja');
         player.animations.add('left', [0, 1, 2, 3], 10, true);
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         player.scale.setTo(0.8, 0.7);
-        game.physics.ninja.enableAABB(player);
+        NinjaGame.game.physics.ninja.enableAABB(player);
         player.scale.setTo(1, 1);
         player.body.bounce = 0;
         player.body.friction = 0.14;
@@ -23,16 +22,22 @@ castlePlayer.prototype = {
         player.immunity=false;
         this.getStats();
         this.updateStatsDash();
-        player.fightTimer= game.time.create(false);
-        player.beAttackedTimer= game.time.create(false);
+        player.fightTimer= NinjaGame.game.time.create(false);
+        player.beAttackedTimer= NinjaGame.game.time.create(false);
         player.canAttack= true;
         player.canBeAttacked=true;
 
     },
 
     update: function() {
-        if (player.body.x>=castleStage.endTile[0].x){
-          login.winLevel();
+        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
+            var leveldata;
+            newPlayer.currentLevel = newPlayer.currentLevel +1;
+            leveldata = 'level'+newPlayer.currentLevel;
+            NinjaGame.game.state.start('Game',true,false,leveldata);
+
+          // NinjaGame.game.state.restart();
+          // login.winLevel();
         }
         //world kill if falls
         // else if (player.body.y > WORLD_DEATH) {
@@ -76,10 +81,10 @@ castlePlayer.prototype = {
           }
 
           _.each(castleStage.enemies, function(enemy){
-            game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
+            NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
                 null, this);
           }, this);
-          game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
+          NinjaGame.game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
 
 
@@ -89,7 +94,7 @@ castlePlayer.prototype = {
     moveLeft: function() {
         //This keeps the player from moving to the left of the camera frame.
         //You can't go back, you can only go foward.
-        var gap = player.body.x - game.camera.x;
+        var gap = player.body.x - NinjaGame.game.camera.x;
         // console.log("gap: ",gap);
         if (gap > 0) {
             //  Move to the left
@@ -127,12 +132,18 @@ castlePlayer.prototype = {
           this.killPlayer();
         }else{
           this.immunity=true;
-          game.time.events.add(Phaser.Timer.SECOND * .5, this.loseImmunity, this);
+          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.loseImmunity, this);
         }
       }
     },
     damageEnemy: function(enemy){
         enemy.strength--;
+        if (this.facingLeft()){
+          enemy.body.x=enemy.body.x-32;
+        }
+        else{
+          enemy.body.x=enemy.body.x+32;
+        }
         if(enemy.strength<=0){
           enemy.kill();
           this.gold = parseInt(this.gold)+enemy.wealth;
@@ -166,13 +177,13 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      player.kill();
-      login.gameOver();
+      NinjaGame.game.state.restart();
     },
     health: 6,
-    gold: 100,
+    gold: 0,
     weapon: 1,
     potion: 1,
+    currentLevel:1,
     getStats: function(){
       //ajaxy stuff
       //this.health = stuff;
@@ -189,6 +200,14 @@ castlePlayer.prototype = {
       var dashTmpl = _.template(dashTemplate);
       var healthHTML = getHearts(dashplayer.health);
       $(".messages").html(dashTmpl(dashplayer)+healthHTML);
+    },
+    facingLeft: function(){
+      if(player.frame<4){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 
 
