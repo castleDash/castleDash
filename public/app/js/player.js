@@ -3,8 +3,7 @@ var castlePlayer = function(){};
 
 castlePlayer.prototype = {
     preload: function() {
-        // game.load.spritesheet('ninja',
-        //     'app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
+
     },
 
     create: function(x,y) {
@@ -32,7 +31,8 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-          login.winLevel();
+          game.state.restart();
+          // login.winLevel();
         }
         //world kill if falls
         // else if (player.body.y > WORLD_DEATH) {
@@ -172,8 +172,7 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      player.kill();
-      login.gameOver();
+      game.state.restart();
     },
     health: 6,
     gold: 0,

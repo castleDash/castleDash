@@ -3,9 +3,7 @@ var ENEMY_SPEED = 15;
 var castleEnemy = function () {};
 
 castleEnemy.prototype = {
-  preload: function(){
-    game.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
-  },
+
 
   create: function(x,y,strength,wealth){
     this.enemy = game.add.sprite(x, y, 'orc');

@@ -2,9 +2,7 @@
 var castleHazards = function(){};
 
 castleHazards.prototype = {
-    preload: function() {
-        // game.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
-    },
+
 
     createSpike: function(x, y) {
       newSpike = game.add.sprite(x, y, 'spike');

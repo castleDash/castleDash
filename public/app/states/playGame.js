@@ -32,9 +32,7 @@ NinjaGame.GameState.prototype = {
   preload: function() {
     console.log("preloading dash");
       castleStage.preload('testLevel.json');
-      newSword.preload();
-      newPlayer.preload();
-      castleControl.preload();
+
   },
   create: function() {
     console.log("running game.create");
