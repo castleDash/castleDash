@@ -1,3 +1,4 @@
+var NinjaGame = NinjaGame || {};
 var login = {
   init: function(){
     login.events();
@@ -12,9 +13,15 @@ var login = {
         login.submitLogin();
       }
     });
-    $("#game").on("click","#playAgain", function(){
-      $("#game").html("");
-      castleDash.init();
+    $("body").keypress(function (e) {
+      if (e.which == 13
+          &&
+          ($("#game").html().indexOf("You died")!=-1 ||
+           $("#game").html().indexOf("You win")!=-1)) {
+        $("#game").html("");
+        console.log("restarting game");
+        game.state.start(game.state.current);
+      }
     });
     $("#registerBtn").on("click", function () {
       var username = $("input[type='username']").val();
@@ -27,17 +34,18 @@ var login = {
         data: { username: username, password: password}
       })
       .then(function(data) {
+
         //check for successful login
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
-          $("#login").prepend("Username invalid");
+          $(".messages").html("Username invalid");
         }
       });
-    })
+    });
   },
   submitLogin: function(){
     var username = $("input[type='username']").val();
@@ -50,24 +58,35 @@ var login = {
       data: { username: username, password: password}
     })
       .error(function(data){
-        $("#login").prepend("Incorrect Login");
+        $(".messages").html("Incorrect Password");
       })
       .then(function(data) {
         //check for successful login
         if(data==="success"){
+          console.log("logging in");
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
-          $("#login").prepend("Incorrect Login");
+          $(".messages").html("Incorrect Password");
         }
       });
     },
     gameOver: function(){
-      game.destroy();
-      $("#game").html("<h1>You died</h1>");
-      $("#game").append("<input id='playAgain' type='button' name='playAgain' value='Play Again'>");
-    }
 
+      // game.destroy();
+      // $("canvas").remove();
+      // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
+    },
+    winLevel: function(){
+      
+      // game.destroy();
+      // $("canvas").remove();
+      // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
+    }
 };
+(function() {
+  'use strict';
+    login.init();
+}());
