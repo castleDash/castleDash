@@ -3,12 +3,11 @@ var castleWeapon = function () {};
 castleWeapon.prototype = {
 
  preload: function(){
-   game.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
-   
+
  },
 
  create: function(){
-   this.sword = game.add.sprite(0, 0, 'sword');
+   this.sword = NinjaGame.game.add.sprite(0, 0, 'sword');
    this.sword.anchor.setTo(0.5,0.5);
    this.sword.scale.setTo(1,1);
    this.sword.enableBody = true;

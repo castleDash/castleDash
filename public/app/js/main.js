@@ -1,3 +1,4 @@
+var NinjaGame = NinjaGame || {};
 var login = {
   init: function(){
     login.events();
@@ -19,7 +20,7 @@ var login = {
            $("#game").html().indexOf("You win")!=-1)) {
         $("#game").html("");
         console.log("restarting game");
-        castleDash.init();
+        game.state.start(game.state.current);
       }
     });
     $("#registerBtn").on("click", function () {
@@ -33,17 +34,18 @@ var login = {
         data: { username: username, password: password}
       })
       .then(function(data) {
+
         //check for successful login
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
           $(".messages").html("Username invalid");
         }
       });
-    })
+    });
   },
   submitLogin: function(){
     var username = $("input[type='username']").val();
@@ -61,9 +63,10 @@ var login = {
       .then(function(data) {
         //check for successful login
         if(data==="success"){
+          console.log("logging in");
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
           $(".messages").html("Incorrect Password");
@@ -71,14 +74,20 @@ var login = {
       });
     },
     gameOver: function(){
-      game.destroy();
-      $("canvas").remove();
-      $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
+
+      // game.destroy();
+      // $("canvas").remove();
+      // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
     },
     winLevel: function(){
-      game.destroy();
-      $("canvas").remove();
-      $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
+      
+      // game.destroy();
+      // $("canvas").remove();
+      // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
     }
 
 };
+(function() {
+  'use strict';
+    login.init();
+}());
