@@ -85,7 +85,6 @@ var login = {
       // $("canvas").remove();
       // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
     }
-
 };
 (function() {
   'use strict';
