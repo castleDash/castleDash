@@ -21,6 +21,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -167,6 +168,13 @@ public class castleDashController {
         saves.save(tempSave);
         return "success";
     }
+
+    /*@RequestMapping (path = "/levelData", method = RequestMethod.GET)
+    public List<Level> levelData(){
+        for (int i=0; i<2; i++){
+            List<Level> tempList = levels.findAllByLevelNumber(i);
+        }
+    }*/
 
     static String readFile(String fileName) {
         File f = new File(fileName);

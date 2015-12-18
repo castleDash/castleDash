@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface LevelRepository extends CrudRepository<Level, Integer> {
     List<Level> findAllByLevelNumber(Level levelNumber);
+    List<Level> findAllByVerNumber(Level version);
 }
