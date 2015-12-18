@@ -70,16 +70,7 @@ var castleControl = {
       return true;
     }
   },
-  meleeCtrl: function () {
-    if(key1.isDown){
-      return true;
-    }
-  },
-  rangeCtrl: function () {
-    if(key2.isDown){
-      return true;
-    }
-  },
+  weaponType: 0,
   buttonAttack: function(){
     this.attack=true;
   },
@@ -97,6 +88,7 @@ var castleControl = {
   buttonUp: function(){
     upButton.frame=1;
     this.up=true;
+    this.changeWeaponType();
   },
   buttonDown: function(){
     downButton.frame=1;
@@ -117,6 +109,13 @@ var castleControl = {
   releaseButtonDown: function(){
     downButton.frame=0;
     this.down=false;
+  },
+  changeWeaponType: function(){
+    if(this.weaponType===0){
+      this.weaponType=1;
+    }else{
+      this.weaponType=0;
+    }
   }
 
 

@@ -157,7 +157,7 @@ castlePlayer.prototype = {
       player.canAttack=true;
     },
     fightEnemy: function(player, enemy) {
-        if (newSword.swordExists() && player.canAttack) {
+        if (newWeapon.weaponExists() && player.canAttack) {
           console.log("attacking");
           player.canAttack=false;
           player.canBeAttacked=false;

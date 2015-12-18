@@ -12,7 +12,7 @@ var SWORD_ANCHOR = 0.5;
 var NINJA_GRAVITY = 0.5;
 var WORLD_DEATH = 270;
 var newPlayer;
-var newSword;
+var newWeapon;
 var castleStage;
 
 NinjaGame.GameState.prototype = {
@@ -22,7 +22,7 @@ NinjaGame.GameState.prototype = {
   styling: function() {
 
     newPlayer = new castlePlayer();
-    newSword = new castleWeapon();
+    newWeapon = new castleWeapon();
     castleStage = new castleStage();
 
   },
@@ -51,11 +51,10 @@ NinjaGame.GameState.prototype = {
 
   },
   update: function() {
-    console.log("running game.update");
 
       castleStage.update();
       newPlayer.update();
-      newSword.update();
+      newWeapon.update();
       _.each(castleStage.enemies, function(enemy){
         enemy.update();
       });

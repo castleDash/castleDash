@@ -17,6 +17,7 @@ NinjaGame.Preload.prototype ={
     this.load.tilemap('level', 'app/assets/levels/testLevel.json', null, Phaser.Tilemap.TILED_JSON);
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
+    this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
     this.load.image('tiles','app/assets/tiledMaps/patformkenney-32-4x39.png');
     this.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
     this.load.image('sky', 'app/assets/backgroundArt/sky.png');
