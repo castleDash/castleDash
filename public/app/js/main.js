@@ -1,17 +1,16 @@
-var Login = function(){};
-
- Login.prototype ={
+var NinjaGame = NinjaGame || {};
+var login = {
   init: function(){
-    Login.events();
+    login.events();
   },
 
   events: function(){
     $("#loginBtn").on("click", function () {
-      Login.submitLogin();
+      login.submitLogin();
     });
     $("#password").keypress(function (e) {
       if (e.which == 13) {
-        Login.submitLogin();
+        login.submitLogin();
       }
     });
     $("body").keypress(function (e) {
@@ -21,7 +20,7 @@ var Login = function(){};
            $("#game").html().indexOf("You win")!=-1)) {
         $("#game").html("");
         console.log("restarting game");
-        castleDash.init();
+        // castleDash.init();
       }
     });
     $("#registerBtn").on("click", function () {
@@ -35,17 +34,18 @@ var Login = function(){};
         data: { username: username, password: password}
       })
       .then(function(data) {
+
         //check for successful login
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
           $(".messages").html("Username invalid");
         }
       });
-    })
+    });
   },
   submitLogin: function(){
     var username = $("input[type='username']").val();
@@ -63,9 +63,10 @@ var Login = function(){};
       .then(function(data) {
         //check for successful login
         if(data==="success"){
+          console.log("logging in");
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
           $(".messages").html("Incorrect Password");
@@ -84,3 +85,7 @@ var Login = function(){};
     }
 
 };
+(function() {
+  'use strict';
+    login.init();
+}());

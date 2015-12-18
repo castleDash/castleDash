@@ -1,8 +1,8 @@
 
 var castleControl = {
   preload: function () {
-    game.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
-    game.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
+    // game.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
+    // game.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
   },
 
   create: function(){
