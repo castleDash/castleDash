@@ -6,6 +6,7 @@ var castleControl = {
     game.load.spritesheet('leftBtn', 'app/assets/sprites/left.png',32,32,2);
     game.load.spritesheet('rightBtn', 'app/assets/sprites/right.png',32,32,2);
     game.load.spritesheet('upBtn', 'app/assets/sprites/up.png',32,32,2);
+    game.load.spritesheet('downBtn', 'app/assets/sprites/down.png',32,32,2);
 
 
   },
@@ -22,18 +23,24 @@ var castleControl = {
     jumpButton.fixedToCamera=true;
     attackButton = game.add.button(game.camera.width - 125, game.camera.height-75, 'attackBtn', this.buttonAttack, this, 0, 0, 1, 0);
     attackButton.fixedToCamera=true;
-    leftButton = game.add.button(100, game.camera.height-75, 'leftBtn');
+    leftButton = game.add.button(99, game.camera.height-75, 'leftBtn');
     leftButton.fixedToCamera=true;
     leftButton.inputEnabled=true;
     leftButton.onInputDown.add(this.buttonLeft, this);
     leftButton.onInputUp.add(this.releaseButtonLeft, this);
-    rightButton = game.add.button(132, game.camera.height-75, 'rightBtn');
+    rightButton = game.add.button(133, game.camera.height-75, 'rightBtn');
     rightButton.fixedToCamera=true;
     rightButton.onInputDown.add(this.buttonRight, this);
     rightButton.onInputUp.add(this.releaseButtonRight, this);
 
-    upButton = game.add.button(116, game.camera.height-93, 'upBtn', this.buttonUp, this, 0, 0, 1, 0);
+    upButton = game.add.button(116, game.camera.height-93, 'upBtn');
     upButton.fixedToCamera=true;
+    upButton.onInputDown.add(this.buttonUp, this);
+    upButton.onInputUp.add(this.releaseButtonUp, this);
+    downButton = game.add.button(116, game.camera.height-58, 'downBtn');
+    downButton.fixedToCamera=true;
+    downButton.onInputDown.add(this.buttonDown, this);
+    downButton.onInputUp.add(this.releaseButtonDown, this);
 
   },
   update: function(){
@@ -86,23 +93,38 @@ var castleControl = {
     this.jump=true;
   },
   buttonLeft: function(){
+    leftButton.frame=1;
     this.left=true;
   },
   buttonRight: function(){
+    rightButton.frame=1;
     this.right=true;
   },
   buttonUp: function(){
+    upButton.frame=1;
     this.up=true;
   },
   buttonDown: function(){
+    downButton.frame=1;
     this.down=true;
   },
   releaseButtonLeft: function(){
+    leftButton.frame=0;
     this.left=false;
   },
   releaseButtonRight: function(){
+    rightButton.frame=0;
     this.right=false;
+  },
+  releaseButtonUp: function(){
+    upButton.frame=0;
+    this.up=false;
+  },
+  releaseButtonDown: function(){
+    downButton.frame=0;
+    this.down=false;
   }
+
 
 
 
