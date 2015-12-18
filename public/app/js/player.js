@@ -31,7 +31,12 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-          NinjaGame.game.state.restart();
+            var leveldata;
+            newPlayer.currentLevel = newPlayer.currentLevel +1;
+            leveldata = 'level'+newPlayer.currentLevel;
+            NinjaGame.game.state.start('Game',true,false,leveldata);
+
+          // NinjaGame.game.state.restart();
           // login.winLevel();
         }
         //world kill if falls
@@ -178,6 +183,7 @@ castlePlayer.prototype = {
     gold: 0,
     weapon: 1,
     potion: 1,
+    currentLevel:1,
     getStats: function(){
       //ajaxy stuff
       //this.health = stuff;

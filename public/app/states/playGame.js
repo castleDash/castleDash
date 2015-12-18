@@ -16,12 +16,13 @@ var newSword;
 var castleStage;
 
 NinjaGame.GameState.prototype = {
-  init: function() {
+  init: function(levelData) {
       this.styling();
+      this.levelData = levelData || 'level';
   },
   styling: function() {
 
-    newPlayer = new castlePlayer();
+    newPlayer = newPlayer || new castlePlayer();
     newSword = new castleWeapon();
     castleStage = new mycastleStage();
 
@@ -29,16 +30,18 @@ NinjaGame.GameState.prototype = {
 
   preload: function() {
     console.log("preloading dash");
-      castleStage.preload('testLevel.json');
+
 
   },
+
+
   create: function() {
     console.log("running game.create");
     var text = "Running Our Game";
     var style = {font:'30px Arial', fill:"#fff", align:"center"};
     var t = this.game.add.text(this.game.width/2,this.game.height/2,text,style);
     t.anchor.set(0.5);
-      castleStage.createBack();
+      castleStage.createBack(this.levelData);
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       game.physics.ninja.gravity = NINJA_GRAVITY;
 
