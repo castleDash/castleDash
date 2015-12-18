@@ -12,32 +12,23 @@ public class Save {
     @GeneratedValue
     int id;
 
-    //@Column(nullable = false)
-    int level;
+    @Column(nullable = false)
+    public int level;
 
-    //@Column(nullable = false)
-    String name;
+    @Column(nullable = false)
+    public int score;
 
-    //@Column(nullable = false)
-    String swordName;
+    @Column(nullable = false)
+    public int healthPotion;
 
-    //@Column(nullable = false)
-    String rangeName;
+    @Column(nullable = false)
+    public int firePotion;
 
-    //@Column(nullable = false)
-    int healthPotion;
+    @Column(nullable = false)
+    public int shieldPotion;
 
-    //@Column(nullable = false)
-    int shieldPotion;
-
-    //@Column(nullable = false)
-    int firePotion;
-
-    //@Column(nullable = false)
-    int currency;
-
-    //@Column(nullable = false)
-    int health;
+    @Column(nullable = false)
+    public int health;
 
     @ManyToOne
     public User user;

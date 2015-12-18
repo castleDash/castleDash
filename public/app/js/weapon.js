@@ -1,61 +1,78 @@
+var castleWeapon = function () {};
 
-var castleWeapon = {
+castleWeapon.prototype = {
 
  preload: function(){
-   game.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
+  //  NinjaGame.game.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
 
  },
 
  create: function(){
-   castleWeapon.sword = game.add.sprite(0, 0, 'sword');
-   castleWeapon.sword.anchor.setTo(0.5,0.5);
-   castleWeapon.sword.scale.setTo(1,1);
-   castleWeapon.sword.enableBody = true;
-   castleWeapon.sword.visible=true;
+   this.sword = NinjaGame.game.add.sprite(0, 0, 'sword');
+   this.sword.anchor.setTo(0.5,0.5);
+   this.sword.scale.setTo(1,1);
+   this.sword.enableBody = true;
+   this.sword.visible=true;
  },
 
  update: function(){
-   if (castleWeapon.swordExists()){
-     castleWeapon.killSword();
+  //  if(meleeCtrl){
+  //    this.type=1;
+  //  }
+  //  else if(rangeCtrl){
+  //    this.type=1;
+  //  }
+   if (this.swordExists()){
+     this.killSword();
    }
 
    if (castleControl.attackCtrl()) {
        if (player.frame < 4) {
-             castleWeapon.attack("left");
-
+         if(this.type=1){
+             this.swordAttack("left");
+         }else{
+           this.potionAttack("left");
+         }
        }
        else {
-             castleWeapon.attack("right");
-       }
+         if(this.type=1){
+           this.swordAttack("right");
+         }else{
+           this.potionAttack("right");
+         }
+      }
    }
+
  },
 
- attack: function(direction){
-   if(!castleWeapon.swordExists()){
-     castleWeapon.create();
-   }
-   
-   castleWeapon.sword.visible=true;
-   castleWeapon.sword.y=player.y;
+ swordAttack: function(direction){
+   if(!this.swordExists() && player.canAttack){
+     this.create();
 
-   if(direction==="left"){
-     castleWeapon.sword.scale.x=-1;
-     castleWeapon.sword.x=player.x-20;
-     player.frame = 3;
+     this.sword.visible=true;
+     this.sword.y=player.y;
+
+     if(direction==="left"){
+       this.sword.scale.x=-1;
+       this.sword.x=player.x-20;
+       player.frame = 3;
+      }
+      else {
+        this.sword.scale.x=1;
+        this.sword.x=player.x+20;
+        player.frame = 8;
     }
-    else {
-      castleWeapon.sword.scale.x=1;
-      castleWeapon.sword.x=player.x+20;
-      player.frame = 8;
-    }
+  }
  },
   swordExists: function(){
-    return (typeof castleWeapon.sword === "object");
+    return (typeof this.sword === "object");
   },
 
   killSword: function(){
-    castleWeapon.sword.kill();
-    castleWeapon.sword=undefined;
+    this.sword.kill();
+    this.sword=undefined;
   },
-  sword: ""
+  sword: "",
+  potion:"",
+  type: 1
 };
