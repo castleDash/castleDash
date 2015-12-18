@@ -31,7 +31,7 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-          game.state.restart();
+          NinjaGame.game.state.restart();
           // login.winLevel();
         }
         //world kill if falls
@@ -172,7 +172,7 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      game.state.restart();
+      NinjaGame.game.state.restart();
     },
     health: 6,
     gold: 0,

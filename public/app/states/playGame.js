@@ -23,7 +23,7 @@ NinjaGame.GameState.prototype = {
 
     newPlayer = new castlePlayer();
     newSword = new castleWeapon();
-    castleStage = new castleStage();
+    castleStage = new mycastleStage();
 
   },
 
@@ -47,7 +47,7 @@ NinjaGame.GameState.prototype = {
       castleStage.createFront();
 
       castleControl.create();
-      
+
 
   },
   update: function() {

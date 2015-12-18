@@ -1,8 +1,8 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
-var castleStage = function(){};
+var mycastleStage = function(){};
 
-castleStage.prototype = {
+mycastleStage.prototype = {
     preload: function(levelName) {
         // game.load.tilemap('level', 'app/assets/levels/'+levelName,
         //     null,
