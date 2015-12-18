@@ -1,15 +1,9 @@
+NinjaGame = NinjaGame || {};
+var game = NinjaGame.game;
 
 var castleControl = {
-  preload: function () {
-    game.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
-    game.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
-    game.load.spritesheet('leftBtn', 'app/assets/sprites/left.png',32,32,2);
-    game.load.spritesheet('rightBtn', 'app/assets/sprites/right.png',32,32,2);
-    game.load.spritesheet('upBtn', 'app/assets/sprites/up.png',32,32,2);
-    game.load.spritesheet('downBtn', 'app/assets/sprites/down.png',32,32,2);
 
 
-  },
 
   create: function(){
     cursors = game.input.keyboard.createCursorKeys();
