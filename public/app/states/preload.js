@@ -15,6 +15,7 @@ NinjaGame.Preload.prototype ={
     this.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     //pulls json file of the level
     this.load.tilemap('level', 'app/assets/levels/testLevel.json', null, Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('level2', 'app/assets/levels/testLevel2.json', null, Phaser.Tilemap.TILED_JSON);
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.image('tiles','app/assets/tiledMaps/patformkenney-32-4x39.png');

@@ -3,19 +3,9 @@ var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var mycastleStage = function(){};
 
 mycastleStage.prototype = {
-    preload: function(levelName) {
-        // game.load.tilemap('level', 'app/assets/levels/'+levelName,
-        //     null,
-        //     Phaser.Tilemap.TILED_JSON); //pulls json file of the level
-        // game.load.image('tiles',
-        //     'app/assets/tiledMaps/patformkenney-32-4x39.png'); //pulls tileset art
-        // game.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
-        // game.load.image('sky', 'app/assets/backgroundArt/sky.png');
-        // game.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
-        // game.load.spritesheet('orc', 'app/assets/sprites/orc_piratess.png', 64, 64, 36);
 
-    },
-    createBack: function() {
+    createBack: function(levelName) {
+        this.levelName = levelName;
         this.spikes=[];
         this.enemies=[];
         //just some  nicer art that's not part of the level object
@@ -26,7 +16,7 @@ mycastleStage.prototype = {
         game.add.sprite(3600, 0, 'sky');
 
 
-        map = game.add.tilemap('level'); //puts the level in the map varirable
+        map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
 
@@ -38,19 +28,19 @@ mycastleStage.prototype = {
             slopeMap);
 
         layer = map.createLayer('filler');
-        if (layer !==null){
+        if (layer !=null){
         layer.resizeWorld();
       }
 
 
 
         layer = map.createLayer('background');
-        if (layer!==null){
+        if (layer!=null){
         layer.resizeWorld();
       }
 
       playerLayer = map.createLayer('playerSpawn');
-      if (playerLayer!==null){
+      if (playerLayer!=null){
         this.playerTile = game.physics.ninja.convertTilemap(map,playerLayer,slopeMap);
         playerLayer.resizeWorld();
         playerLayer.kill();
@@ -59,7 +49,7 @@ mycastleStage.prototype = {
         //adding spikeLayer for spike hazards
 
         spikeLayer = map.createLayer('spikeLayer');
-        if (spikeLayer !== null){
+        if (spikeLayer != null){
         spikeLayer.resizeWorld();
         this.spikeTiles = game.physics.ninja.convertTilemap(map,
             spikeLayer, slopeMap);
@@ -72,14 +62,14 @@ mycastleStage.prototype = {
       }
 
         endLevelLayer = map.createLayer('levelEnd');
-        if (endLevelLayer!==null){
+        if (endLevelLayer!=null){
         endLevelLayer.resizeWorld();
         this.endTile = game.physics.ninja.convertTilemap(map, endLevelLayer, slopeMap);
       }
 
 
         enemyLayer = map.createLayer('enemyLayer');
-        if (enemyLayer!==null){
+        if (enemyLayer!=null){
         enemyLayer.resizeWorld();
         this.enemyTiles = game.physics.ninja.convertTilemap(map, enemyLayer, slopeMap);
         enemyLayer.kill();
@@ -94,7 +84,7 @@ mycastleStage.prototype = {
     },
     createFront: function() {
         layer = map.createLayer('foreground'); //creates foreground layer to render after player is created so you can move behind objects
-        if (layer !==null){
+        if (layer !=null){
         layer.resizeWorld();
       }
     },
