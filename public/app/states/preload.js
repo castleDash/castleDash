@@ -22,6 +22,9 @@ NinjaGame.Preload.prototype ={
     this.load.image('sky', 'app/assets/backgroundArt/sky.png');
     this.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
     this.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
+    this.load.spritesheet('leftBtn', 'app/assets/sprites/left.png',32,32,2);
+    this.load.spritesheet('rightBtn', 'app/assets/sprites/right.png',32,32,2);
+    this.load.spritesheet('upBtn', 'app/assets/sprites/up.png',32,32,2);
 
     this.load.script('level.js','app/js/levels.js');
     this.load.script('enemy.js','app/js/enemy.js');

@@ -133,6 +133,12 @@ castlePlayer.prototype = {
     },
     damageEnemy: function(enemy){
         enemy.strength--;
+        if (this.facingLeft()){
+          enemy.body.x=enemy.body.x-32;
+        }
+        else{
+          enemy.body.x=enemy.body.x+32;
+        }
         if(enemy.strength<=0){
           enemy.kill();
           this.gold = parseInt(this.gold)+enemy.wealth;
@@ -170,7 +176,7 @@ castlePlayer.prototype = {
       login.gameOver();
     },
     health: 6,
-    gold: 100,
+    gold: 0,
     weapon: 1,
     potion: 1,
     getStats: function(){
@@ -189,6 +195,14 @@ castlePlayer.prototype = {
       var dashTmpl = _.template(dashTemplate);
       var healthHTML = getHearts(dashplayer.health);
       $(".messages").html(dashTmpl(dashplayer)+healthHTML);
+    },
+    facingLeft: function(){
+      if(player.frame<4){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 
 
