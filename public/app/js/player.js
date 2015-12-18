@@ -21,6 +21,7 @@ castlePlayer.prototype = {
         player.frame=5;
         player.health=6;
         player.immunity=false;
+        player.canJump = true;
         this.getStats();
         this.updateStatsDash();
         player.fightTimer= game.time.create(false);
@@ -75,12 +76,14 @@ castlePlayer.prototype = {
             }
           }
 
+
           _.each(castleStage.enemies, function(enemy){
             game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
                 null, this);
           }, this);
           game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
+            //  game.physics.ninja.overlap(this.firePot, enemy.enemy, this.fightEnemy, null, this);
 
 
 
@@ -112,10 +115,16 @@ castlePlayer.prototype = {
     },
 
     jump: function() {
-      if(player.body.touching.down){
+      if(player.body.touching.down || player.body.touching.right || player.body.touching.left){
+
         PLAYER_SPEED = 10;
         player.body.moveUp(450);
+        player.canJump;
+        //game.events.add(Phaser)
+
       }
+      //ground jump can jump whenever. player.body.touching.right/left with a timer reversing the boolean
+      //this will allow for wall jumps that won't let you just climb straight up a wall
 
     },
     damagePlayer: function(){
@@ -156,6 +165,14 @@ castlePlayer.prototype = {
     enableAttack: function(){
       player.canAttack=true;
     },
+
+    canJump: function() {
+      player.canJump=true;
+    },
+    canNotJump: function() {
+      player.canJump = false;
+    },
+
     fightEnemy: function(player, enemy) {
         // if (newSword.swordExists() && player.canAttack) {
         //   console.log("attacking");
@@ -188,7 +205,7 @@ castlePlayer.prototype = {
           player.fightTimer.start();
           player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
           player.beAttackedTimer.start();
-          
+
           game.physics.ninja.overlap(newFirePot, enemy, this.damageEnemy(enemy));
 
           //this.damageEnemy(enemy);
