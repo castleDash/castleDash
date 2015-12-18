@@ -26,9 +26,7 @@ NinjaGame.GameState.prototype = {
     castleStage = new castleStage();
 
   },
-  events: function() {
 
-  },
   preload: function() {
     console.log("preloading dash");
       castleStage.preload('testLevel.json');
