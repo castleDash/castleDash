@@ -1,5 +1,6 @@
 package com.teamKninja.services;
 
+import com.teamKninja.entities.Level;
 import com.teamKninja.entities.Save;
 import com.teamKninja.entities.User;
 import org.springframework.data.repository.CrudRepository;

@@ -1,7 +1,9 @@
 package com.teamKninja.controllers;
 
+import com.teamKninja.entities.Level;
 import com.teamKninja.entities.Save;
 import com.teamKninja.entities.User;
+import com.teamKninja.services.LevelRepository;
 import com.teamKninja.services.SaveRepository;
 import com.teamKninja.services.UserRepository;
 import com.teamKninja.util.PasswordHash;
@@ -14,10 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.security.AllPermission;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by holdenhughes on 12/10/15.
@@ -30,8 +37,14 @@ public class castleDashController {
     @Autowired
     SaveRepository saves;
 
+    @Autowired
+    LevelRepository levels;
+
+    @Autowired
+    LevelRepository randLevels;
+
     @PostConstruct
-    public void init() throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public void init() throws Exception {
         if (users.count() >0) {
             return;
         } else {
@@ -39,6 +52,30 @@ public class castleDashController {
             user.username = "Henry";
             user.password = PasswordHash.createHash("Grenry");
             users.save(user);
+                while (saves.findAllByUser(user).size()<3){
+                    Save save = new Save();
+                    save.level = 0;
+                    save.firePotion = 3;
+                    save.healthPotion = 3;
+                    save.shieldPotion = 3;
+                    save.score =0;
+                    save.user = user;
+                    saves.save(save);
+                }
+            for (int i=1; i<2; i++){ //This loop will populate the levels based on the number set at i
+                String levelNum = String.valueOf(i);
+                for (int j =1; j<4; j++){ //This loop will populate based on the number of j "version number"
+                    Level level = new Level();
+                    String verNum = String.valueOf(j);
+                    String filename = "level"+levelNum+"v"+verNum+".json"; // builds the filename
+                    String fileContent = readFile(filename);
+                    level.levelCode = fileContent;
+                    level.levelNumber = i;
+                    level.version = j;
+                    levels.save(level);
+
+                }
+            }
         }
     }
 
@@ -81,23 +118,19 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/createSave", method = RequestMethod.POST)
-    public String createSave(HttpSession session, String name) throws Exception {
+    public String createSave(HttpSession session) throws Exception {
         String username =(String) session.getAttribute("username");
         User user = users.findOneByUsername(username);
         if (username == null){
-            throw new Exception("Not logged in");
+            return "not logged in";
         } else {
             List<Save> saveList = saves.findAllByUser(user);
             if (saveList.size() < 3){
                 Save save = new Save();
-                save.name = name;
-                save.level = 0;
-                save.currency = 100;
+                save.level = 1;
                 save.firePotion = 3;
                 save.healthPotion = 3;
                 save.shieldPotion = 3;
-                save.swordName = "sword";
-                save.rangeName = "shuriken";
                 saves.save(save);
                 return "success";
             } else {
@@ -106,7 +139,7 @@ public class castleDashController {
         }
     }
 
-    @RequestMapping (path = "/savesList", method = RequestMethod.GET)
+    @RequestMapping (path = "/saveList", method = RequestMethod.GET)
     public List savesList(HttpSession session){
         String username =(String) session.getAttribute("username");
         User user = users.findOneByUsername(username);
@@ -114,7 +147,7 @@ public class castleDashController {
         return saveList;
     }
 
-    @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
+   @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
     public String selectSave(HttpSession saveSession, int id){
         Save save = saves.findOneById(id);
         saveSession.setAttribute("id", save);
@@ -127,21 +160,47 @@ public class castleDashController {
         return "success";
     }
 
-    @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
-    public String saveGame(HttpSession saveSession,
-                           int level,
-                           int healthPotion,
-                           int shieldPotion,
-                           int firePotion,
-                           int currency) {
+    /*@RequestMapping (path = "/saveGame", method = RequestMethod.POST)
+    public String saveGame(HttpSession saveSession, int level, int healthPotion, int shieldPotion,
+                           int firePotion, int health) {
         int id = (int) saveSession.getAttribute("id");
         Save tempSave = saves.findOneById(id);
-        tempSave.level = level+1;
+        tempSave.level = level;
         tempSave.healthPotion = healthPotion;
         tempSave.shieldPotion = shieldPotion;
         tempSave.firePotion = firePotion;
-        tempSave.currency = currency + 20;
+        tempSave.health = health;
         saves.save(tempSave);
         return "success";
+    }
+
+    @RequestMapping (path = "/levelData", method = RequestMethod.GET)
+    public ArrayList<Level> levelList(){
+        Random rn = new Random();
+        int randVersion = rn.nextInt(2) +1;
+
+            int i =1;
+            List<Level> tempList = levels.findAllByLevelNumber(i);
+            Level randLevel =  randLevels.findOneByVersion(randVersion);
+
+
+        ArrayList<Level> finalList = new ArrayList<>();
+
+        //finalList.add(levelSelect);
+
+        return finalList;
+    }*/
+
+    static String readFile(String fileName) {
+        File f = new File(fileName);
+        try {
+            FileReader fr = new FileReader(f);
+            int fileSize = (int) f.length();
+            char[] fileContent = new char[fileSize];
+            fr.read(fileContent);
+            return new String(fileContent);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
