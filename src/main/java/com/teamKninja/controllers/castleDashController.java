@@ -19,10 +19,12 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.security.AllPermission;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by holdenhughes on 12/10/15.
@@ -37,6 +39,9 @@ public class castleDashController {
 
     @Autowired
     LevelRepository levels;
+
+    @Autowired
+    LevelRepository randLevels;
 
     @PostConstruct
     public void init() throws Exception {
@@ -155,7 +160,7 @@ public class castleDashController {
         return "success";
     }
 
-    @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
+    /*@RequestMapping (path = "/saveGame", method = RequestMethod.POST)
     public String saveGame(HttpSession saveSession, int level, int healthPotion, int shieldPotion,
                            int firePotion, int health) {
         int id = (int) saveSession.getAttribute("id");
@@ -169,11 +174,21 @@ public class castleDashController {
         return "success";
     }
 
-    /*@RequestMapping (path = "/levelData", method = RequestMethod.GET)
-    public List<Level> levelData(){
-        for (int i=0; i<2; i++){
+    @RequestMapping (path = "/levelData", method = RequestMethod.GET)
+    public ArrayList<Level> levelList(){
+        Random rn = new Random();
+        int randVersion = rn.nextInt(2) +1;
+
+            int i =1;
             List<Level> tempList = levels.findAllByLevelNumber(i);
-        }
+            Level randLevel =  randLevels.findOneByVersion(randVersion);
+
+
+        ArrayList<Level> finalList = new ArrayList<>();
+
+        //finalList.add(levelSelect);
+
+        return finalList;
     }*/
 
     static String readFile(String fileName) {
