@@ -31,10 +31,8 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-            var leveldata;
-            newPlayer.currentLevel = newPlayer.currentLevel +1;
-            leveldata = 'level'+newPlayer.currentLevel;
-            NinjaGame.game.state.start('Game',true,false,leveldata);
+          this.currentLevel = this.currentLevel +1;
+          this.levelLoader();
 
           // NinjaGame.game.state.restart();
           // login.winLevel();
@@ -177,7 +175,18 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      NinjaGame.game.state.restart();
+      this.health = 6;
+      this.loseImmunity();
+      this.levelLoader();
+
+    },
+    levelLoader: function(){
+      var leveldata = 'level';
+      if(this.currentLevel>1){
+
+        leveldata +=this.currentLevel;
+       }
+      NinjaGame.game.state.start('Game',true,false,leveldata);
     },
     health: 6,
     gold: 0,
