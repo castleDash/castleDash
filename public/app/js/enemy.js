@@ -46,11 +46,13 @@ castleEnemy.prototype = {
   },
   damageEnemy: function(enemy){
       enemy.strength--;
-      if (newPlayer.facingLeft()){
-        enemy.body.x=enemy.body.x-32;
-      }
-      else{
-        enemy.body.x=enemy.body.x+32;
+      if(castleControl.weaponType==0){
+        if (newPlayer.facingLeft()){
+          enemy.body.x=enemy.body.x-32;
+        }
+        else{
+          enemy.body.x=enemy.body.x+32;
+        }        
       }
       if(enemy.strength<=0){
         enemy.kill();
