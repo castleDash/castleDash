@@ -33,14 +33,7 @@ castlePlayer.prototype = {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
           this.currentLevel = this.currentLevel +1;
           this.levelLoader();
-
-          // NinjaGame.game.state.restart();
-          // login.winLevel();
         }
-        //world kill if falls
-        // else if (player.body.y > WORLD_DEATH) {
-        //     this.killPlayer();
-        // }
         else{
           //MOVEMENT
           if (player.body.touching.down) {
@@ -80,8 +73,8 @@ castlePlayer.prototype = {
 
           _.each(castleStage.enemies, function(enemy){
             NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
-                null, this);
-          }, this);
+                null, newPlayer);
+          }, newPlayer);
           NinjaGame.game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
 
@@ -134,20 +127,7 @@ castlePlayer.prototype = {
         }
       }
     },
-    damageEnemy: function(enemy){
-        enemy.strength--;
-        if (this.facingLeft()){
-          enemy.body.x=enemy.body.x-32;
-        }
-        else{
-          enemy.body.x=enemy.body.x+32;
-        }
-        if(enemy.strength<=0){
-          enemy.kill();
-          this.gold = parseInt(this.gold)+enemy.wealth;
-          this.updateStatsDash();
-        }
-    },
+
     loseImmunity: function(){
       player.body.sprite.visible = true;
       player.body.sprite.tint = 16777215;
@@ -160,7 +140,7 @@ castlePlayer.prototype = {
       player.canAttack=true;
     },
     fightEnemy: function(player, enemy) {
-        if (newSword.swordExists() && player.canAttack) {
+        if (newWeapon.weaponExists() && player.canAttack) {
           console.log("attacking");
           player.canAttack=false;
           player.canBeAttacked=false;
@@ -168,7 +148,7 @@ castlePlayer.prototype = {
           player.fightTimer.start();
           player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
           player.beAttackedTimer.start();
-          this.damageEnemy(enemy);
+          newEnemy.damageEnemy(enemy);
         }
         else if(player.canBeAttacked){
             this.damagePlayer();

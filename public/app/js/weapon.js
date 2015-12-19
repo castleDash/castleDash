@@ -2,77 +2,99 @@ var castleWeapon = function () {};
 
 castleWeapon.prototype = {
 
- preload: function(){
-  //  NinjaGame.game.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
-
- },
-
  create: function(){
-   this.sword = NinjaGame.game.add.sprite(0, 0, 'sword');
-   this.sword.anchor.setTo(0.5,0.5);
-   this.sword.scale.setTo(1,1);
-   this.sword.enableBody = true;
-   this.sword.visible=true;
+   if(castleControl.weaponType===0){
+     this.weapon = NinjaGame.game.add.sprite(0, 0, 'sword');
+
+     this.weapon.enableBody = true;
+   }
+   else{
+       console.log("creating firepot");
+       this.weapon = NinjaGame.game.add.sprite(player.x, player.y, 'firepot');
+       this.weapon.animations.add('throw', [0, 1, 2, 3], 10, true, true);
+       this.weapon.animations.add('splash', [4,5,6,7,8], 2, true, true);
+       NinjaGame.game.physics.ninja.enableAABB(this.weapon);
+       this.weapon.enableBody = true;
+       this.weapon.body.friction = 0.1;
+       this.weapon.collideWorldBounds = true;
+   }
+   this.weapon.anchor.setTo(0.5,0.5);
+   this.weapon.scale.setTo(1,1);
+   this.weapon.visible=true;
  },
 
  update: function(){
-  //  if(meleeCtrl){
-  //    this.type=1;
-  //  }
-  //  else if(rangeCtrl){
-  //    this.type=1;
-  //  }
-   if (this.swordExists()){
-     this.killSword();
+   if(keyW.isDown){
+     castleControl.changeWeaponType();
+   };
+   if (this.weaponExists() && castleControl.weaponType===0){
+     this.killWeapon();
    }
 
    if (castleControl.attackCtrl()) {
        if (player.frame < 4) {
-         if(this.type=1){
-             this.swordAttack("left");
-         }else{
-           this.potionAttack("left");
-         }
+         this.weaponAttack("left",castleControl.weaponType);
        }
        else {
-         if(this.type=1){
-           this.swordAttack("right");
-         }else{
-           this.potionAttack("right");
-         }
+         this.weaponAttack("right",castleControl.weaponType);
       }
    }
 
- },
-
- swordAttack: function(direction){
-   if(!this.swordExists() && player.canAttack){
-     this.create();
-
-     this.sword.visible=true;
-     this.sword.y=player.y;
-
-     if(direction==="left"){
-       this.sword.scale.x=-1;
-       this.sword.x=player.x-20;
-       player.frame = 3;
+    if (this.weaponExists() && castleControl.weaponType===1){
+      this.rangeCollide();
+      if(this.weapon.body.touching.down){
+        this.weapon.animations.play('splash');
+        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .1, this.killWeapon, this);
       }
-      else {
-        this.sword.scale.x=1;
-        this.sword.x=player.x+20;
-        player.frame = 8;
-    }
-  }
+     }
+
  },
-  swordExists: function(){
-    return (typeof this.sword === "object");
+
+ weaponAttack: function(direction,type){
+   if(player.canAttack){
+     if (!this.weaponExists()){
+       this.create();
+     }
+     if(type===0){
+       this.weapon.y=player.y;
+       if(direction==="left"){
+         this.weapon.scale.x=-1;
+         this.weapon.x=player.x-20;
+         player.frame = 3;
+        }
+        else {
+          this.weapon.scale.x=1;
+          this.weapon.x=player.x+20;
+          player.frame = 8;
+        }
+     }
+     else{
+       this.weapon.body.moveRight(50);
+       this.weapon.body.moveUp(100);
+       this.weapon.animations.play('throw');
+       }
+
+   }
+ },
+  weaponExists: function(){
+    return (typeof this.weapon === "object");
   },
 
-  killSword: function(){
-    this.sword.kill();
-    this.sword=undefined;
+  killWeapon: function(){
+    if(this.weaponExists()){
+      this.weapon.kill();
+      this.weapon=undefined;
+    }
   },
-  sword: "",
-  potion:"",
+  rangeCollide: function(){
+    for (var i=0; i<castleStage.tiles.length; i++){
+      this.weapon.body.aabb.collideAABBVsTile(castleStage.tiles[i].tile);
+     }
+     _.each(castleStage.enemies, function(enemy){
+       NinjaGame.game.physics.ninja.overlap(enemy.enemy, this.weapon, newEnemy.damageEnemy,
+           null, this);
+     }, this);
+  },
+  weapon: "",
   type: 1
 };

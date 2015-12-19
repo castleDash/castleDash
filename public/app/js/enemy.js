@@ -44,7 +44,20 @@ castleEnemy.prototype = {
       }
     }
   },
-
+  damageEnemy: function(enemy){
+      enemy.strength--;
+      if (newPlayer.facingLeft()){
+        enemy.body.x=enemy.body.x-32;
+      }
+      else{
+        enemy.body.x=enemy.body.x+32;
+      }
+      if(enemy.strength<=0){
+        enemy.kill();
+        newPlayer.gold = parseInt(newPlayer.gold)+enemy.wealth;
+        newPlayer.updateStatsDash();
+      }
+  },
   moveRight:function(){
     this.enemy.body.moveRight(ENEMY_SPEED);
     this.enemy.animations.play('orcright');
