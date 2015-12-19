@@ -66,7 +66,7 @@ var castleControl = {
   },
 
   jumpCtrl: function(){
-    if(keyW.isDown || cursors.up.isDown || keyJump.isDown || this.jump){
+    if(cursors.up.isDown || keyJump.isDown || this.jump){
       return true;
     }
   },

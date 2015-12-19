@@ -24,6 +24,9 @@ castleWeapon.prototype = {
  },
 
  update: function(){
+   if(keyW.isDown){
+     castleControl.changeWeaponType();
+   };
    if (this.weaponExists() && castleControl.weaponType===0){
      this.killWeapon();
    }
@@ -78,8 +81,10 @@ castleWeapon.prototype = {
   },
 
   killWeapon: function(){
-    this.weapon.kill();
-    this.weapon=undefined;
+    if(this.weaponExists()){
+      this.weapon.kill();
+      this.weapon=undefined;
+    }
   },
   rangeCollide: function(){
     for (var i=0; i<castleStage.tiles.length; i++){
