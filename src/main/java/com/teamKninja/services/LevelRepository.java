@@ -10,6 +10,7 @@ import java.util.List;
  * Created by holdenhughes on 12/17/15.
  */
 public interface LevelRepository extends CrudRepository<Level, Integer> {
-    List<Level> findAllByLevelNumber(Level levelNumber);
-    List<Level> findAllByVerNumber(Level version);
+    List<Level> findAllByLevelNumber(int levelNumber);
+    List<Level> findAllByVersion(Level version);
+    Level findOneByVersion(int version);
 }
