@@ -32,6 +32,7 @@ castlePlayer.prototype = {
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
             var leveldata;
+            this.immunity=false;
             newPlayer.currentLevel = newPlayer.currentLevel +1;
             leveldata = 'level'+newPlayer.currentLevel;
             NinjaGame.game.state.start('Game',true,false,leveldata);
@@ -39,7 +40,7 @@ castlePlayer.prototype = {
           // NinjaGame.game.state.restart();
           // login.winLevel();
         }
-        //world kill if falls
+        //world kill` if falls
         // else if (player.body.y > WORLD_DEATH) {
         //     this.killPlayer();
         // }
