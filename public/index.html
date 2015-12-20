@@ -3,27 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Castle Dash</title>
-    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="app/css/styles.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <div class="container">
-      <header>
-        <h1>Kninja Nights</h1>
-      </header>
-      <div class="messages"></div>
-      <div id="login">
-        <input type="username" id="username" value="" placeholder="Username">
-        <input type="password" id="password" value="" placeholder="Password">
-        <input id="registerBtn" type="button" name="register" value="Register">
-        <input id="loginBtn" type="button" name="login" value="Login">
-      </div>
-      <div id="game" class="hidden">
+  <h1>Castle Dash</h1>
 
-      </div>
-      <footer>
-        <span>Created by Brandon, Doug, Holden, and Sally</span>
-      </footer>
+    <div id="login">
+      <input type="username" id="username" value="" placeholder="Username">
+      <input type="password" id="password" value="" placeholder="Password">
+      <input id="registerBtn" type="button" name="register" value="Register">
+      <input id="loginBtn" type="button" name="login" value="Login">
+    </div>
+    <div id="game" class="hidden">
+
     </div>
 
     <!--libs-->
@@ -33,14 +25,16 @@
     <script src="bower_components/phaser/build/custom/phaser-ninja-physics.js" charset="utf-8"></script>
 
     <!--gameScripts-->
-
+    <script src="app/js/untouchables.js" charset="utf-8"></script>
+    <script src="app/js/main.js" charset="utf-8"></script>
+    <script src="app/js/player.js" charset="utf-8"></script>
+    <script src="app/js/weapon.js" charset="utf-8"></script>
+    <script src="app/js/levels.js" charset="utf-8"></script>
+    <script src="app/js/gameControl.js" charset="utf-8"></script>
+    <script src="app/js/enemy.js" charset="utf-8"></script>
 
     <!--coreGame-->
-    <script src="app/states/boot.js" charset="utf-8"></script>
-    <script src="app/states/preload.js" charset="utf-8"></script>
-    <script src="app/states/mainMenu.js" charset="utf-8"></script>
-    <script src="app/states/playGame.js" charset="utf-8"></script>
-    <script src="app/states/started.js" charset="utf-8"></script>
-    <script src="app/js/main.js" charset="utf-8"></script>
+    <script src="app/js/game.js" charset="utf-8"></script>
+
   </body>
 </html>

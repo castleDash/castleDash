@@ -20,7 +20,6 @@ castlePlayer.prototype = {
         player.frame=5;
         player.health=6;
         player.immunity=false;
-        player.canJump = true;
         this.getStats();
         this.updateStatsDash();
         player.fightTimer= NinjaGame.game.time.create(false);
@@ -32,18 +31,9 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-            var leveldata;
-            newPlayer.currentLevel = newPlayer.currentLevel +1;
-            leveldata = 'level'+newPlayer.currentLevel;
-            NinjaGame.game.state.start('Game',true,false,leveldata);
-
-          // NinjaGame.game.state.restart();
-          // login.winLevel();
+          this.currentLevel = this.currentLevel +1;
+          this.levelLoader();
         }
-        //world kill if falls
-        // else if (player.body.y > WORLD_DEATH) {
-        //     this.killPlayer();
-        // }
         else{
           //MOVEMENT
           if (player.body.touching.down) {
@@ -81,14 +71,12 @@ castlePlayer.prototype = {
             }
           }
 
-
           _.each(castleStage.enemies, function(enemy){
             NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
-                null, this);
-          }, this);
+                null, newPlayer);
+          }, newPlayer);
           NinjaGame.game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
-            //  game.physics.ninja.overlap(this.firePot, enemy.enemy, this.fightEnemy, null, this);
 
 
 
@@ -120,16 +108,10 @@ castlePlayer.prototype = {
     },
 
     jump: function() {
-      if(player.body.touching.down || player.body.touching.right || player.body.touching.left){
-
+      if(player.body.touching.down){
         PLAYER_SPEED = 10;
         player.body.moveUp(450);
-        player.canJump;
-        //game.events.add(Phaser)
-
       }
-      //ground jump can jump whenever. player.body.touching.right/left with a timer reversing the boolean
-      //this will allow for wall jumps that won't let you just climb straight up a wall
 
     },
     damagePlayer: function(){
@@ -145,20 +127,7 @@ castlePlayer.prototype = {
         }
       }
     },
-    damageEnemy: function(enemy){
-        enemy.strength--;
-        if (this.facingLeft()){
-          enemy.body.x=enemy.body.x-32;
-        }
-        else{
-          enemy.body.x=enemy.body.x+32;
-        }
-        if(enemy.strength<=0){
-          enemy.kill();
-          this.gold = parseInt(this.gold)+enemy.wealth;
-          this.updateStatsDash();
-        }
-    },
+
     loseImmunity: function(){
       player.body.sprite.visible = true;
       player.body.sprite.tint = 16777215;
@@ -170,39 +139,8 @@ castlePlayer.prototype = {
     enableAttack: function(){
       player.canAttack=true;
     },
-
-    canJump: function() {
-      player.canJump=true;
-    },
-    canNotJump: function() {
-      player.canJump = false;
-    },
-
     fightEnemy: function(player, enemy) {
-        // if (newSword.swordExists() && player.canAttack) {
-        //   console.log("attacking");
-        //   player.canAttack=false;
-        //   player.canBeAttacked=false;
-        //   player.fightTimer.loop(500, this.enableAttack, this);
-        //   player.fightTimer.start();
-        //   player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
-        //   player.beAttackedTimer.start();
-        //   this.damageEnemy(enemy);
-        // }
-        // if (newSword.swordExists() && player.canAttack) {
-        //   console.log("attacking");
-        //   player.canAttack=false;
-        //   player.canBeAttacked=false;
-        //   player.fightTimer.loop(500, this.enableAttack, this);
-        //   player.fightTimer.start();
-        //   player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
-        //   player.beAttackedTimer.start();
-        //   this.damageEnemy(enemy);
-        // }
-        // else if(player.canBeAttacked){
-        //     this.damagePlayer();
-        // }
-        if (newFirePot.potionExists() && player.canAttack) {
+        if (newWeapon.weaponExists() && player.canAttack) {
           console.log("attacking");
           player.canAttack=false;
           player.canBeAttacked=false;
@@ -210,17 +148,25 @@ castlePlayer.prototype = {
           player.fightTimer.start();
           player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
           player.beAttackedTimer.start();
-
-          game.physics.ninja.overlap(newFirePot, enemy, this.damageEnemy(enemy));
-
-          //this.damageEnemy(enemy);
+          newEnemy.damageEnemy(enemy);
         }
         else if(player.canBeAttacked){
             this.damagePlayer();
         }
     },
     killPlayer: function(){
-      NinjaGame.game.state.restart();
+      this.health = 6;
+      this.loseImmunity();
+      this.levelLoader();
+
+    },
+    levelLoader: function(){
+      var leveldata = 'level';
+      if(this.currentLevel>1){
+
+        leveldata +=this.currentLevel;
+       }
+      NinjaGame.game.state.start('Game',true,false,leveldata);
     },
     health: 6,
     gold: 0,

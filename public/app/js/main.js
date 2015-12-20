@@ -80,7 +80,7 @@ var login = {
       // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
     },
     winLevel: function(){
-      
+
       // game.destroy();
       // $("canvas").remove();
       // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");

@@ -2,6 +2,7 @@ body, html{
   margin:0;
   padding:0;
   background-color: black;
+  font-family: 'Press Start 2P', cursive;
 }
 
 html {
@@ -21,14 +22,11 @@ html {
   width: 800px;
   margin:auto;
   text-align: center;
-  min-height: 500px;
+  min-height: 490px;
 }
-#game{
-  font-family: 'Press Start 2P', cursive;
-}
+
 header, footer, .messages{
   text-align: center;
-  font-family: 'Press Start 2P', cursive;
   height: 100px;
 }
 footer{

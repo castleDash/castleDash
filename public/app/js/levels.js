@@ -67,6 +67,7 @@ mycastleStage.prototype = {
         this.endTile = game.physics.ninja.convertTilemap(map, endLevelLayer, slopeMap);
       }
 
+
         enemyLayer = map.createLayer('enemyLayer');
         if (enemyLayer!=null){
         enemyLayer.resizeWorld();
@@ -74,11 +75,10 @@ mycastleStage.prototype = {
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
-          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y,6, DEFAULT_WEALTH);
+          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y,DEFAULT_STRENGTH, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }
       }
-
 
 
     },
@@ -93,11 +93,10 @@ mycastleStage.prototype = {
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-          //   if (this.firePot!=null){
-          //   this.firePot.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-          // }
+            // this.enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
+              // console.log(this.spikes[j]);
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
           }
@@ -108,11 +107,11 @@ mycastleStage.prototype = {
       }
     }
   },
-    // tiles: [],
-    // playerTile: [],
-    // spikeTiles: [],
-    // spikes: [],
-    // enemies: [],
-    // enemyTiles: [],
-    // endTile: []
+    tiles: [],
+    playerTile: [],
+    spikeTiles: [],
+    spikes: [],
+    enemies: [],
+    enemyTiles: [],
+    endTile: []
 };
