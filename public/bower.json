@@ -1,0 +1,23 @@
+{
+  "name": "castle-dash",
+  "homepage": "https://github.com/sallykingston/castleDash",
+  "authors": [
+    "Sally Kingston <sally.a.kingston@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "phaser": "~2.4.4",
+    "jquery": "~2.1.4",
+    "underscore": "~1.8.3"
+  }
+}
