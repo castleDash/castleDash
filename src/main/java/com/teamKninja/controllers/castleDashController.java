@@ -57,6 +57,7 @@ public class castleDashController {
             user2.password = PasswordHash.createHash("brandon");
             users.save(user2);
             Save save1 = new Save();
+            save1.level = 2;
             save1.firePotion = 3;
             save1.healthPotion = 3;
             save1.shieldPotion = 3;
@@ -75,7 +76,7 @@ public class castleDashController {
                     saves.save(save);
                     i++;
                 }
-            for (int a=1; a<2; a++){ //This loop will populate the levels based on the number set at i
+            for (int a=1; a<4; a++){ //This loop will populate the levels based on the number set at i
                 String levelNum = String.valueOf(a);
                 for (int j =1; j<4; j++){ //This loop will populate based on the number of j "version number"
                     Level level = new Level();
@@ -188,14 +189,14 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/levelData", method = RequestMethod.GET)
-    public ArrayList<Level> levelList(){
-        ArrayList<Level> finalList = new ArrayList<>();
-        for (int i=0; i<3; i++) {
+    public List<Level> levelList(){
+        List<Level> finalList = new ArrayList<>();
+        for (int i =1; i <4; i++){
             Random rn = new Random();
             int randVersion = rn.nextInt(2) + 1;
-            //List<Level> tempList = levels.findAllByLevelNumber(i);
-            Level randLevel = randLevels.findOneByVersion(randVersion);
-            finalList.add(randLevel);
+            List<Level> tempList = levels.findAllByLevelNumber(i);
+            Level randomLevel = tempList.get(randVersion);
+            finalList.add(randomLevel);
         }
         return finalList;
     }
