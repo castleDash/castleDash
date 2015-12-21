@@ -70,7 +70,7 @@ castleWeapon.prototype = {
      }
      else{
        this.weapon.body.moveRight(50);
-       this.weapon.body.moveUp(100);
+       this.weapon.body.moveUp(50);
        this.weapon.animations.play('throw');
        }
 
