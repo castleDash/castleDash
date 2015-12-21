@@ -49,5 +49,8 @@ var getHearts = function(health){
     case 6:
       return fullheart+fullheart+fullheart+"</div>";
       break;
+    default:
+      return emptyheart+emptyheart+emptyheart+"</div>";
+      break;
   }
 };
