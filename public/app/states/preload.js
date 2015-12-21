@@ -17,7 +17,7 @@ NinjaGame.Preload.prototype ={
     this.load.tilemap('level', 'app/assets/levels/level1v1.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('level2', 'app/assets/levels/level2v2.json', null, Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('level3', 'app/assets/levels/level3v1.json', null, Phaser.Tilemap.TILED_JSON);
-
+    //this.load.tilemap('level4', 'app/assets/levels/spikeHell.json', null, Phaser.Tilemap.TILED_JSON);
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);

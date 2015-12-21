@@ -12,7 +12,7 @@ castleWeapon.prototype = {
        console.log("creating firepot");
        this.weapon = NinjaGame.game.add.sprite(player.x, player.y, 'firepot');
        this.weapon.animations.add('throw', [0, 1, 2, 3], 10, true, true);
-       this.weapon.animations.add('splash', [4,5,6,7,8], 2, true, true);
+       this.weapon.animations.add('splash', [4,5,6,7,8], 10, true, true);
        NinjaGame.game.physics.ninja.enableAABB(this.weapon);
        this.weapon.enableBody = true;
        this.weapon.body.friction = 0.1;
@@ -44,7 +44,7 @@ castleWeapon.prototype = {
       this.rangeCollide();
       if(this.weapon.body.touching.down){
         this.weapon.animations.play('splash');
-        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .1, this.killWeapon, this);
+        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.killWeapon, this);
       }
      }
 
@@ -75,7 +75,7 @@ castleWeapon.prototype = {
        else{
          this.weapon.body.moveRight(50);
        }
-       this.weapon.body.moveUp(100);
+       this.weapon.body.moveUp(50);
        this.weapon.animations.play('throw');
        }
 
