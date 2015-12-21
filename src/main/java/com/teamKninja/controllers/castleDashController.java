@@ -160,7 +160,7 @@ public class castleDashController {
         return "success";
     }
 
-    /*@RequestMapping (path = "/saveGame", method = RequestMethod.POST)
+    @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
     public String saveGame(HttpSession saveSession, int level, int healthPotion, int shieldPotion,
                            int firePotion, int health) {
         int id = (int) saveSession.getAttribute("id");
@@ -176,20 +176,16 @@ public class castleDashController {
 
     @RequestMapping (path = "/levelData", method = RequestMethod.GET)
     public ArrayList<Level> levelList(){
-        Random rn = new Random();
-        int randVersion = rn.nextInt(2) +1;
-
-            int i =1;
-            List<Level> tempList = levels.findAllByLevelNumber(i);
-            Level randLevel =  randLevels.findOneByVersion(randVersion);
-
-
         ArrayList<Level> finalList = new ArrayList<>();
-
-        //finalList.add(levelSelect);
-
+        for (int i=0; i<3; i++) {
+            Random rn = new Random();
+            int randVersion = rn.nextInt(2) + 1;
+            //List<Level> tempList = levels.findAllByLevelNumber(i);
+            Level randLevel = randLevels.findOneByVersion(randVersion);
+            finalList.add(randLevel);
+        }
         return finalList;
-    }*/
+    }
 
     static String readFile(String fileName) {
         File f = new File(fileName);
