@@ -19,7 +19,6 @@ var login = {
           ($("#game").html().indexOf("You died")!=-1 ||
            $("#game").html().indexOf("You win")!=-1)) {
         $("#game").html("");
-        console.log("restarting game");
         game.state.start(game.state.current);
       }
     });
@@ -63,7 +62,6 @@ var login = {
       .then(function(data) {
         //check for successful login
         if(data==="success"){
-          console.log("logging in");
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
           loggedIn();
@@ -80,7 +78,7 @@ var login = {
       // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
     },
     winLevel: function(){
-      
+
       // game.destroy();
       // $("canvas").remove();
       // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");

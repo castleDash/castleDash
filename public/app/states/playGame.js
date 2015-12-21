@@ -27,14 +27,13 @@ NinjaGame.GameState.prototype = {
   },
 
   preload: function() {
-    console.log("preloading dash");
+
 
 
   },
 
 
   create: function() {
-    console.log("running game.create");
     var text = "Running Our Game";
     var style = {font:'30px Arial', fill:"#fff", align:"center"};
     var t = this.game.add.text(this.game.width/2,this.game.height/2,text,style);

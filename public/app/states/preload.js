@@ -4,11 +4,18 @@ NinjaGame.Preload = function(){};
 NinjaGame.Preload.prototype ={
 
   preload:function(){
-    console.log("Preload");
     this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
     this.preloadBar.anchor.setTo(0.5);
     this.preloadBar.scale.setTo(2);
     this.load.setPreloadSprite(this.preloadBar);
+
+    // $.ajax({
+    //   method:"GET",
+    //   url:'/levelData',
+    //   success: function(data){
+    //     console.log(data);
+    //   }
+    // });
 
     this.load.spritesheet('ninja','app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
     this.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
