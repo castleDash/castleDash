@@ -11,17 +11,26 @@ var castleControl = {
     keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
     keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
     keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
+    keyJ = game.input.keyboard.addKey(Phaser.Keyboard.J);
     keyK = game.input.keyboard.addKey(Phaser.Keyboard.K);
+
     keyJump = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    jumpButton = game.add.button(game.camera.width - 100, game.camera.height-100, 'jumpBtn', this.buttonJump, this, 0, 0, 1, 0);
+
+    jumpButton = game.add.button(game.camera.width - 100, game.camera.height-100, 'jumpBtn');
     jumpButton.fixedToCamera=true;
-    attackButton = game.add.button(game.camera.width - 125, game.camera.height-75, 'attackBtn', this.buttonAttack, this, 0, 0, 1, 0);
+    jumpButton.onInputDown.add(this.buttonJump, this);
+    jumpButton.onInputUp.add(this.releaseButtonJump, this);
+
+    attackButton = game.add.button(game.camera.width - 125, game.camera.height-75, 'attackBtn');
     attackButton.fixedToCamera=true;
+    attackButton.onInputDown.add(this.buttonAttack, this);
+    attackButton.onInputUp.add(this.releaseButtonAttack, this);
+
     leftButton = game.add.button(99, game.camera.height-75, 'leftBtn');
     leftButton.fixedToCamera=true;
-    leftButton.inputEnabled=true;
     leftButton.onInputDown.add(this.buttonLeft, this);
     leftButton.onInputUp.add(this.releaseButtonLeft, this);
+
     rightButton = game.add.button(133, game.camera.height-75, 'rightBtn');
     rightButton.fixedToCamera=true;
     rightButton.onInputDown.add(this.buttonRight, this);
@@ -31,16 +40,30 @@ var castleControl = {
     upButton.fixedToCamera=true;
     upButton.onInputDown.add(this.buttonUp, this);
     upButton.onInputUp.add(this.releaseButtonUp, this);
+
     downButton = game.add.button(116, game.camera.height-58, 'downBtn');
     downButton.fixedToCamera=true;
     downButton.onInputDown.add(this.buttonDown, this);
     downButton.onInputUp.add(this.releaseButtonDown, this);
 
+    weaponLeftButton = game.add.button(110, game.camera.height-115, 'leftBtn');
+    weaponLeftButton.fixedToCamera=true;
+    weaponLeftButton.onInputDown.add(this.weaponLeft, this);
+    weaponLeftButton.scale.setTo(.5,.5);
+    weaponLeftButton.onInputUp.add(this.releaseWeaponLeft, this);
+
+    weaponRightButton = game.add.button(138, game.camera.height-115, 'rightBtn');
+    weaponRightButton.fixedToCamera=true;
+    weaponRightButton.onInputDown.add(this.weaponRight, this);
+    weaponRightButton.scale.setTo(.5,.5);
+    weaponRightButton.onInputUp.add(this.releaseWeaponRight, this);
+
+
   },
   update: function(){
-    this.attack=false;
-    this.jump=false;
-    this.up=false;
+    // this.attack=false;
+    // this.jump=false;
+    // this.up=false;
   },
   attack: false,
   jump: false,
@@ -66,15 +89,17 @@ var castleControl = {
   },
 
   jumpCtrl: function(){
-    if(cursors.up.isDown || keyJump.isDown || this.jump){
+    if(keyJ.isDown || cursors.up.isDown || keyJump.isDown || this.jump){
       return true;
     }
   },
   weaponType: 0,
   buttonAttack: function(){
+    attackButton.frame=1;
     this.attack=true;
   },
   buttonJump: function(){
+    jumpButton.frame=1;
     this.jump=true;
   },
   buttonLeft: function(){
@@ -93,6 +118,14 @@ var castleControl = {
   buttonDown: function(){
     downButton.frame=1;
     this.down=true;
+  },
+  releaseButtonJump: function(){
+    jumpButton.frame=0;
+    this.jump=false;
+  },
+  releaseButtonAttack: function(){
+    attackButton.frame=0;
+    this.attack=false;
   },
   releaseButtonLeft: function(){
     leftButton.frame=0;
@@ -116,9 +149,21 @@ var castleControl = {
     }else{
       this.weaponType=0;
     }
+  },
+  weaponLeft: function(){
+    weaponLeftButton.frame=1;
+    console.log("rotating weapon subtype left");
+  },
+  weaponRight: function(){
+    weaponRightButton.frame=1;
+    console.log("rotating weapon subtype right");
+  },
+  releaseWeaponLeft:function(){
+    weaponLeftButton.frame=0;
+  },
+  releaseWeaponRight: function () {
+    weaponRightButton.frame=0;
   }
-
-
 
 
 

@@ -69,7 +69,12 @@ castleWeapon.prototype = {
         }
      }
      else{
-       this.weapon.body.moveRight(50);
+       if(direction==="left"){
+         this.weapon.body.moveLeft(50);
+       }
+       else{
+         this.weapon.body.moveRight(50);         
+       }
        this.weapon.body.moveUp(100);
        this.weapon.animations.play('throw');
        }
