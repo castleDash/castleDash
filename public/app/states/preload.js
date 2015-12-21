@@ -1,28 +1,41 @@
 var NinjaGame = NinjaGame || {};
 NinjaGame.Preload = function(){};
+var levelArr = [];
+
 
 NinjaGame.Preload.prototype ={
 
   preload:function(){
+    var that = this;
     this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
     this.preloadBar.anchor.setTo(0.5);
     this.preloadBar.scale.setTo(2);
     this.load.setPreloadSprite(this.preloadBar);
 
-    // $.ajax({
-    //   method:"GET",
-    //   url:'/levelData',
-    //   success: function(data){
-    //     console.log(data);
-    //   }
-    // });
+    $.ajax({
+      method:"GET",
+      url:'/levelData',
+      success: function(data){
+        _.each(data, function(i){
+          levelArr.push(i.levelCode);
+        });
+        that.doThis();
+
+      }
+    });
+    $.ajax({
+      method:"GET",
+      url:"/saveList",
+      success:function(saves){
+        that.saves = saves;
+      }
+    });
 
     this.load.spritesheet('ninja','app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
     this.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
     this.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     //pulls json file of the level
-    this.load.tilemap('level', 'app/assets/levels/testLevel.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.tilemap('level2', 'app/assets/levels/testLevel2.json', null, Phaser.Tilemap.TILED_JSON);
+
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
@@ -48,8 +61,15 @@ NinjaGame.Preload.prototype ={
   },
 
   create:function(){
-    this.state.start('MainMenu');
-  }
+    this.state.start('MainMenu',true,false, this.saves);
+  },
+
+  doThis:function(){
+    this.load.tilemap('level', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('level2', null, levelArr[1], Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('level3', null, levelArr[2], Phaser.Tilemap.TILED_JSON);
+  },
+  saves:null,
 
 
 };

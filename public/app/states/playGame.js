@@ -17,8 +17,7 @@ var castleStage;
 
 NinjaGame.GameState.prototype = {
   init: function(levelData) {
-      this.styling();
-      this.levelData = levelData || 'level';
+    console.log(levelData);
   },
   styling: function() {
     newPlayer = newPlayer || new castlePlayer();
