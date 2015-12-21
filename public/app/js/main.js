@@ -5,6 +5,17 @@ var login = {
   },
 
   events: function(){
+    $("#logout").on("click",function(){
+      $.ajax({
+        method:"POST",
+        url:"/logout",
+        success:function(){
+          console.log("logged Out");
+        }
+      });
+
+
+    });
     $("#loginBtn").on("click", function () {
       login.submitLogin();
     });
@@ -71,6 +82,7 @@ var login = {
         }
       });
     },
+
     gameOver: function(){
 
       // game.destroy();
