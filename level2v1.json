@@ -89,7 +89,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/..\/..\/..\/..\/Downloads\/phaser_tutorial_02\/assets\/patformkenney-32-4x39.png",
+         "image":"..\/..\/Downloads\/phaser_tutorial_02\/assets\/patformkenney-32-4x39.png",
          "imageheight":1248,
          "imagewidth":128,
          "margin":0,

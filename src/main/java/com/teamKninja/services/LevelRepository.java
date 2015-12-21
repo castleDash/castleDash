@@ -13,4 +13,5 @@ public interface LevelRepository extends CrudRepository<Level, Integer> {
     List<Level> findAllByLevelNumber(int levelNumber);
     List<Level> findAllByVersion(Level version);
     Level findOneByVersion(int version);
+    Level findOneByLevelNumber(int levelNumber);
 }

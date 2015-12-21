@@ -48,29 +48,43 @@ public class castleDashController {
         if (users.count() >0) {
             return;
         } else {
-            User user = new User();
-            user.username = "Henry";
-            user.password = PasswordHash.createHash("Grenry");
-            users.save(user);
-                while (saves.findAllByUser(user).size()<3){
+            User user1 = new User();
+            user1.username = "Henry";
+            user1.password = PasswordHash.createHash("Grenry");
+            users.save(user1);
+            User user2 = new User();
+            user2.username = "Brandon";
+            user2.password = PasswordHash.createHash("brandon");
+            users.save(user2);
+            Save save1 = new Save();
+            save1.level = 2;
+            save1.firePotion = 3;
+            save1.healthPotion = 3;
+            save1.shieldPotion = 3;
+            save1.score =0;
+            save1.user = user2;
+            saves.save(save1);
+            int i = 1;
+                while (saves.findAllByUser(user1).size()<3){
                     Save save = new Save();
-                    save.level = 0;
+                    save.level = i;
                     save.firePotion = 3;
                     save.healthPotion = 3;
                     save.shieldPotion = 3;
                     save.score =0;
-                    save.user = user;
+                    save.user = user1;
                     saves.save(save);
+                    i++;
                 }
-            for (int i=1; i<2; i++){ //This loop will populate the levels based on the number set at i
-                String levelNum = String.valueOf(i);
+            for (int a=1; a<4; a++){ //This loop will populate the levels based on the number set at i
+                String levelNum = String.valueOf(a);
                 for (int j =1; j<4; j++){ //This loop will populate based on the number of j "version number"
                     Level level = new Level();
                     String verNum = String.valueOf(j);
                     String filename = "level"+levelNum+"v"+verNum+".json"; // builds the filename
                     String fileContent = readFile(filename);
                     level.levelCode = fileContent;
-                    level.levelNumber = i;
+                    level.levelNumber = a;
                     level.version = j;
                     levels.save(level);
 
@@ -175,14 +189,14 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/levelData", method = RequestMethod.GET)
-    public ArrayList<Level> levelList(){
-        ArrayList<Level> finalList = new ArrayList<>();
-        for (int i=0; i<3; i++) {
+    public List<Level> levelList(){
+        List<Level> finalList = new ArrayList<>();
+        for (int i =1; i <4; i++){
             Random rn = new Random();
             int randVersion = rn.nextInt(2) + 1;
-            //List<Level> tempList = levels.findAllByLevelNumber(i);
-            Level randLevel = randLevels.findOneByVersion(randVersion);
-            finalList.add(randLevel);
+            List<Level> tempList = levels.findAllByLevelNumber(i);
+            Level randomLevel = tempList.get(randVersion);
+            finalList.add(randomLevel);
         }
         return finalList;
     }
