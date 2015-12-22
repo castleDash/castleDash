@@ -153,6 +153,7 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
+      var that = this;
       this.health = 6;
       this.loseImmunity();
       this.levelLoader();
@@ -160,10 +161,7 @@ castlePlayer.prototype = {
     },
     levelLoader: function(){
       var leveldata = this.currentLevel;
-      // if(this.currentLevel>1){
-      //
-      //   leveldata +=this.currentLevel;
-      //  }
+      this.loseImmunity();
       NinjaGame.game.state.start('Game',true,false,leveldata);
     },
     health: 6,
