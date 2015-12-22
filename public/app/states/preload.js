@@ -5,32 +5,14 @@ var levelArr = [];
 
 NinjaGame.Preload.prototype ={
   init:function(){
-    var that = this;
-    $.ajax({
-      method:"GET",
-      url:'/levelData',
-      success: function(data){
-        _.each(data, function(i){
-          levelArr.push(i.levelCode);
-        });
-        that.doThis();
-        $.ajax({
-          method:"GET",
-          url:"/saveList",
-          success:function(saves){
 
-            that.state.start('MainMenu',true,false, saves);
-          }
-        });
 
-      }
-    });
 
 
   },
 
   preload:function(){
-
+    var that = this;
     this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
     this.preloadBar.anchor.setTo(0.5);
     this.preloadBar.scale.setTo(2);
@@ -61,11 +43,27 @@ NinjaGame.Preload.prototype ={
     this.load.script('save.js','app/js/save.js');
     this.load.script('untouchables.js','app/js/untouchables.js');
     this.load.script('weapon.js','app/js/weapon.js');
+    $.ajax({
+      method:"GET",
+      url:'/levelData',
+      success: function(data){
+        _.each(data, function(i){
+          levelArr.push(i.levelCode);
+        });
+        that.doThis();
+        $.ajax({
+          method:"GET",
+          url:"/saveList",
+          success:function(saves){
+            that.state.start('MainMenu',true,false, saves);
+          }
+        });
+
+      }
+    });
   },
 
-  create:function(saves){
-
-  },
+  create:function(){},
 
   doThis:function(){
     this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
