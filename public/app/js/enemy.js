@@ -24,10 +24,10 @@ castleEnemy.prototype = {
     if(player.alive){
       var distX = this.enemy.body.x - player.body.x;
       var distY = this.enemy.body.y - player.body.y;
-      if(distX < 250 && distX > 5 && distY <64) {
+      if(distX < 250 && distX > 5 && distY < 64 && disty > -64) {
         this.moveLeft();
       }
-      else if(distX < -5 && distX > -250 && distY < 64){
+      else if(distX < -5 && distX > -250 && distY < 64 && disty > -64){
         this.moveRight();
       }
       else{
