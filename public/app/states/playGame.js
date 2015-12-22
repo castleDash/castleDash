@@ -65,9 +65,14 @@ NinjaGame.GameState.prototype = {
       castleStage.createBack(this.levelData);
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
-        newPlayer.currentLevel = this.SaveInfo.level;
-        newPlayer.gold = this.SaveInfo.score;
-        newPlayer.loseImmunity();
+        if(newPlayer.currentLevel < this.SaveInfo.level){
+          newPlayer.currentLevel = this.SaveInfo.level;
+          newPlayer.gold = this.SaveInfo.score;
+          newPlayer.loseImmunity();
+        }
+        if(newPlayer.immunity){
+          newPlayer.loseImmunity();
+        }
       }
 
       game.physics.ninja.gravity = NINJA_GRAVITY;
