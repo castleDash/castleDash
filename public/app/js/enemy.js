@@ -1,11 +1,13 @@
 var ENEMY_SPEED = 15;
+var RAND_STRENGTH = (Math.floor(Math.random() * 6) + 1);
+var COLORS = [0x99FFFF, 0x99FF66, 0xFFCC66, 0xFF9966, 0xFF3333, 0x990000];
 
 var castleEnemy = function () {};
 
 castleEnemy.prototype = {
 
 
-  create: function(x,y,strength,wealth){
+  create: function(x,y,wealth){
     this.enemy = game.add.sprite(x, y, 'orc');
     this.enemy.animations.add('orcleft', [10,11,12,13,14,15,16,17], 15, true);
     this.enemy.animations.add('orcright', [28,29,30,31,32,33,34,35], 15, true);
@@ -14,16 +16,20 @@ castleEnemy.prototype = {
     this.enemy.scale.setTo(1,1);
     this.enemy.anchor.setTo(0.5,0.6);
     this.enemy.body.collideWorldBounds = true;
-    this.enemy.strength = strength;
+    this.enemy.strength = (Math.floor(Math.random() * 6) + 1);
     this.enemy.wealth = wealth;
     this.enemy.immunity = false;
+
+    //this.enemy.tint = tint;
+    this.enemy.tint = COLORS[this.enemy.strength - 1];
   },
 
   update: function(){
     // this.enemy.body.collision()
     if(player.alive){
       var dist = this.enemy.body.x - player.body.x;
-      if(dist < 250 && dist > 5) {
+      //var distY = this.enemy.body.y - player.body.y;
+      if(dist < 250 && dist > 5 ) {
         this.moveLeft();
       }
       else if(dist < -5 && dist > -250){
@@ -52,7 +58,7 @@ castleEnemy.prototype = {
         }
         else{
           enemy.body.x=enemy.body.x+32;
-        }        
+        }
       }
       if(enemy.strength<=0){
         enemy.kill();

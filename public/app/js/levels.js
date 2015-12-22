@@ -1,5 +1,7 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
+
+//var COLORS = [#00FFFF];
 var mycastleStage = function(){};
 
 mycastleStage.prototype = {
@@ -43,7 +45,6 @@ mycastleStage.prototype = {
       if (playerLayer!=null){
         this.playerTile = game.physics.ninja.convertTilemap(map,playerLayer,slopeMap);
         playerLayer.resizeWorld();
-        playerLayer.kill();
       }
 
         //adding spikeLayer for spike hazards
@@ -75,7 +76,8 @@ mycastleStage.prototype = {
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
-          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y,DEFAULT_STRENGTH, DEFAULT_WEALTH);
+
+          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }
       }
