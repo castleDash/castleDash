@@ -153,7 +153,7 @@ public class castleDashController {
     }
 
    @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
-    public String selectSave(HttpSession saveSession, int id){
+    public String selectSave(HttpSession saveSession, Integer id){
         Save save = saves.findOneById(id);
         saveSession.setAttribute("id", save);
         return "success";
@@ -167,7 +167,7 @@ public class castleDashController {
 
     @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
     public String saveGame(HttpSession saveSession, int level, int score) {
-        int id = (int) saveSession.getAttribute("id");
+        Integer id = (Integer) saveSession.getAttribute("id");
         Save tempSave = saves.findOneById(id);
         tempSave.level = level;
         tempSave.score = score;
