@@ -159,11 +159,11 @@ castlePlayer.prototype = {
 
     },
     levelLoader: function(){
-      var leveldata = 'level';
-      if(this.currentLevel>1){
-
-        leveldata +=this.currentLevel;
-       }
+      var leveldata = this.currentLevel;
+      // if(this.currentLevel>1){
+      //
+      //   leveldata +=this.currentLevel;
+      //  }
       NinjaGame.game.state.start('Game',true,false,leveldata);
     },
     health: 6,
