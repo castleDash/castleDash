@@ -17,8 +17,21 @@ var castleStage;
 
 NinjaGame.GameState.prototype = {
   init: function(levelData) {
+
+      var that = this;
       this.styling();
-      this.levelData = levelData || 'level';
+      this.levelData = levelData;
+      if(!isNaN(levelData)){
+        that.levelData = 'level'+levelData;
+      }
+      else if(levelData === undefined){
+        that.levelData = 'level1';
+      }
+      else{
+        that.levelData = 'level'+levelData.level;
+        that.SaveInfo = levelData;
+
+      }
   },
   styling: function() {
     newPlayer = newPlayer || new castlePlayer();
@@ -27,20 +40,26 @@ NinjaGame.GameState.prototype = {
   },
 
   preload: function() {
-    console.log("preloading dash");
+
 
 
   },
 
 
   create: function() {
-    console.log("running game.create");
     var text = "Running Our Game";
     var style = {font:'30px Arial', fill:"#fff", align:"center"};
     var t = this.game.add.text(this.game.width/2,this.game.height/2,text,style);
     t.anchor.set(0.5);
       castleStage.createBack(this.levelData);
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
+      if(this.SaveInfo !== undefined){
+        newPlayer.currentLevel = this.SaveInfo.level;
+        newPlayer.gold = this.SaveInfo.score;
+        console.log("re-enable health below when we have actual save files with health");
+        // newPlayer.health = this.SaveInfo.health;
+      }
+
       game.physics.ninja.gravity = NINJA_GRAVITY;
 
       game.camera.follow(player, Phaser.Camera.FOLLOW_LOCKON);

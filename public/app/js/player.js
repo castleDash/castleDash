@@ -86,7 +86,6 @@ castlePlayer.prototype = {
         //This keeps the player from moving to the left of the camera frame.
         //You can't go back, you can only go foward.
         var gap = player.body.x - NinjaGame.game.camera.x;
-        // console.log("gap: ",gap);
         if (gap > 0) {
             //  Move to the left
             if (gap < PLAYER_SPEED) {
@@ -141,7 +140,6 @@ castlePlayer.prototype = {
     },
     fightEnemy: function(player, enemy) {
         if (newWeapon.weaponExists() && player.canAttack) {
-          console.log("attacking");
           player.canAttack=false;
           player.canBeAttacked=false;
           player.fightTimer.loop(500, this.enableAttack, this);
@@ -155,17 +153,15 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
+      var that = this;
       this.health = 6;
       this.loseImmunity();
       this.levelLoader();
 
     },
     levelLoader: function(){
-      var leveldata = 'level';
-      if(this.currentLevel>1){
-
-        leveldata +=this.currentLevel;
-       }
+      var leveldata = this.currentLevel;
+      this.loseImmunity();
       NinjaGame.game.state.start('Game',true,false,leveldata);
     },
     health: 6,

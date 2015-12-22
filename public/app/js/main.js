@@ -5,6 +5,26 @@ var login = {
   },
 
   events: function(){
+    $("#logout").on("click",function(){
+      $.ajax({
+        method:"POST",
+        url:"/logout",
+        success:function(){
+          console.log("logged Out");
+          NinjaGame.game.state.clearCurrentState();
+          NinjaGame.game.cache.destroy();
+          newPlayer = undefined;
+          NinjaGame.game.world.shutdown();
+          NinjaGame.game.destroy();
+          $('canvas').remove();
+          $('.messages').html("");
+          $("#game").addClass("hidden");
+          $("#login").removeClass("hidden");
+        }
+      });
+
+
+    });
     $("#loginBtn").on("click", function () {
       login.submitLogin();
     });
@@ -19,7 +39,6 @@ var login = {
           ($("#game").html().indexOf("You died")!=-1 ||
            $("#game").html().indexOf("You win")!=-1)) {
         $("#game").html("");
-        console.log("restarting game");
         game.state.start(game.state.current);
       }
     });
@@ -63,7 +82,6 @@ var login = {
       .then(function(data) {
         //check for successful login
         if(data==="success"){
-          console.log("logging in");
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
           loggedIn();
@@ -73,6 +91,7 @@ var login = {
         }
       });
     },
+
     gameOver: function(){
 
       // game.destroy();
@@ -80,7 +99,7 @@ var login = {
       // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
     },
     winLevel: function(){
-      
+
       // game.destroy();
       // $("canvas").remove();
       // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
