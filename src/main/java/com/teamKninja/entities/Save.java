@@ -13,9 +13,6 @@ public class Save {
     public int id;
 
     @Column(nullable = false)
-    int idNum;
-
-    @Column(nullable = false)
     public int level;
 
     @Column(nullable = false)

@@ -40,9 +40,6 @@ public class castleDashController {
     @Autowired
     LevelRepository levels;
 
-    @Autowired
-    LevelRepository randLevels;
-
     @PostConstruct
     public void init() throws Exception {
         if (users.count() >0) {
@@ -119,29 +116,23 @@ public class castleDashController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout(HttpSession session, HttpServletResponse response) throws IOException {
+    public String logout(HttpSession session, HttpServletResponse response, HttpSession saveSession) throws IOException {
+        saveSession.setAttribute("id", null);
         session.invalidate();
         response.sendRedirect("/");
         return "success";
     }
 
     @RequestMapping (path = "/createSave", method = RequestMethod.POST)
-    public String createSave(HttpSession session) throws Exception {
+    public Save createSave(HttpSession session) throws Exception {
         String username =(String) session.getAttribute("username");
         User user = users.findOneByUsername(username);
-        if (username == null){
-            return "not logged in";
-        } else {
-            List<Save> saveList = saves.findAllByUser(user);
-            if (saveList.size() < 3){
-                Save save = new Save();
-                save.level = 1;
-                saves.save(save);
-                return "success";
-            } else {
-                return "too many saves";
-            }
-        }
+        List<Save> saveList = saves.findAllByUser(user);
+        Save save = new Save();
+        save.level = 1;
+        save.user = user;
+        saves.save(save);
+        return save;
     }
 
     @RequestMapping (path = "/saveList", method = RequestMethod.GET)
@@ -155,7 +146,7 @@ public class castleDashController {
    @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
     public String selectSave(HttpSession saveSession, int id){
         Save save = saves.findOneById(id);
-        saveSession.setAttribute("id", save);
+        saveSession.setAttribute("id", save.id);
         return "success";
     }
 
