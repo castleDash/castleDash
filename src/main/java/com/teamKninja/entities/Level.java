@@ -25,6 +25,4 @@ public class Level {
     @Column
     public int version;
 
-
-
 }
