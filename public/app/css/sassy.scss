@@ -1,14 +1,65 @@
+body, html{
+  margin:0;
+  padding:0;
+  background-color: black;
+  font-family: 'Press Start 2P', cursive;
+}
+
+
+html {
+  box-sizing: border-box;
+  
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.container{
+  background-color: black;
+  color: white;
+
+}
+
 #game, #login{
   width: 800px;
   margin:auto;
   text-align: center;
+  min-height: 490px;
 }
 
-h1{
+header, footer, .messages{
   text-align: center;
+  height: 100px;
+}
+footer{
+  height: 50px;
 }
 
+.messages{
+  // background-color: red;
+  width: 800px;
+  margin: auto;
+}
 
 .hidden{
   display:none;
+}
+
+.weapon,.health,.coin{
+  border: 4px solid gray;
+  margin: 2px;
+  display: inline-block;
+  img{
+    height:64px;
+  }
+}
+.coin{
+  height: 72px;
+  vertical-align: top;
+  img{
+    height:32px;
+  }
+  p{
+    margin:8;
+  }
 }
