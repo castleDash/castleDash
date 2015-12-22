@@ -56,6 +56,7 @@ NinjaGame.Preload.prototype ={
           method:"GET",
           url:"/saveList",
           success:function(saves){
+            console.log(saves);
             that.state.start('MainMenu',true,false, saves);
           }
         });

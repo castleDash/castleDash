@@ -27,12 +27,12 @@ castleEnemy.prototype = {
   update: function(){
     // this.enemy.body.collision()
     if(player.alive){
-      var dist = this.enemy.body.x - player.body.x;
-      //var distY = this.enemy.body.y - player.body.y;
-      if(dist < 250 && dist > 5 ) {
+      var distX = this.enemy.body.x - player.body.x;
+      var distY = this.enemy.body.y - player.body.y;
+      if(distX < 250 && distX > 5 && distY < 64 && distY > -64) {
         this.moveLeft();
       }
-      else if(dist < -5 && dist > -250){
+      else if(distX < -5 && distX > -250 && distY < 64 && distY > -64){
         this.moveRight();
       }
       else{
