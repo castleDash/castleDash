@@ -6,7 +6,7 @@ var counter = 1;
 NinjaGame.MainMenu.prototype = {
   init:function(saves){
     this.saves = saves;
-
+    counter = 1;
   },
 
   create: function(){

@@ -11,6 +11,15 @@ var login = {
         url:"/logout",
         success:function(){
           console.log("logged Out");
+          NinjaGame.game.state.clearCurrentState();
+          NinjaGame.game.cache.destroy();
+          newPlayer = undefined;
+          NinjaGame.game.world.shutdown();
+          NinjaGame.game.destroy();
+          $('canvas').remove();
+          $('.messages').html("");
+          $("#game").addClass("hidden");
+          $("#login").removeClass("hidden");
         }
       });
 
