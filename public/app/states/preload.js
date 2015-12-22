@@ -22,6 +22,7 @@ NinjaGame.Preload.prototype ={
     this.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
     this.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     //pulls json file of the level
+
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
@@ -55,6 +56,7 @@ NinjaGame.Preload.prototype ={
           method:"GET",
           url:"/saveList",
           success:function(saves){
+            console.log(saves);
             that.state.start('MainMenu',true,false, saves);
           }
         });

@@ -17,6 +17,8 @@ castlePlayer.prototype = {
         player.body.friction = 0.14;
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
+        //player.checkWorldBounds = true;
+        //player.outOfBoundsKill = true;
         player.frame=5;
         player.health=6;
         player.immunity=false;
@@ -32,7 +34,9 @@ castlePlayer.prototype = {
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
           this.currentLevel = this.currentLevel +1;
+          this.saveGame();
           this.levelLoader();
+
         }
         else{
           //MOVEMENT
@@ -81,6 +85,29 @@ castlePlayer.prototype = {
 
 
     },
+    saveGame:function(){
+      var mylevel;
+      var myscore;
+      var playerSave;
+      mylevel = this.currentLevel;
+      myscore = this.gold;
+      mysave = saveInfo.id;
+
+      console.log("level: " +mylevel+" score: "+myscore+" saveID: "+mysave);
+
+      $.ajax({
+        method:"POST",
+        url:"/saveGame",
+        data:{level:mylevel,score:myscore},
+        success:function(){
+          console.log(success);
+          this.levelLoader();
+        },
+        error:function(){
+          console.log("error");
+        }
+      });
+    },
 
     moveLeft: function() {
         //This keeps the player from moving to the left of the camera frame.
@@ -122,7 +149,7 @@ castlePlayer.prototype = {
           this.killPlayer();
         }else{
           this.immunity=true;
-          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.loseImmunity, this);
+          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.loseImmunity, this);
         }
       }
     },

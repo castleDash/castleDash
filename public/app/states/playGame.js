@@ -14,6 +14,7 @@ var WORLD_DEATH = 270;
 var newPlayer;
 var newWeapon;
 var castleStage;
+var saveInfo;
 
 NinjaGame.GameState.prototype = {
   init: function(levelData) {
@@ -30,7 +31,17 @@ NinjaGame.GameState.prototype = {
       else{
         that.levelData = 'level'+levelData.level;
         that.SaveInfo = levelData;
-
+        saveInfo =levelData;
+        var saveId = that.SaveInfo.id;
+        console.log(saveId);
+        $.ajax({
+          method:"POST",
+          url:"/selectSave",
+          data:{id:saveId},
+          success:function(){
+            console.log("success");
+          }
+        });
       }
   },
   styling: function() {
@@ -56,6 +67,7 @@ NinjaGame.GameState.prototype = {
       if(this.SaveInfo !== undefined){
         newPlayer.currentLevel = this.SaveInfo.level;
         newPlayer.gold = this.SaveInfo.score;
+        newPlayer.loseImmunity();
         console.log("re-enable health below when we have actual save files with health");
         // newPlayer.health = this.SaveInfo.health;
       }

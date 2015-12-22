@@ -9,7 +9,7 @@ castleWeapon.prototype = {
      this.weapon.enableBody = true;
    }
    else{
-       this.weapon = NinjaGame.game.add.sprite(player.x, player.y, 'firepot');
+       this.weapon = NinjaGame.game.add.sprite(player.x, player.y-40, 'firepot');
        this.weapon.animations.add('throw', [0, 1, 2, 3], 10, true, true);
        this.weapon.animations.add('splash', [4,5,6,7,8], 10, true, true);
        NinjaGame.game.physics.ninja.enableAABB(this.weapon);
@@ -25,8 +25,11 @@ castleWeapon.prototype = {
 
  update: function(){
    if(keyW.isDown){
+     if(this.weaponExists()){
+       this.killWeapon();
+     }
      castleControl.changeWeaponType();
-   };
+   }
    if (this.weaponExists() && castleControl.weaponType===0){
      this.killWeapon();
    }
@@ -75,7 +78,7 @@ castleWeapon.prototype = {
        else{
          this.weapon.body.moveRight(50);
        }
-       this.weapon.body.moveUp(100);
+       this.weapon.body.moveUp(50);
        this.weapon.animations.play('throw');
        }
 

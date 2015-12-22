@@ -1,4 +1,3 @@
-
 var castleHazards = function(){};
 
 castleHazards.prototype = {
