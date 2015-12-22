@@ -10,7 +10,6 @@ var login = {
         method:"POST",
         url:"/logout",
         success:function(){
-          console.log("logged Out");
           NinjaGame.game.state.clearCurrentState();
           NinjaGame.game.cache.destroy();
           newPlayer = undefined;

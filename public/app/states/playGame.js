@@ -33,13 +33,13 @@ NinjaGame.GameState.prototype = {
         that.SaveInfo = levelData;
         saveInfo =levelData;
         var saveId = that.SaveInfo.id;
-        console.log(saveId);
+
         $.ajax({
           method:"POST",
           url:"/selectSave",
           data:{id:saveId},
           success:function(){
-            console.log("success");
+
           }
         });
       }
@@ -68,8 +68,6 @@ NinjaGame.GameState.prototype = {
         newPlayer.currentLevel = this.SaveInfo.level;
         newPlayer.gold = this.SaveInfo.score;
         newPlayer.loseImmunity();
-        console.log("re-enable health below when we have actual save files with health");
-        // newPlayer.health = this.SaveInfo.health;
       }
 
       game.physics.ninja.gravity = NINJA_GRAVITY;
