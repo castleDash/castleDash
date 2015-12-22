@@ -152,11 +152,9 @@ var castleControl = {
   },
   weaponLeft: function(){
     weaponLeftButton.frame=1;
-    console.log("rotating weapon subtype left");
   },
   weaponRight: function(){
     weaponRightButton.frame=1;
-    console.log("rotating weapon subtype right");
   },
   releaseWeaponLeft:function(){
     weaponLeftButton.frame=0;

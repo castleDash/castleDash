@@ -6,7 +6,6 @@ NinjaGame.Boot = function(){};
 NinjaGame.Boot.prototype = {
 
   preload:function(){
-    console.log("preloading loading bar");
     this.load.image('preloadbar', 'app/assets/sprites/loadingBar.png');
   },
 
