@@ -119,7 +119,8 @@ public class castleDashController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public String logout(HttpSession session, HttpServletResponse response) throws IOException {
+    public String logout(HttpSession session, HttpServletResponse response, HttpSession saveSession) throws IOException {
+        saveSession.setAttribute("id", null);
         session.invalidate();
         response.sendRedirect("/");
         return "success";
@@ -136,6 +137,7 @@ public class castleDashController {
             if (saveList.size() < 3){
                 Save save = new Save();
                 save.level = 1;
+                save.user = user;
                 saves.save(save);
                 return "success";
             } else {
@@ -153,9 +155,9 @@ public class castleDashController {
     }
 
    @RequestMapping (path = "/selectSave", method = RequestMethod.POST)
-    public String selectSave(HttpSession saveSession, Integer id){
+    public String selectSave(HttpSession saveSession, int id){
         Save save = saves.findOneById(id);
-        saveSession.setAttribute("id", save);
+        saveSession.setAttribute("id", save.id);
         return "success";
     }
 
@@ -167,7 +169,7 @@ public class castleDashController {
 
     @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
     public String saveGame(HttpSession saveSession, int level, int score) {
-        Integer id = (Integer) saveSession.getAttribute("id");
+        int id = (int) saveSession.getAttribute("id");
         Save tempSave = saves.findOneById(id);
         tempSave.level = level;
         tempSave.score = score;

@@ -10,10 +10,7 @@ import javax.persistence.*;
 public class Save {
     @Id
     @GeneratedValue
-    public Integer id;
-
-    @Column(nullable = false)
-    int idNum;
+    public int id;
 
     @Column(nullable = false)
     public int level;

@@ -21,7 +21,7 @@ NinjaGame.MainMenu.prototype = {
     });
     if(counter<4){
       for (var i = counter; i < 4; i++) {
-        that.addFile("New Game",function(){NinjaGame.game.state.start("Game");});
+        that.addFile("New Game",function(){$.ajax({method:"POST",url:"/createSave",success:function(){console.log("Success");NinjaGame.game.state.start("Game",true,false)}})});
       }
     }
 
