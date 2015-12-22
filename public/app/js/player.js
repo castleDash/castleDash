@@ -86,6 +86,7 @@ castlePlayer.prototype = {
 
     },
     saveGame:function(){
+      var that = this;
       var mylevel;
       var myscore;
       var playerSave;
@@ -100,8 +101,8 @@ castlePlayer.prototype = {
         url:"/saveGame",
         data:{level:mylevel,score:myscore},
         success:function(){
-          console.log(success);
-          this.levelLoader();
+          console.log("sucess save");
+          that.levelLoader();
         },
         error:function(){
           console.log("error");
