@@ -18,7 +18,7 @@ var saveInfo;
 
 NinjaGame.GameState.prototype = {
   init: function(levelData) {
-
+      console.log(levelData);
       var that = this;
       this.styling();
       this.levelData = levelData;
