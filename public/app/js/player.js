@@ -35,6 +35,7 @@ castlePlayer.prototype = {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
           this.currentLevel = this.currentLevel +1;
           this.saveGame();
+          this.levelLoader();
         }
         else{
           //MOVEMENT
@@ -90,18 +91,15 @@ castlePlayer.prototype = {
       var playerSave;
       mylevel = this.currentLevel;
       myscore = this.gold;
-      console.log("level: " +mylevel+" score: "+myscore);
-
       $.ajax({
         method:"POST",
         url:"/saveGame",
         data:{level:mylevel,score:myscore},
         success:function(){
-          console.log("sucess save");
-          that.levelLoader();
+
         },
         error:function(){
-          console.log("error");
+
         }
       });
     },
