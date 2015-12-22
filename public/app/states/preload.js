@@ -1,10 +1,18 @@
 var NinjaGame = NinjaGame || {};
 NinjaGame.Preload = function(){};
+var levelArr = [];
+
 
 NinjaGame.Preload.prototype ={
+  init:function(){
+
+
+
+
+  },
 
   preload:function(){
-    console.log("Preload");
+    var that = this;
     this.preloadBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'preloadbar');
     this.preloadBar.anchor.setTo(0.5);
     this.preloadBar.scale.setTo(2);
@@ -14,10 +22,7 @@ NinjaGame.Preload.prototype ={
     this.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
     this.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     //pulls json file of the level
-    this.load.tilemap('level', 'app/assets/levels/finalLevel1v1.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.tilemap('level2', 'app/assets/levels/level2v2.json', null, Phaser.Tilemap.TILED_JSON);
-    this.load.tilemap('level3', 'app/assets/levels/level3v1.json', null, Phaser.Tilemap.TILED_JSON);
-    //this.load.tilemap('level4', 'app/assets/levels/spikeHell.json', null, Phaser.Tilemap.TILED_JSON);
+
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
@@ -39,12 +44,34 @@ NinjaGame.Preload.prototype ={
     this.load.script('save.js','app/js/save.js');
     this.load.script('untouchables.js','app/js/untouchables.js');
     this.load.script('weapon.js','app/js/weapon.js');
+    $.ajax({
+      method:"GET",
+      url:'/levelData',
+      success: function(data){
+        _.each(data, function(i){
+          levelArr.push(i.levelCode);
+        });
+        that.doThis();
+        $.ajax({
+          method:"GET",
+          url:"/saveList",
+          success:function(saves){
+            that.state.start('MainMenu',true,false, saves);
+          }
+        });
 
+      }
+    });
   },
 
-  create:function(){
-    this.state.start('MainMenu');
-  }
+  create:function(){},
+
+  doThis:function(){
+    this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('level2', null, levelArr[1], Phaser.Tilemap.TILED_JSON);
+    this.load.tilemap('level3', null, levelArr[2], Phaser.Tilemap.TILED_JSON);
+  },
+
 
 
 };

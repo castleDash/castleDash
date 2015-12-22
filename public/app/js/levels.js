@@ -98,7 +98,6 @@ mycastleStage.prototype = {
             // this.enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
-              // console.log(this.spikes[j]);
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
             }
           }
