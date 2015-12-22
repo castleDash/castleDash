@@ -10,34 +10,16 @@ import javax.persistence.*;
 public class Save {
     @Id
     @GeneratedValue
-    int id;
+    public int id;
 
-    //@Column(nullable = false)
-    int level;
+    @Column(nullable = false)
+    int idNum;
 
-    //@Column(nullable = false)
-    String name;
+    @Column(nullable = false)
+    public int level;
 
-    //@Column(nullable = false)
-    String swordName;
-
-    //@Column(nullable = false)
-    String rangeName;
-
-    //@Column(nullable = false)
-    int healthPotion;
-
-    //@Column(nullable = false)
-    int shieldPotion;
-
-    //@Column(nullable = false)
-    int firePotion;
-
-    //@Column(nullable = false)
-    int currency;
-
-    //@Column(nullable = false)
-    int health;
+    @Column(nullable = false)
+    public int score;
 
     @ManyToOne
     public User user;
