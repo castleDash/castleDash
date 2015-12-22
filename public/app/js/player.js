@@ -91,8 +91,7 @@ castlePlayer.prototype = {
       var playerSave;
       mylevel = this.currentLevel;
       myscore = this.gold;
-      mysave = saveInfo.id;
-
+      
       console.log("level: " +mylevel+" score: "+myscore+" saveID: "+mysave);
 
       $.ajax({
@@ -100,7 +99,7 @@ castlePlayer.prototype = {
         url:"/saveGame",
         data:{level:mylevel,score:myscore},
         success:function(){
-          console.log(success);
+          console.log("success");
           this.levelLoader();
         },
         error:function(){
