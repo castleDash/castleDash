@@ -122,7 +122,7 @@ castlePlayer.prototype = {
           this.killPlayer();
         }else{
           this.immunity=true;
-          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.loseImmunity, this);
+          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.loseImmunity, this);
         }
       }
     },
