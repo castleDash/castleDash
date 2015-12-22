@@ -58,9 +58,6 @@ public class castleDashController {
             users.save(user2);
             Save save1 = new Save();
             save1.level = 2;
-            save1.firePotion = 3;
-            save1.healthPotion = 3;
-            save1.shieldPotion = 3;
             save1.score =0;
             save1.user = user2;
             saves.save(save1);
@@ -68,9 +65,6 @@ public class castleDashController {
                 while (saves.findAllByUser(user1).size()<3){
                     Save save = new Save();
                     save.level = i;
-                    save.firePotion = 3;
-                    save.healthPotion = 3;
-                    save.shieldPotion = 3;
                     save.score =0;
                     save.user = user1;
                     saves.save(save);
@@ -142,9 +136,6 @@ public class castleDashController {
             if (saveList.size() < 3){
                 Save save = new Save();
                 save.level = 1;
-                save.firePotion = 3;
-                save.healthPotion = 3;
-                save.shieldPotion = 3;
                 saves.save(save);
                 return "success";
             } else {
@@ -175,15 +166,11 @@ public class castleDashController {
     }
 
     @RequestMapping (path = "/saveGame", method = RequestMethod.POST)
-    public String saveGame(HttpSession saveSession, int level, int healthPotion, int shieldPotion,
-                           int firePotion, int health) {
+    public String saveGame(HttpSession saveSession, int level, int score) {
         int id = (int) saveSession.getAttribute("id");
         Save tempSave = saves.findOneById(id);
         tempSave.level = level;
-        tempSave.healthPotion = healthPotion;
-        tempSave.shieldPotion = shieldPotion;
-        tempSave.firePotion = firePotion;
-        tempSave.health = health;
+        tempSave.score = score;
         saves.save(tempSave);
         return "success";
     }
