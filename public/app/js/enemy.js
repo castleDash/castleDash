@@ -23,10 +23,11 @@ castleEnemy.prototype = {
     // this.enemy.body.collision()
     if(player.alive){
       var dist = this.enemy.body.x - player.body.x;
-      if(dist < 250 && dist > 5) {
+      var disty = this.enemy.body.y - player.body.y;
+      if(dist < 250 && dist > 5 && disty <64) {
         this.moveLeft();
       }
-      else if(dist < -5 && dist > -250){
+      else if(dist < -5 && dist > -250 && disty < 64){
         this.moveRight();
       }
       else{
@@ -52,7 +53,7 @@ castleEnemy.prototype = {
         }
         else{
           enemy.body.x=enemy.body.x+32;
-        }        
+        }
       }
       if(enemy.strength<=0){
         enemy.kill();

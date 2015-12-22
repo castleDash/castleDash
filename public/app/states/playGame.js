@@ -56,6 +56,7 @@ NinjaGame.GameState.prototype = {
       if(this.SaveInfo !== undefined){
         newPlayer.currentLevel = this.SaveInfo.level;
         newPlayer.gold = this.SaveInfo.score;
+        newPlayer.loseImmunity();
         console.log("re-enable health below when we have actual save files with health");
         // newPlayer.health = this.SaveInfo.health;
       }
