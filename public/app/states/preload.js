@@ -68,7 +68,8 @@ NinjaGame.Preload.prototype ={
   create:function(){},
 
   doThis:function(){
-    this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
+   this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
+  //  this.load.tilemap('level1', 'app/assets/levels/finalLevel2v1.json', null, Phaser.Tilemap.TILED_JSON );
     this.load.tilemap('level2', null, levelArr[1], Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('level3', null, levelArr[2], Phaser.Tilemap.TILED_JSON);
   },
