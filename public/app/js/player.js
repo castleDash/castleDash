@@ -86,22 +86,23 @@ castlePlayer.prototype = {
 
     },
     saveGame:function(){
+      var that = this;
       var mylevel;
       var myscore;
       var playerSave;
       mylevel = this.currentLevel;
       myscore = this.gold;
-      mysave = saveInfo.id;
 
-      console.log("level: " +mylevel+" score: "+myscore+" saveID: "+mysave);
+
+      console.log("level: " +mylevel+" score: "+myscore);
 
       $.ajax({
         method:"POST",
         url:"/saveGame",
         data:{level:mylevel,score:myscore},
         success:function(){
-          console.log(success);
-          this.levelLoader();
+          console.log("sucess save");
+          that.levelLoader();
         },
         error:function(){
           console.log("error");
