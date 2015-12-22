@@ -1,9 +1,30 @@
+var NinjaGame = NinjaGame || {};
 var login = {
   init: function(){
     login.events();
   },
 
   events: function(){
+    $("#logout").on("click",function(){
+      $.ajax({
+        method:"POST",
+        url:"/logout",
+        success:function(){
+          console.log("logged Out");
+          NinjaGame.game.state.clearCurrentState();
+          NinjaGame.game.cache.destroy();
+          newPlayer = undefined;
+          NinjaGame.game.world.shutdown();
+          NinjaGame.game.destroy();
+          $('canvas').remove();
+          $('.messages').html("");
+          $("#game").addClass("hidden");
+          $("#login").removeClass("hidden");
+        }
+      });
+
+
+    });
     $("#loginBtn").on("click", function () {
       login.submitLogin();
     });
@@ -12,9 +33,14 @@ var login = {
         login.submitLogin();
       }
     });
-    $("#game").on("click","#playAgain", function(){
-      $("#game").html("");
-      castleDash.init();
+    $("body").keypress(function (e) {
+      if (e.which == 13
+          &&
+          ($("#game").html().indexOf("You died")!=-1 ||
+           $("#game").html().indexOf("You win")!=-1)) {
+        $("#game").html("");
+        game.state.start(game.state.current);
+      }
     });
     $("#registerBtn").on("click", function () {
       var username = $("input[type='username']").val();
@@ -27,17 +53,18 @@ var login = {
         data: { username: username, password: password}
       })
       .then(function(data) {
+
         //check for successful login
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
-          $("#login").prepend("Username invalid");
+          $(".messages").html("Username invalid");
         }
       });
-    })
+    });
   },
   submitLogin: function(){
     var username = $("input[type='username']").val();
@@ -50,24 +77,35 @@ var login = {
       data: { username: username, password: password}
     })
       .error(function(data){
-        $("#login").prepend("Incorrect Login");
+        $(".messages").html("Incorrect Password");
       })
       .then(function(data) {
         //check for successful login
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
-          castleDash.init();
+          loggedIn();
         }
         else{
-          $("#login").prepend("Incorrect Login");
+          $(".messages").html("Incorrect Password");
         }
       });
     },
-    gameOver: function(){
-      game.destroy();
-      $("#game").html("<h1>You died</h1>");
-      $("#game").append("<input id='playAgain' type='button' name='playAgain' value='Play Again'>");
-    }
 
+    gameOver: function(){
+
+      // game.destroy();
+      // $("canvas").remove();
+      // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
+    },
+    winLevel: function(){
+
+      // game.destroy();
+      // $("canvas").remove();
+      // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
+    }
 };
+(function() {
+  'use strict';
+    login.init();
+}());
