@@ -5,24 +5,11 @@ var login = {
   },
 
   events: function(){
+    window.addEventListener("beforeunload", function() {
+      login.submitLogout();
+    });
     $("#logout").on("click",function(){
-      $.ajax({
-        method:"POST",
-        url:"/logout",
-        success:function(){
-          NinjaGame.game.state.clearCurrentState();
-          NinjaGame.game.cache.destroy();
-          newPlayer = undefined;
-          NinjaGame.game.world.shutdown();
-          NinjaGame.game.destroy();
-          $('canvas').remove();
-          $('.messages').html("");
-          $("#game").addClass("hidden");
-          $("#login").removeClass("hidden");
-        }
-      });
-
-
+      login.submitLogout();
     });
     $("#loginBtn").on("click", function () {
       login.submitLogin();
@@ -63,6 +50,24 @@ var login = {
           $(".messages").html("Username invalid");
         }
       });
+    });
+  },
+  submitLogout: function(){
+    console.log("logging out");
+    $.ajax({
+      method:"POST",
+      url:"/logout",
+      success:function(){
+        NinjaGame.game.state.clearCurrentState();
+        NinjaGame.game.cache.destroy();
+        newPlayer = undefined;
+        NinjaGame.game.world.shutdown();
+        NinjaGame.game.destroy();
+        $('canvas').remove();
+        $('.messages').html("");
+        $("#game").addClass("hidden");
+        $("#login").removeClass("hidden");
+      }
     });
   },
   submitLogin: function(){
