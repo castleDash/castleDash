@@ -11,10 +11,13 @@ NinjaGame.CreditState.prototype = {
 
   create: function(){
 
-    player = NinjaGame.game.add.sprite(this.game.width/5, this.game.height/2, 'ninja');
+    player = NinjaGame.game.add.sprite(this.game.width/5, this.game.height/2 -100, 'ninja');
+    player.scale.setTo(3,3);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
-    this.game.stage.backgroundColor = '#000000';
-    var style = {font:'20px Arial', fill:"#fff", align:"center"};
+    player.animations.add('stopped',[4],10,true);
+    this.game.stage.backgroundColor = '#222222';
+    var that = this;
+    var style = {font:'25px Arial', fill:"#fff", align:"center"};
     var Devs = "DEVELOPERS\n Sally Kingston \nHolden Hughes \nDoug Scott \nBrandon Jones";
     var Creators = "FROM THE MINDS OF\n Henry Kingston\n Graham Kingston";
     var Testers = "QA TEAM\n Graham \n Henry \n Ayden \n Ellie";
@@ -43,6 +46,7 @@ NinjaGame.CreditState.prototype = {
         });
       }
       else{
+        that.playerRunning = false;
         t.text = "The End\n thanks for playing";
         var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -100, restart, style);
         u.anchor.set(0.5,0.5);
@@ -59,9 +63,15 @@ NinjaGame.CreditState.prototype = {
     };
     changeText();
   },
+  playerRunning: true,
 
   update:function(){
-    player.animations.play('right');
+    if(this.playerRunning){
+      player.animations.play('right');
+    }
+    else{
+      player.animations.play('stopped');
+    }
   }
 
 };
