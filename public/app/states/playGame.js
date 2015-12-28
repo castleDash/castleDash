@@ -58,11 +58,6 @@ NinjaGame.GameState.prototype = {
 
 
   create: function() {
-    var text = "Running Our Game";
-    var style = {font:'30px Arial', fill:"#fff", align:"center"};
-    var t = this.game.add.text(this.game.width/2,this.game.height/2,text,style);
-    t.anchor.set(0.5);
-
       castleStage.createBack(this.levelData);
       backgroundMusic.loop = true;
       backgroundMusic.play();
@@ -72,6 +67,7 @@ NinjaGame.GameState.prototype = {
         if(newPlayer.currentLevel < this.SaveInfo.level){
           newPlayer.currentLevel = this.SaveInfo.level;
           newPlayer.gold = this.SaveInfo.score;
+          newPlayer.previousGold = this.SaveInfo.score;
           newPlayer.loseImmunity();
         }
         if(newPlayer.immunity){

@@ -46,8 +46,15 @@ castlePlayer.prototype = {
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
           this.currentLevel = this.currentLevel +1;
-          this.saveGame();
-          this.levelLoader();
+          this.previousGold = this.gold;
+          if(this.currentLevel === 4){
+            NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
+          }
+          else {
+            this.saveGame();
+            this.levelLoader();
+          }
+
         }
         else{
           //MOVEMENT
@@ -196,6 +203,7 @@ castlePlayer.prototype = {
     killPlayer: function(){
       var that = this;
       this.health = 6;
+      this.gold = this.previousGold;
       this.levelLoader();
       playerHurtSound.mute = true;
       playerDeathSound.play();
@@ -211,6 +219,7 @@ castlePlayer.prototype = {
     weapon: 1,
     potion: 1,
     currentLevel:1,
+    previousGold:0,
     getStats: function(){
       //ajaxy stuff
       //this.health = stuff;
