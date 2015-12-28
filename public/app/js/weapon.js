@@ -1,4 +1,4 @@
-
+var swordSound;
 var castleWeapon = function () {};
 
 castleWeapon.prototype = {
@@ -26,6 +26,8 @@ castleWeapon.prototype = {
    this.weapon.anchor.setTo(0.5,0.5);
    this.weapon.scale.setTo(1,1);
    this.weapon.visible=true;
+
+   swordSound = game.add.audio('swordSound');
  },
  swordExisted: false,
  update: function(){
@@ -68,7 +70,7 @@ castleWeapon.prototype = {
      }
      if(type===0){
        if(!this.swordExisted){
-         //doug, play the sword sound here.
+         swordSound.play();
        }
        this.weapon.y=player.y;
        if(direction==="left"){
