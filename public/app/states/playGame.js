@@ -64,6 +64,9 @@ NinjaGame.GameState.prototype = {
     t.anchor.set(0.5);
 
       castleStage.createBack(this.levelData);
+      backgroundMusic.loop = true;
+      backgroundMusic.play();
+
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
         if(newPlayer.currentLevel < this.SaveInfo.level){

@@ -1,6 +1,8 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var backgroundMusic;
+var ship;
+var originalY;
 
 var mycastleStage = function(){};
 
@@ -12,11 +14,11 @@ mycastleStage.prototype = {
         this.spikes=[];
         this.enemies=[];
         //just some  nicer art that's not part of the level object
-        game.add.sprite(0, 0, 'sky');
-        game.add.sprite(800, 0, 'sky');
-        game.add.sprite(1600, 0, 'sky');
-        game.add.sprite(2400, 0, 'sky');
-        game.add.sprite(3600, 0, 'sky');
+        // game.add.sprite(0, 0, 'sky');
+        // game.add.sprite(800, 0, 'sky');
+        // game.add.sprite(1600, 0, 'sky');
+        // game.add.sprite(2400, 0, 'sky');
+        // game.add.sprite(3600, 0, 'sky');
 
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
@@ -86,7 +88,18 @@ mycastleStage.prototype = {
       }
 
       backgroundMusic = game.add.audio('music');
-      backgroundMusic.play();
+
+      if (levelName === 'level3'){
+
+
+
+        ship = NinjaGame.game.add.sprite(100,7500, 'ship');
+        ship.enableBody = true;
+        NinjaGame.game.physics.ninja.enableAABB(ship);
+      }
+
+
+
 
     },
     createFront: function() {
@@ -95,7 +108,24 @@ mycastleStage.prototype = {
         layer.resizeWorld();
       }
     },
+    counter:0,
     update: function() {
+
+      //  ship.body.moveUp(50);
+      if (ship!=null){
+       if (counter%80===0){
+          ship.body.moveUp(500);
+      }
+    }
+        counter++;
+
+        // if (ship.body.y > originalY){
+        //   ship.body.y = ship.body.y+ 0.8;
+        //   console.log("ship is too high");
+        // }
+
+
+
 
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
@@ -118,5 +148,6 @@ mycastleStage.prototype = {
     spikes: [],
     enemies: [],
     enemyTiles: [],
-    endTile: []
+    endTile: [],
+    shipTiles: []
 };
