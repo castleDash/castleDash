@@ -85,11 +85,8 @@ mycastleStage.prototype = {
         }
       }
 
-      backgroundMusic = game.add.audio('music');
-      backgroundMusic.autoplay = false;
-      if (!backgroundMusic.isPlaying){
-        backgroundMusic.play();
-      }
+      backgroundMusic = game.add.audio('music', 1, true);
+      backgroundMusic.play();
 
     },
     createFront: function() {
@@ -103,7 +100,6 @@ mycastleStage.prototype = {
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            // this.enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);

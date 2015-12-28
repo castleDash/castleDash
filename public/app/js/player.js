@@ -156,7 +156,7 @@ castlePlayer.prototype = {
     damagePlayer: function(){
       if (!this.immunity){
         this.health--;
-        playerHurtSound.play();
+      //  playerHurtSound.play();
         this.saveStats();
         this.updateStatsDash();
         if(this.health<=0){
@@ -199,11 +199,12 @@ castlePlayer.prototype = {
       this.levelLoader();
       playerHurtSound.mute = true;
       playerDeathSound.play();
-
+      backgroundMusic.stop();
     },
     levelLoader: function(){
       var leveldata = this.currentLevel;
       NinjaGame.game.state.start('Game',true,false,leveldata);
+      backgroundMusic.stop();
     },
     health: 6,
     gold: 0,
