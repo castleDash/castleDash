@@ -91,9 +91,7 @@ mycastleStage.prototype = {
 
       if (levelName === 'level3'){
 
-
-
-        ship = NinjaGame.game.add.sprite(100,7500, 'ship');
+        ship = NinjaGame.game.add.sprite(5730,7180, 'ship');
         ship.enableBody = true;
         NinjaGame.game.physics.ninja.enableAABB(ship);
       }
