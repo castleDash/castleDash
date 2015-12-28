@@ -26,13 +26,17 @@ castleWeapon.prototype = {
    this.weapon.scale.setTo(1,1);
    this.weapon.visible=true;
  },
-
+ swordExisted: false,
  update: function(){
    if(keyW.justDown && !castleControl.attackCtrl()){
      castleControl.changeWeaponType();
    };
    if (this.weaponExists() && castleControl.weaponType===0){
+     this.swordExisted=true;
      this.killWeapon();
+   }
+   else{
+     this.swordExisted=false;
    }
 
    if (castleControl.attackCtrl()) {
@@ -60,6 +64,9 @@ castleWeapon.prototype = {
        this.create();
      }
      if(type===0){
+       if(!this.swordExisted){
+         //doug, play the sword sound here.
+       }
        this.weapon.y=player.y;
        if(direction==="left"){
          this.weapon.scale.x=-1;
