@@ -9,14 +9,18 @@ castleWeapon.prototype = {
      this.weapon.enableBody = true;
    }
    else{
-       console.log("creating firepot");
+     if(player.frame > 4){
        this.weapon = NinjaGame.game.add.sprite(player.x, player.y, 'firepot');
-       this.weapon.animations.add('throw', [0, 1, 2, 3], 10, true, true);
-       this.weapon.animations.add('splash', [4,5,6,7,8], 2, true, true);
-       NinjaGame.game.physics.ninja.enableAABB(this.weapon);
-       this.weapon.enableBody = true;
-       this.weapon.body.friction = 0.1;
-       this.weapon.collideWorldBounds = true;
+     }
+     else{
+       this.weapon = NinjaGame.game.add.sprite(player.x-32, player.y, 'firepot');
+     }
+     this.weapon.animations.add('throw', [0, 1, 2, 3], 10, true, true);
+     this.weapon.animations.add('splash', [4,5,6,7,8], 2, true, true);
+     NinjaGame.game.physics.ninja.enableAABB(this.weapon);
+     this.weapon.enableBody = true;
+     this.weapon.body.friction = 0.1;
+     this.weapon.collideWorldBounds = true;
    }
    this.weapon.anchor.setTo(0.5,0.5);
    this.weapon.scale.setTo(1,1);
