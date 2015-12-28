@@ -163,12 +163,14 @@ castlePlayer.prototype = {
     fightEnemy: function(player, enemy) {
         if (newWeapon.weaponExists() && player.canAttack) {
           player.canAttack=false;
-          player.canBeAttacked=false;
           player.fightTimer.loop(500, this.enableAttack, this);
           player.fightTimer.start();
-          player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
-          player.beAttackedTimer.start();
-          newEnemy.damageEnemy(enemy);
+          if(newWeapon.weaponType===0){
+            player.canBeAttacked=false;
+            player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
+            player.beAttackedTimer.start();
+            newEnemy.damageEnemy(enemy);
+          }
         }
         else if(player.canBeAttacked){
             this.damagePlayer();
