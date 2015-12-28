@@ -33,7 +33,7 @@ castleWeapon.prototype = {
  update: function(){
    if(keyW.justDown && !castleControl.attackCtrl()){
      castleControl.changeWeaponType();
-   };
+   }
    if (this.weaponExists() && castleControl.weaponType===0){
      this.swordExisted=true;
      this.killWeapon();
