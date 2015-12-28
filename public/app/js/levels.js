@@ -85,7 +85,7 @@ mycastleStage.prototype = {
         }
       }
 
-      backgroundMusic = game.add.audio('music', 1, true);
+      backgroundMusic = game.add.audio('music');
       backgroundMusic.play();
 
     },
