@@ -64,6 +64,7 @@ NinjaGame.GameState.prototype = {
         if(newPlayer.currentLevel < this.SaveInfo.level){
           newPlayer.currentLevel = this.SaveInfo.level;
           newPlayer.gold = this.SaveInfo.score;
+          newPlayer.previousGold = this.SaveInfo.score;
           newPlayer.loseImmunity();
         }
         if(newPlayer.immunity){
