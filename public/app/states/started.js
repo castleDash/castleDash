@@ -10,5 +10,6 @@ NinjaGame.game.state.add('Boot', NinjaGame.Boot);
 NinjaGame.game.state.add('Preload', NinjaGame.Preload);
 NinjaGame.game.state.add('MainMenu', NinjaGame.MainMenu);
 NinjaGame.game.state.add('Game', NinjaGame.GameState);
+NinjaGame.game.state.add('Credits', NinjaGame.CreditState);
 NinjaGame.game.state.start('Boot');
 };
