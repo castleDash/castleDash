@@ -70,6 +70,7 @@ NinjaGame.GameState.prototype = {
         if(newPlayer.immunity){
           newPlayer.loseImmunity();
         }
+        newPlayer.updateStatsDash();
       }
 
       game.physics.ninja.gravity = NINJA_GRAVITY;
