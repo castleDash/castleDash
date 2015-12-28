@@ -52,13 +52,27 @@ NinjaGame.MainMenu.prototype = {
 
   addFile: function(fileName, callback){
     var style = {font:'30px Arial', fill:"#fff", align:"center"};
+    var style2 = {font:'30px Arial', fill:'#D64937', align:"center"};
     var text;
     if(fileName != "New Game"){
       text = counter +". - level: "+ fileName.level;
-    }
+      var u = this.game.add.text(this.game.width/2, this.game.height/2,"X",style2);
+      u.anchor.set(-10,3.5-counter*1.5);
+      u.inputEnabled = true;
+      u.events.onInputUp.add(function(){$.ajax({
+        method:POST,
+        url:"/deleteSave",
+        data:{id:fileName.id},
+        success:function(data){
+          console.log("deleted");
+        }
+      });
+    });
+  }
     else{
       text = fileName;
     }
+
     var t = this.game.add.text(this.game.width/2, this.game.height/2,text,style);
     t.anchor.set(0.5, 3.5-counter*1.5);
     t.inputEnabled = true;
