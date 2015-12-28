@@ -90,8 +90,7 @@ mycastleStage.prototype = {
       backgroundMusic = game.add.audio('music');
 
       if (levelName === 'level3'){
-
-        ship = NinjaGame.game.add.sprite(5730,7180, 'ship');
+        ship = NinjaGame.game.add.sprite(4930,7080, 'ship');
         ship.enableBody = true;
         NinjaGame.game.physics.ninja.enableAABB(ship);
       }
@@ -110,11 +109,11 @@ mycastleStage.prototype = {
     update: function() {
 
       //  ship.body.moveUp(50);
-      if (ship!=null){
-       if (counter%80===0){
-          ship.body.moveUp(500);
-      }
-    }
+    //   if (ship!=null){
+    //    if (counter%10===0){
+    //       ship.body.moveUp(500);
+    //   }
+    // }
         counter++;
 
         // if (ship.body.y > originalY){
@@ -128,6 +127,7 @@ mycastleStage.prototype = {
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            ship.body.aabb.collideAABBVsTile(this.tiles[i].tile);
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
