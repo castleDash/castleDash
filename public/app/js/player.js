@@ -165,7 +165,7 @@ castlePlayer.prototype = {
           player.canAttack=false;
           player.fightTimer.loop(500, this.enableAttack, this);
           player.fightTimer.start();
-          if(newWeapon.weaponType===0){
+          if(castleControl.weaponType===0){
             player.canBeAttacked=false;
             player.beAttackedTimer.loop(500, this.enableBeAttacked, this);
             player.beAttackedTimer.start();
