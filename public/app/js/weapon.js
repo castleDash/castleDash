@@ -1,11 +1,12 @@
+
 var castleWeapon = function () {};
 
 castleWeapon.prototype = {
 
+
  create: function(){
    if(castleControl.weaponType===0){
      this.weapon = NinjaGame.game.add.sprite(0, 0, 'sword');
-
      this.weapon.enableBody = true;
    }
    else{
@@ -37,9 +38,11 @@ castleWeapon.prototype = {
    if (castleControl.attackCtrl()) {
        if (player.frame < 4) {
          this.weaponAttack("left",castleControl.weaponType);
+
        }
        else {
          this.weaponAttack("right",castleControl.weaponType);
+
       }
    }
 

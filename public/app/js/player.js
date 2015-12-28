@@ -1,5 +1,12 @@
 var PLAYER_SPEED = 50;
 var castlePlayer = function(){};
+var jumpSound;
+var walkSound;
+//var swordSound;
+var potionSound;
+var splashSound;
+var playerHurtSound;
+var playerDeathSound;
 
 castlePlayer.prototype = {
     preload: function() {
@@ -28,6 +35,13 @@ castlePlayer.prototype = {
         player.beAttackedTimer= NinjaGame.game.time.create(false);
         player.canAttack= true;
         player.canBeAttacked=true;
+
+        walkSound = game.add.audio('step');
+        //swordSound = game.add.audio('swordSound');
+        playerHurtSound = game.add.audio('playerHurt');
+        playerDeathSound = game.add.audio('playerDeath');
+        jumpSound = game.add.audio('playerJump');
+
 
     },
 
@@ -116,8 +130,11 @@ castlePlayer.prototype = {
             }
             else {
                 player.body.moveLeft(PLAYER_SPEED);
+
             }
             player.animations.play('left');
+
+
         }
     },
 
@@ -132,12 +149,14 @@ castlePlayer.prototype = {
       if(player.body.touching.down){
         PLAYER_SPEED = 10;
         player.body.moveUp(450);
+        jumpSound.play();
       }
 
     },
     damagePlayer: function(){
       if (!this.immunity){
         this.health--;
+        playerHurtSound.play();
         this.saveStats();
         this.updateStatsDash();
         if(this.health<=0){
@@ -179,6 +198,8 @@ castlePlayer.prototype = {
       this.health = 6;
       this.loseImmunity();
       this.levelLoader();
+      playerHurtSound.mute = true;
+      playerDeathSound.play();
 
     },
     levelLoader: function(){

@@ -23,11 +23,27 @@ NinjaGame.Preload.prototype ={
     this.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     //pulls json file of the level
 
+    //audio effects
+
+    this.load.audio('music', 'app/assets/audio/music/01 Running free.mp3');
+
+    this.load.audio('enemyHit', 'app/assets/audio/enemySound/hit5.mp3');
+
+    this.load.audio('step', 'app/assets/audio/playerSound/Ejimas1.m4a');
+    this.load.audio('swordSound', 'app/assets/audio/playerSound/swish-13.wav');
+    this.load.audio('playerHurt', 'app/assets/audio/playerSound/pain-1.ogg');
+    this.load.audio('playerDeath', 'app/assets/audio/playerSound/pain-2.ogg');
+    this.load.audio('playerJump', 'app/assets/audio/playerSound/SFX_Jump_24.wav');
+
+
+
+
     //pulls tileset art
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
     this.load.image('tiles','app/assets/tiledMaps/patformkenney-32-4x39.png');
     this.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
+    this.load.image('ship', 'app/assets/tiledMaps/2nd_ship_new_4.png');
     this.load.image('sky', 'app/assets/backgroundArt/sky.png');
     this.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
     this.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
@@ -67,8 +83,7 @@ NinjaGame.Preload.prototype ={
   create:function(){},
 
   doThis:function(){
-   this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
-  //  this.load.tilemap('level1', 'app/assets/levels/finalLevel2v1.json', null, Phaser.Tilemap.TILED_JSON );
+    this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('level2', null, levelArr[1], Phaser.Tilemap.TILED_JSON);
     this.load.tilemap('level3', null, levelArr[2], Phaser.Tilemap.TILED_JSON);
   },

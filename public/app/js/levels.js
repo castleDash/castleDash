@@ -1,8 +1,9 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
+var backgroundMusic;
 
-//var COLORS = [#00FFFF];
 var mycastleStage = function(){};
+
 
 mycastleStage.prototype = {
 
@@ -17,10 +18,11 @@ mycastleStage.prototype = {
         game.add.sprite(2400, 0, 'sky');
         game.add.sprite(3600, 0, 'sky');
 
-
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
+        map.addTilesetImage('pirateShip', 'ship');
+
 
         ground = map.createLayer('ground'); //creates layer called ground
         ground.resizeWorld();
@@ -57,7 +59,8 @@ mycastleStage.prototype = {
         spikeLayer.kill();
         var hazard = new castleHazards();
         for (var i = 0; i < this.spikeTiles.length; i++) {
-          spike = hazard.createSpike(this.spikeTiles[i].x, this.spikeTiles[i].y);
+          spike = hazard.createSpike(this.spikeTiles[i].x - 16 , this.spikeTiles[i].y);
+              //hazard is created at tile.x -16 because tile is drawn from left to right. at just x it draws halfway through a tile. this keeps everthing lined up nicely
              this.spikes.push(spike);
         }
       }
@@ -77,11 +80,16 @@ mycastleStage.prototype = {
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
 
-          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y, DEFAULT_WEALTH);
+          newEnemy.create(this.enemyTiles[i].x-16, this.enemyTiles[i].y, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }
       }
 
+      backgroundMusic = game.add.audio('music');
+      backgroundMusic.autoplay = false;
+      if (!backgroundMusic.isPlaying){
+        backgroundMusic.play();
+      }
 
     },
     createFront: function() {
