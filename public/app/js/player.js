@@ -206,6 +206,7 @@ castlePlayer.prototype = {
       var that = this;
       this.health = 6;
       this.gold = this.previousGold;
+      $(".messages").html("");
       this.levelLoader();
       playerHurtSound.mute = true;
       playerDeathSound.play();
