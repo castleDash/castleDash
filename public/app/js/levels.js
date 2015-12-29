@@ -81,7 +81,6 @@ mycastleStage.prototype = {
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
-
           newEnemy.create(this.enemyTiles[i].x-16, this.enemyTiles[i].y, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }

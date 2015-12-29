@@ -79,6 +79,19 @@ castlePlayer.prototype = {
           if (castleControl.jumpCtrl()) {
               this.jump();
           }
+          if (castleControl.volumeDown()){
+            game.sound.volume -= 0.2;
+          }
+          if (castleControl.volumeUp()){
+            game.sound.volume += 0.2;
+          }
+          if (castleControl.muteMusic()){
+            backgroundMusic.volume = 0;
+          } 
+          if (castleControl.unMuteMusic()){
+            backgroundMusic.volume = game.sound.volume;
+          }
+
 
 
           if(this.immunity){
