@@ -51,16 +51,24 @@ NinjaGame.CreditState.prototype = {
         var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -50, restart, style);
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
-        u.events.onInputUp.add(function(){$.ajax({
-                  method:"GET",
-                  url:"/saveList",
-                  success:function(saves){
-                    newPlayer = new castlePlayer();
-                    that.playerRunning = true;
-                    NinjaGame.game.state.start('MainMenu',true,false, saves);
-                  }
-                });
+        u.events.onInputUp.add(function(){
+          $.ajax({
+            method:"POST",
+            url:"/exitSave",
+            success:function(){
+              $.ajax({
+                method:"GET",
+                url:"/saveList",
+                success:function(saves){
+                  newPause.unPause();
+                  console.log("exiting");
+                  newPlayer = new castlePlayer();
+                  game.state.start('MainMenu',true,false, saves);
+                }
               });
+            }
+          });
+        });
       }
     };
     changeText();
