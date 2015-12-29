@@ -197,10 +197,10 @@ var castleControl = {
         return true;
     }
   },
-unMuteMusic: function(){
-  if (keyV.justDown){
-      return true;
-  }
+  unMuteMusic: function(){
+    if (keyV.justDown){
+        return true;
+    }
 }
 
 
