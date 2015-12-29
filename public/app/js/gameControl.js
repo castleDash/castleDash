@@ -194,9 +194,7 @@ var castleControl = {
   },
   muteMusic: function(){
     if (keyB.justDown){
-      if (backgroundMusic.volume > 0){
         return true;
-      }
     }
   },
 unMuteMusic: function(){
