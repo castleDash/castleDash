@@ -14,7 +14,7 @@ NinjaGame.CreditState.prototype = {
     player = NinjaGame.game.add.sprite(this.game.width/5, this.game.height/2 -100, 'ninja');
     player.scale.setTo(3,3);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
-    player.animations.add('stopped',[4],10,true);
+    player.animations.add('stopped',[4,4,4,4,9,4,4,4,4],3,true);
     this.game.stage.backgroundColor = '#222222';
     var that = this;
     var style = {font:'25px Arial', fill:"#fff", align:"center"};
@@ -48,13 +48,15 @@ NinjaGame.CreditState.prototype = {
       else{
         that.playerRunning = false;
         t.text = "The End\n thanks for playing";
-        var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -100, restart, style);
+        var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -50, restart, style);
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
         u.events.onInputUp.add(function(){$.ajax({
                   method:"GET",
                   url:"/saveList",
                   success:function(saves){
+                    newPlayer = new castlePlayer();
+                    that.playerRunning = true;
                     NinjaGame.game.state.start('MainMenu',true,false, saves);
                   }
                 });
