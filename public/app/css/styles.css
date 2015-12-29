@@ -61,12 +61,14 @@ footer {
   height: 100%;
   text-align: center;
   z-index: 1000; }
+  #pauseMenu div {
+    width: 300px;
+    margin: 210px auto;
+    background-color: #fff;
+    color: black;
+    border: 1px solid #000;
+    padding: 15px;
+    text-align: center; }
 
-#pauseMenu div {
-  width: 300px;
-  margin: 100px auto;
-  background-color: #fff;
-  color: black;
-  border: 1px solid #000;
-  padding: 15px;
-  text-align: center; }
+#musicOn {
+  display: none; }

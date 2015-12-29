@@ -178,6 +178,8 @@ var castleControl = {
   releaseWeaponRight: function () {
     weaponRightButton.frame=0;
   },
+  mute:false,
+  unMute:false,
   volumeDown: function(){
     if (keyN.justDown){
       while (game.sound.volume > 0){
@@ -193,13 +195,15 @@ var castleControl = {
     }
   },
   muteMusic: function(){
-    if (keyB.justDown){
-        return true;
+    if (keyB.justDown || this.mute){
+      this.mute=false;
+      return true;
     }
   },
   unMuteMusic: function(){
-    if (keyV.justDown){
-        return true;
+    if (keyV.justDown||this.unMute){
+      this.unMute=false;
+      return true;
     }
 }
 
