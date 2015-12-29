@@ -1,8 +1,6 @@
 var castleHazards = function(){};
 
 castleHazards.prototype = {
-
-
     createSpike: function(x, y) {
       newSpike = game.add.sprite(x, y, 'spike');
       newSpike.scale.setTo(1, 0.5);

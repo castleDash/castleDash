@@ -13,6 +13,10 @@ var castleControl = {
     keyW = game.input.keyboard.addKey(Phaser.Keyboard.W);
     keyJ = game.input.keyboard.addKey(Phaser.Keyboard.J);
     keyK = game.input.keyboard.addKey(Phaser.Keyboard.K);
+    keyN = game.input.keyboard.addKey(Phaser.Keyboard.N);
+    keyM = game.input.keyboard.addKey(Phaser.Keyboard.M);
+    keyB = game.input.keyboard.addKey(Phaser.Keyboard.B);
+    keyV = game.input.keyboard.addKey(Phaser.Keyboard.V);
 
     keyJump = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     keyPause = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
@@ -173,8 +177,31 @@ var castleControl = {
   },
   releaseWeaponRight: function () {
     weaponRightButton.frame=0;
-  }
-
+  },
+  volumeDown: function(){
+    if (keyN.justDown){
+      while (game.sound.volume > 0){
+        return true;
+      }
+    }
+  },
+  volumeUp: function(){
+    if (keyM.justDown){
+      while (game.sound.volume < 1){
+        return true;
+      }
+    }
+  },
+  muteMusic: function(){
+    if (keyB.justDown){
+        return true;
+    }
+  },
+  unMuteMusic: function(){
+    if (keyV.justDown){
+        return true;
+    }
+}
 
 
 

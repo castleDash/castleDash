@@ -5,6 +5,7 @@ var login = {
   },
 
   events: function(){
+    var that=this;
     window.addEventListener("beforeunload", function() {
       login.submitLogout();
     });
@@ -33,8 +34,6 @@ var login = {
       $(".messages").html("");
       var username = $("input[type='username']").val();
       var password = $("input[type='password']").val();
-      $("input[type='username']").val("");
-      $("input[type='password']").val("");
       $.ajax({
         method: "POST",
         url: "/createUser",
@@ -44,9 +43,7 @@ var login = {
 
         //check for successful login
         if(data==="success"){
-          $("#login").addClass("hidden");
-          $("#game").removeClass("hidden");
-          loggedIn();
+          that.submitLogin();
         }
         else{
           $(".messages").html("Username invalid");
@@ -98,18 +95,6 @@ var login = {
       });
     },
 
-    gameOver: function(){
-
-      // game.destroy();
-      // $("canvas").remove();
-      // $("#game").html("<h2>You died</h2><p>Press enter to play again.</p>");
-    },
-    winLevel: function(){
-
-      // game.destroy();
-      // $("canvas").remove();
-      // $("#game").html("<h2>You win</h2><p>Press enter to play again.</p>");
-    }
 };
 (function() {
   'use strict';

@@ -24,8 +24,6 @@ castlePlayer.prototype = {
         player.body.friction = 0.14;
         player.anchor.setTo(0.5, 0.65);
         player.body.collideWorldBounds = true;
-        //player.checkWorldBounds = true;
-        //player.outOfBoundsKill = true;
         player.frame=5;
         player.health=6;
         player.immunity=false;
@@ -85,6 +83,19 @@ castlePlayer.prototype = {
           if (castleControl.jumpCtrl()) {
               this.jump();
           }
+          if (castleControl.volumeDown()){
+            game.sound.volume -= 0.2;
+          }
+          if (castleControl.volumeUp()){
+            game.sound.volume += 0.2;
+          }
+          if (castleControl.muteMusic()){
+            backgroundMusic.volume = 0;
+          } 
+          if (castleControl.unMuteMusic()){
+            backgroundMusic.volume = game.sound.volume;
+          }
+
 
 
           if(this.immunity){

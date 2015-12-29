@@ -31,13 +31,19 @@ castlePause.prototype = {
     },
     exitLevel: function(){
       $.ajax({
-        method:"GET",
-        url:"/saveList",
-        success:function(saves){
-          newPause.unPause();
-          console.log("exiting");
-          newPlayer = new castlePlayer();
-          game.state.start('MainMenu',true,false, saves);
+        method:"POST",
+        url:"/exitSave",
+        success:function(){
+          $.ajax({
+            method:"GET",
+            url:"/saveList",
+            success:function(saves){
+              newPause.unPause();
+              console.log("exiting");
+              newPlayer = new castlePlayer();
+              game.state.start('MainMenu',true,false, saves);
+            }
+          });
         }
       });
     },
