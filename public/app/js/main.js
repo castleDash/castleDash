@@ -12,6 +12,7 @@ var login = {
       login.submitLogout();
     });
     $("#loginBtn").on("click", function () {
+      $(".messages").html("");
       login.submitLogin();
     });
     $("#password").keypress(function (e) {
@@ -29,6 +30,7 @@ var login = {
       }
     });
     $("#registerBtn").on("click", function () {
+      $(".messages").html("");
       var username = $("input[type='username']").val();
       var password = $("input[type='password']").val();
       $("input[type='username']").val("");

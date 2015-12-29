@@ -49,6 +49,7 @@ NinjaGame.GameState.prototype = {
     newWeapon = new castleWeapon();
     castleStage = new mycastleStage();
     newHud = new castleHUD();
+    newPause = new castlePause();
   },
 
   preload: function() {
@@ -82,6 +83,7 @@ NinjaGame.GameState.prototype = {
 
       castleControl.create();
       newHud.create();
+      newPause.create();
 
 
   },
@@ -93,8 +95,8 @@ NinjaGame.GameState.prototype = {
       _.each(castleStage.enemies, function(enemy){
         enemy.update();
       });
-      castleControl.update();
       newHud.update();
+      newPause.update();
   },
   render: function() {
     // game.debug.body(castleStage.enemies.children[0]);

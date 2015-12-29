@@ -199,7 +199,6 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      var that = this;
       this.health = 6;
       this.gold = this.previousGold;
       $(".messages").html("");

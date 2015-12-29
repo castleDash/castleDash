@@ -49,13 +49,14 @@ NinjaGame.Preload.prototype ={
     this.load.image('fullheart', 'app/assets/sprites/fullheart.png');
     this.load.image('halfheart', 'app/assets/sprites/halfheart.png');
     this.load.image('emptyheart', 'app/assets/sprites/emptyheart.png');
+    this.load.image('pauseBtn', 'app/assets/sprites/pause.png');
     this.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
     this.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
     this.load.spritesheet('leftBtn', 'app/assets/sprites/left.png',32,32,2);
     this.load.spritesheet('rightBtn', 'app/assets/sprites/right.png',32,32,2);
     this.load.spritesheet('upBtn', 'app/assets/sprites/up.png',32,32,2);
     this.load.spritesheet('downBtn', 'app/assets/sprites/down.png',32,32,2);
-
+  
     this.load.script('level.js','app/js/levels.js');
     this.load.script('enemy.js','app/js/enemy.js');
     this.load.script('gameControl.js','app/js/gameControl.js');
@@ -65,6 +66,7 @@ NinjaGame.Preload.prototype ={
     this.load.script('untouchables.js','app/js/untouchables.js');
     this.load.script('weapon.js','app/js/weapon.js');
     this.load.script('hud.js','app/js/hud.js');
+    this.load.script('pauseMenu.js','app/js/pauseMenu.js');
 
     $.ajax({
       method:"GET",
