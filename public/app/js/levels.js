@@ -113,10 +113,6 @@ mycastleStage.prototype = {
         counter++;
 
 
-
-
-
-
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
