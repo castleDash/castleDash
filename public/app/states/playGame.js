@@ -62,6 +62,9 @@ NinjaGame.GameState.prototype = {
   create: function() {
       this.game.stage.backgroundColor="656565";
       castleStage.createBack(this.levelData);
+      backgroundMusic.loop = true;
+      backgroundMusic.play();
+
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
         if(newPlayer.currentLevel < this.SaveInfo.level){
