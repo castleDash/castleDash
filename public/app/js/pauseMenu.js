@@ -1,18 +1,21 @@
 var game = NinjaGame.game;
-
+var volume=0;
 var castlePause = function() {};
 
 castlePause.prototype = {
 
     create: function() {
-        volUp = $("#volUp");
-        volDown = $("#volDown");
-        musicOff = $("#musicOff");
-
         $("#resume").on("click", this.unPause);
         $("#exit").on("click",this.exitLevel);
         $("#restart").on("click",this.restartLevel);
+        $("#volUp").on("click", this.volUp);
+        $("#volDn").on("click", this.volDown);
+        $("#musicOff").on("click", this.musicOff);
+        $("#musicOn").on("click",this.musicOn);
+        $("#logout").on("click", this.logout);
 
+        game.onPause.add(this.getVolume);
+        game.onResume.add(this.setVolume);
     },
     update: function() {
         if (castleControl.pauseCtrl()) {
@@ -46,6 +49,40 @@ castlePause.prototype = {
       newPlayer.gold = newPlayer.previousGold;
       $(".messages").html("");
       newPlayer.levelLoader();
+    },
+    volUp: function(){
+      volume +=0.2;
+      if (volume>1){
+        volume=1;
+      }
+    },
+    volDown: function(){
+      volume -=0.2;
+      if(volume<0){
+        volume=0;
+      }
+    },
+    musicOff: function(){
+      castleControl.mute=true;
+      $("#musicOff").css('display','none');
+      $("#musicOn").css('display','block');
+    },
+    musicOn: function(){
+      castleControl.unMute=true;
+      $("#musicOn").css('display','none');
+      $("#musicOff").css('display','block');
+    },
+    logout: function(){
+      newPause.unPause();
+      login.submitLogout();
+    },
+    setVolume: function () {
+      console.log("setting volume",volume);
+      game.sound.volume=volume;
+    },
+    getVolume: function(){
+      console.log("getting volume",game.sound.volume);
+      volume=game.sound.volume;
     }
 
 };
