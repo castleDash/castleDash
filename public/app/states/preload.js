@@ -39,6 +39,11 @@ NinjaGame.Preload.prototype ={
 
 
     //pulls tileset art
+    this.load.spritesheet('jumpControl','app/assets/sprites/jumpconrol.png',100,20,3);
+    this.load.spritesheet('attackControl','app/assets/sprites/attackcontrol.png',100,20,3);
+    this.load.spritesheet('moveControl','app/assets/sprites/movecontrols.png',100,20,3);
+    this.load.spritesheet('pauseControl','app/assets/sprites/pausecontrol.png',100,20,3);
+    this.load.spritesheet('toggleControl','app/assets/sprites/jumpconrol.png',100,20,3);
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
     this.load.image('tiles','app/assets/tiledMaps/patformkenney-32-4x39.png');
@@ -56,7 +61,9 @@ NinjaGame.Preload.prototype ={
     this.load.spritesheet('rightBtn', 'app/assets/sprites/right.png',32,32,2);
     this.load.spritesheet('upBtn', 'app/assets/sprites/up.png',32,32,2);
     this.load.spritesheet('downBtn', 'app/assets/sprites/down.png',32,32,2);
-  
+
+    this.load.tilemap('tutorial', 'app/assets/tiledMaps/tutorial.json', null,  Phaser.Tilemap.TILED_JSON);
+
     this.load.script('level.js','app/js/levels.js');
     this.load.script('enemy.js','app/js/enemy.js');
     this.load.script('gameControl.js','app/js/gameControl.js');

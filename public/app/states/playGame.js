@@ -22,27 +22,30 @@ NinjaGame.GameState.prototype = {
       var that = this;
       this.styling();
       this.levelData = levelData;
-      if(!isNaN(levelData)){
-        that.levelData = 'level'+levelData;
-      }
-      else if(levelData === undefined){
-        that.levelData = 'level1';
-      }
-      else{
-        that.levelData = 'level'+levelData.level;
-        that.SaveInfo = levelData;
-        saveInfo =levelData;
-        var saveId = that.SaveInfo.id;
+      if(levelData != "tutorial"){
 
-        $.ajax({
-          method:"POST",
-          url:"/selectSave",
-          data:{id:saveId},
-          success:function(){
-
+          if(!isNaN(levelData)){
+            that.levelData = 'level'+levelData;
           }
-        });
-      }
+          else if(levelData === undefined){
+            that.levelData = 'level1';
+          }
+          else{
+            that.levelData = 'level'+levelData.level;
+            that.SaveInfo = levelData;
+            saveInfo =levelData;
+            var saveId = that.SaveInfo.id;
+
+            $.ajax({
+              method:"POST",
+              url:"/selectSave",
+              data:{id:saveId},
+              success:function(){
+
+              }
+            });
+          }
+    }
   },
   styling: function() {
     newPlayer = newPlayer || new castlePlayer();

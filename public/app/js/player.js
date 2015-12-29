@@ -45,16 +45,20 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-          this.currentLevel = this.currentLevel +1;
-          this.previousGold = this.gold;
-          if(this.currentLevel === 4){
-            NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
-          }
-          else {
-            this.saveGame();
-            this.levelLoader();
-          }
-
+            if(castleStage.levelName != "tutorial"){
+              this.currentLevel = this.currentLevel +1;
+              this.previousGold = this.gold;
+              if(this.currentLevel === 4){
+                NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
+              }
+              else {
+                this.saveGame();
+                this.levelLoader();
+              }
+            }
+            else{
+              
+            }
         }
         else{
           //MOVEMENT

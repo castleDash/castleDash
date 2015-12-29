@@ -32,6 +32,14 @@ NinjaGame.MainMenu.prototype = {
         })
       }
     }
+    var v = this.game.add.text(this.game.width/2, this.game.height/2,"Tutorial",style);
+    v.anchor.set(0.5, 3.5-counter*1.5);
+    v.inputEnabled = true;
+    v.events.onInputUp.add(function(){
+      NinjaGame.game.state.start("Game",true,false,"tutorial");
+    }
+
+    );
   },
 
   update:function(){
