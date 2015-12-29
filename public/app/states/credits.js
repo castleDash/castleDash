@@ -14,7 +14,7 @@ NinjaGame.CreditState.prototype = {
     player = NinjaGame.game.add.sprite(this.game.width/5, this.game.height/2 -100, 'ninja');
     player.scale.setTo(3,3);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
-    player.animations.add('stopped',[4,9,10,11,12,13,14,15,16],3,true);
+    player.animations.add('stopped',[4,4,4,4,9,4,4,4,4],3,true);
     this.game.stage.backgroundColor = '#222222';
     var that = this;
     var style = {font:'25px Arial', fill:"#fff", align:"center"};
