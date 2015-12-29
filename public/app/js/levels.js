@@ -1,6 +1,8 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var backgroundMusic;
+var ship;
+var originalY;
 
 var mycastleStage = function(){};
 
@@ -12,11 +14,11 @@ mycastleStage.prototype = {
         this.spikes=[];
         this.enemies=[];
         //just some  nicer art that's not part of the level object
-        game.add.sprite(0, 0, 'sky');
-        game.add.sprite(800, 0, 'sky');
-        game.add.sprite(1600, 0, 'sky');
-        game.add.sprite(2400, 0, 'sky');
-        game.add.sprite(3600, 0, 'sky');
+        // game.add.sprite(0, 0, 'sky');
+        // game.add.sprite(800, 0, 'sky');
+        // game.add.sprite(1600, 0, 'sky');
+        // game.add.sprite(2400, 0, 'sky');
+        // game.add.sprite(3600, 0, 'sky');
 
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
@@ -79,14 +81,22 @@ mycastleStage.prototype = {
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
-
           newEnemy.create(this.enemyTiles[i].x-16, this.enemyTiles[i].y, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }
       }
 
       backgroundMusic = game.add.audio('music');
-      backgroundMusic.play();
+
+      if (levelName === 'level3'){
+        ship = NinjaGame.game.add.sprite(5500,6908, 'ship');
+        //ship doesn't spawn in proper spot for some insane reason...Guess the image itself is too large
+        //ship.enableBody = true;
+        NinjaGame.game.physics.ninja.enableAABB(ship);
+      }
+
+
+
 
     },
     createFront: function() {
@@ -95,11 +105,20 @@ mycastleStage.prototype = {
         layer.resizeWorld();
       }
     },
+    counter:0,
     update: function() {
+
+
+
+        counter++;
+
 
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+            if (ship!=null){
+            ship.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+          }
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
@@ -118,5 +137,6 @@ mycastleStage.prototype = {
     spikes: [],
     enemies: [],
     enemyTiles: [],
-    endTile: []
+    endTile: [],
+    shipTiles: []
 };
