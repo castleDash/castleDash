@@ -27,8 +27,6 @@ castlePlayer.prototype = {
         player.frame=5;
         player.health=6;
         player.immunity=false;
-        this.getStats();
-        this.updateStatsDash();
         player.fightTimer= NinjaGame.game.time.create(false);
         player.beAttackedTimer= NinjaGame.game.time.create(false);
         player.canAttack= true;
@@ -162,8 +160,6 @@ castlePlayer.prototype = {
       if (!this.immunity){
         this.health--;
       //  playerHurtSound.play();
-        this.saveStats();
-        this.updateStatsDash();
         if(this.health<=0){
           this.killPlayer();
         }else{
@@ -221,23 +217,6 @@ castlePlayer.prototype = {
     potion: 1,
     currentLevel:1,
     previousGold:0,
-    getStats: function(){
-      //ajaxy stuff
-      //this.health = stuff;
-    },
-    saveStats: function(){
-      //ajaxy stuff
-      //data.health = this.health
-    },
-    updateStatsDash: function(){
-      //this is where the ajax call will go
-
-      dashplayer = {health:this.health, gold:this.gold, weapon:this.weapon, potion:this.potion};
-
-      var dashTmpl = _.template(dashTemplate);
-      var healthHTML = getHearts(dashplayer.health);
-      $(".messages").html(dashTmpl(dashplayer)+healthHTML);
-    },
     facingLeft: function(){
       if(player.frame<4){
         return true;

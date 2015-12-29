@@ -48,6 +48,7 @@ NinjaGame.GameState.prototype = {
     newPlayer = newPlayer || new castlePlayer();
     newWeapon = new castleWeapon();
     castleStage = new mycastleStage();
+    newHud = new castleHUD();
   },
 
   preload: function() {
@@ -74,7 +75,6 @@ NinjaGame.GameState.prototype = {
         if(newPlayer.immunity){
           newPlayer.loseImmunity();
         }
-        newPlayer.updateStatsDash();
       }
 
       game.physics.ninja.gravity = NINJA_GRAVITY;
@@ -84,6 +84,7 @@ NinjaGame.GameState.prototype = {
       castleStage.createFront();
 
       castleControl.create();
+      newHud.create();
 
 
   },
@@ -96,7 +97,7 @@ NinjaGame.GameState.prototype = {
         enemy.update();
       });
       castleControl.update();
-
+      newHud.update();
   },
   render: function() {
     // game.debug.body(castleStage.enemies.children[0]);
