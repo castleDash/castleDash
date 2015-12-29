@@ -58,6 +58,27 @@ var castleControl = {
     weaponRightButton.scale.setTo(.5,.5);
     weaponRightButton.onInputUp.add(this.releaseWeaponRight, this);
 
+    pauseButton = game.add.button(116, game.camera.height-58, 'pauseBtn');
+    pauseButton.fixedToCamera=true;
+    pauseButton.onInputPause.add(this.buttonPause, this);
+    pauseButton.onInputUp.add(this.releaseButtonPause, this);
+
+    // exitButton = game.add.button(116, game.camera.height-58, 'exitBtn');
+    // exitButton.fixedToCamera=true;
+    // exitButton.onInputExit.add(this.buttonExit, this);
+    // exitButton.onInputUp.add(this.releaseButtonExit, this);
+    //
+    // restartButton = game.add.button(116, game.camera.height-58, 'restartBtn');
+    // restartButton.fixedToCamera=true;
+    // restartButton.onInputRestart.add(this.buttonRestart, this);
+    // restartButton.onInputUp.add(this.releaseButtonRestart, this);
+    //
+    // soundButton = game.add.button(116, game.camera.height-58, 'soundBtn');
+    // soundButton.fixedToCamera=true;
+    // soundButton.onInputSound.add(this.buttonSound, this);
+    // soundButton.onInputUp.add(this.releaseButtonSound, this);
+
+
 
   },
   update: function(){
@@ -119,6 +140,22 @@ var castleControl = {
     downButton.frame=1;
     this.down=true;
   },
+  buttonPause: function(){
+    // pauseButton.frame=1;
+    game.paused=true;
+  },
+  // buttonExit: function(){
+  //   exitButton.frame=1;
+  //   this.exit=true;
+  // },
+  // buttonRestart: function(){
+  //   restartButton.frame=1;
+  //   this.restart=true;
+  // },
+  // buttonSound: function(){
+  //   soundButton.frame=1;
+  //   this.sound=true;
+  // },
   releaseButtonJump: function(){
     jumpButton.frame=0;
     this.jump=false;
@@ -143,6 +180,19 @@ var castleControl = {
     downButton.frame=0;
     this.down=false;
   },
+
+  // releaseButtonExit: function(){
+  //   exitButton.frame=0;
+  //   this.exit=false;
+  // },
+  // releaseButtonRestart: function(){
+  //   restartButton.frame=0;
+  //   this.restart=false;
+  // },
+  // releaseButtonSound: function(){
+  //   soundButton.frame=0;
+  //   this.sound=false;
+  // },
   changeWeaponType: function(){
     if(this.weaponType===0){
       this.weaponType=1;
