@@ -48,13 +48,15 @@ NinjaGame.CreditState.prototype = {
       else{
         that.playerRunning = false;
         t.text = "The End\n thanks for playing";
-        var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -100, restart, style);
+        var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -50, restart, style);
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
         u.events.onInputUp.add(function(){$.ajax({
                   method:"GET",
                   url:"/saveList",
                   success:function(saves){
+                    newPlayer = new castlePlayer();
+                    that.playerRunning = true;
                     NinjaGame.game.state.start('MainMenu',true,false, saves);
                   }
                 });
