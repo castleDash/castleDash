@@ -5,6 +5,7 @@ var login = {
   },
 
   events: function(){
+    var that=this;
     window.addEventListener("beforeunload", function() {
       login.submitLogout();
     });
@@ -33,8 +34,8 @@ var login = {
       $(".messages").html("");
       var username = $("input[type='username']").val();
       var password = $("input[type='password']").val();
-      $("input[type='username']").val("");
-      $("input[type='password']").val("");
+      // $("input[type='username']").val("");
+      // $("input[type='password']").val("");
       $.ajax({
         method: "POST",
         url: "/createUser",
@@ -44,9 +45,10 @@ var login = {
 
         //check for successful login
         if(data==="success"){
-          $("#login").addClass("hidden");
-          $("#game").removeClass("hidden");
-          loggedIn();
+          // $("#login").addClass("hidden");
+          // $("#game").removeClass("hidden");
+          that.submitLogin();
+          // loggedIn();
         }
         else{
           $(".messages").html("Username invalid");
