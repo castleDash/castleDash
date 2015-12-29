@@ -1,5 +1,12 @@
 var PLAYER_SPEED = 50;
 var castlePlayer = function(){};
+var jumpSound;
+var walkSound;
+//var swordSound;
+var potionSound;
+var splashSound;
+var playerHurtSound;
+var playerDeathSound;
 
 castlePlayer.prototype = {
     preload: function() {
@@ -29,13 +36,27 @@ castlePlayer.prototype = {
         player.canAttack= true;
         player.canBeAttacked=true;
 
+        walkSound = game.add.audio('step');
+        //swordSound = game.add.audio('swordSound');
+        playerHurtSound = game.add.audio('playerHurt');
+        playerDeathSound = game.add.audio('playerDeath');
+        jumpSound = game.add.audio('playerJump');
+
+
     },
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
           this.currentLevel = this.currentLevel +1;
-          this.saveGame();
-          this.levelLoader();
+          this.previousGold = this.gold;
+          if(this.currentLevel === 4){
+            NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
+          }
+          else {
+            this.saveGame();
+            this.levelLoader();
+          }
+
         }
         else{
           //MOVEMENT
@@ -116,8 +137,11 @@ castlePlayer.prototype = {
             }
             else {
                 player.body.moveLeft(PLAYER_SPEED);
+
             }
             player.animations.play('left');
+
+
         }
     },
 
@@ -132,12 +156,14 @@ castlePlayer.prototype = {
       if(player.body.touching.down){
         PLAYER_SPEED = 10;
         player.body.moveUp(450);
+        jumpSound.play();
       }
 
     },
     damagePlayer: function(){
       if (!this.immunity){
         this.health--;
+      //  playerHurtSound.play();
         this.saveStats();
         this.updateStatsDash();
         if(this.health<=0){
@@ -179,18 +205,25 @@ castlePlayer.prototype = {
     killPlayer: function(){
       var that = this;
       this.health = 6;
+      this.gold = this.previousGold;
+      $(".messages").html("");
       this.levelLoader();
-
+      playerHurtSound.mute = true;
+      playerDeathSound.play();
+      backgroundMusic.stop();
     },
     levelLoader: function(){
       var leveldata = this.currentLevel;
       NinjaGame.game.state.start('Game',true,false,leveldata);
+      backgroundMusic.stop();
     },
     health: 6,
     gold: 0,
     weapon: 1,
     potion: 1,
     currentLevel:1,
+    previousGold:0,
+  
     updateStatsDash: function(){
 
       dashplayer = {health:this.health, gold:this.gold, weapon:this.weapon, potion:this.potion};

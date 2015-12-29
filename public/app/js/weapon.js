@@ -1,11 +1,12 @@
+var swordSound;
 var castleWeapon = function () {};
 
 castleWeapon.prototype = {
 
+
  create: function(){
    if(castleControl.weaponType===0){
      this.weapon = NinjaGame.game.add.sprite(0, 0, 'sword');
-
      this.weapon.enableBody = true;
    }
    else{
@@ -25,12 +26,14 @@ castleWeapon.prototype = {
    this.weapon.anchor.setTo(0.5,0.5);
    this.weapon.scale.setTo(1,1);
    this.weapon.visible=true;
+
+   swordSound = game.add.audio('swordSound');
  },
  swordExisted: false,
  update: function(){
    if(keyW.justDown && !castleControl.attackCtrl()){
      castleControl.changeWeaponType();
-   };
+   }
    if (this.weaponExists() && castleControl.weaponType===0){
      this.swordExisted=true;
      this.killWeapon();
@@ -42,9 +45,11 @@ castleWeapon.prototype = {
    if (castleControl.attackCtrl()) {
        if (player.frame < 4) {
          this.weaponAttack("left",castleControl.weaponType);
+
        }
        else {
          this.weaponAttack("right",castleControl.weaponType);
+
       }
    }
 
@@ -65,7 +70,7 @@ castleWeapon.prototype = {
      }
      if(type===0){
        if(!this.swordExisted){
-         //doug, play the sword sound here.
+         swordSound.play();
        }
        this.weapon.y=player.y;
        if(direction==="left"){

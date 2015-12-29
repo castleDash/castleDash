@@ -58,21 +58,20 @@ NinjaGame.GameState.prototype = {
 
 
   create: function() {
-    var text = "Running Our Game";
-    var style = {font:'30px Arial', fill:"#fff", align:"center"};
-    var t = this.game.add.text(this.game.width/2,this.game.height/2,text,style);
-    t.anchor.set(0.5);
+      this.game.stage.backgroundColor="656565";
       castleStage.createBack(this.levelData);
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
         if(newPlayer.currentLevel < this.SaveInfo.level){
           newPlayer.currentLevel = this.SaveInfo.level;
           newPlayer.gold = this.SaveInfo.score;
+          newPlayer.previousGold = this.SaveInfo.score;
           newPlayer.loseImmunity();
         }
         if(newPlayer.immunity){
           newPlayer.loseImmunity();
         }
+        newPlayer.updateStatsDash();
       }
 
       game.physics.ninja.gravity = NINJA_GRAVITY;

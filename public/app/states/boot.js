@@ -10,7 +10,7 @@ NinjaGame.Boot.prototype = {
   },
 
   create: function(){
-    this.game.stage.backgroundColor = '#DDDDDD';
+    this.game.stage.backgroundColor = '#222222';
 
     this.game.physics.startSystem(Phaser.Physics.NINJA);
 
