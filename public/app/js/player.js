@@ -191,16 +191,7 @@ castlePlayer.prototype = {
     weapon: 1,
     potion: 1,
     currentLevel:1,
-    getStats: function(){
-      //ajaxy stuff
-      //this.health = stuff;
-    },
-    saveStats: function(){
-      //ajaxy stuff
-      //data.health = this.health
-    },
     updateStatsDash: function(){
-      //this is where the ajax call will go
 
       dashplayer = {health:this.health, gold:this.gold, weapon:this.weapon, potion:this.potion};
 
