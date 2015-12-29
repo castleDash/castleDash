@@ -45,6 +45,10 @@ NinjaGame.Preload.prototype ={
     this.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
     this.load.image('ship', 'app/assets/tiledMaps/2nd_ship_new_4.png');
     this.load.image('sky', 'app/assets/backgroundArt/sky.png');
+    this.load.image('coin', 'app/assets/sprites/coin.png');
+    this.load.image('fullheart', 'app/assets/sprites/fullheart.png');
+    this.load.image('halfheart', 'app/assets/sprites/halfheart.png');
+    this.load.image('emptyheart', 'app/assets/sprites/emptyheart.png');
     this.load.spritesheet('jumpBtn', 'app/assets/sprites/Jump_btn.png',32,32,2);
     this.load.spritesheet('attackBtn', 'app/assets/sprites/Attack_btn.png',32,32,2);
     this.load.spritesheet('leftBtn', 'app/assets/sprites/left.png',32,32,2);
@@ -60,6 +64,8 @@ NinjaGame.Preload.prototype ={
     this.load.script('save.js','app/js/save.js');
     this.load.script('untouchables.js','app/js/untouchables.js');
     this.load.script('weapon.js','app/js/weapon.js');
+    this.load.script('hud.js','app/js/hud.js');
+
     $.ajax({
       method:"GET",
       url:'/levelData',

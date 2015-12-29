@@ -66,7 +66,6 @@ castleEnemy.prototype = {
       if(enemy.strength<=0){
         enemy.kill();
         newPlayer.gold = parseInt(newPlayer.gold)+enemy.wealth;
-        newPlayer.updateStatsDash();
       }
   },
   moveRight:function(){
