@@ -19,6 +19,7 @@ var castleControl = {
     keyV = game.input.keyboard.addKey(Phaser.Keyboard.V);
 
     keyJump = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    keyPause = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
     jumpButton = game.add.button(game.camera.width - 100, game.camera.height-100, 'jumpBtn');
     jumpButton.fixedToCamera=true;
@@ -62,12 +63,11 @@ var castleControl = {
     weaponRightButton.scale.setTo(.5,.5);
     weaponRightButton.onInputUp.add(this.releaseWeaponRight, this);
 
+    pauseButton = game.add.button(game.camera.width/2, game.camera.height-75, 'pauseBtn');
+    pauseButton.fixedToCamera=true;
+    pauseButton.onInputDown.add(this.buttonPause, this);
+    pauseButton.onInputUp.add(this.releaseButtonPause, this);
 
-  },
-  update: function(){
-    // this.attack=false;
-    // this.jump=false;
-    // this.up=false;
   },
   attack: false,
   jump: false,
@@ -97,6 +97,11 @@ var castleControl = {
       return true;
     }
   },
+  pauseCtrl: function(){
+    if(keyPause.isDown || this.pause){
+      return true;
+    }
+  },
   weaponType: 0,
   buttonAttack: function(){
     attackButton.frame=1;
@@ -123,6 +128,9 @@ var castleControl = {
     downButton.frame=1;
     this.down=true;
   },
+  buttonPause: function(){
+    this.pause=true;
+  },
   releaseButtonJump: function(){
     jumpButton.frame=0;
     this.jump=false;
@@ -146,6 +154,10 @@ var castleControl = {
   releaseButtonDown: function(){
     downButton.frame=0;
     this.down=false;
+  },
+  releaseButtonPause: function(){
+    pauseButton.frame=0;
+    this.pause=false;
   },
   changeWeaponType: function(){
     if(this.weaponType===0){
