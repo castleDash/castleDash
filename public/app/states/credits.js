@@ -36,9 +36,7 @@ NinjaGame.CreditState.prototype = {
     var t = NinjaGame.game.add.text(this.game.width/2, this.game.height/2,myText,style);
     t.anchor.set(0.5,0.5);
     var changeText = function(){
-      console.log("made it here");
       if(counter < credArr.length){
-        console.log("Should be changing text",credArr[counter]);
         t.text = credArr[counter];
         NinjaGame.game.time.events.add(1000,function(){
           counter++;
@@ -61,7 +59,6 @@ NinjaGame.CreditState.prototype = {
                 url:"/saveList",
                 success:function(saves){
                   newPause.unPause();
-                  console.log("exiting");
                   newPlayer = new castlePlayer();
                   game.state.start('MainMenu',true,false, saves);
                 }

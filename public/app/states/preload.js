@@ -39,11 +39,11 @@ NinjaGame.Preload.prototype ={
 
 
     //pulls tileset art
-    this.load.spritesheet('jumpControl','app/assets/sprites/jumpconrol.png',100,20,3);
+    this.load.spritesheet('jumperControl','app/assets/sprites/jumpcontrol.png',100,20,3);
     this.load.spritesheet('attackControl','app/assets/sprites/attackcontrol.png',100,20,3);
     this.load.spritesheet('moveControl','app/assets/sprites/movecontrols.png',100,20,3);
     this.load.spritesheet('pauseControl','app/assets/sprites/pausecontrol.png',100,20,3);
-    this.load.spritesheet('toggleControl','app/assets/sprites/jumpconrol.png',100,20,3);
+    this.load.spritesheet('toggleControl','app/assets/sprites/togglecontrol.png',100,20,3);
     this.load.spritesheet('sword', 'app/assets/sprites/Flame_Sword.png');
     this.load.spritesheet('firepot', 'app/assets/sprites/firepotionfull.png',32,32, 9);
     this.load.image('tiles','app/assets/tiledMaps/patformkenney-32-4x39.png');
@@ -69,7 +69,6 @@ NinjaGame.Preload.prototype ={
     this.load.script('gameControl.js','app/js/gameControl.js');
     this.load.script('hazards.js','app/js/hazards.js');
     this.load.script('player.js','app/js/player.js');
-    this.load.script('save.js','app/js/save.js');
     this.load.script('untouchables.js','app/js/untouchables.js');
     this.load.script('weapon.js','app/js/weapon.js');
     this.load.script('hud.js','app/js/hud.js');

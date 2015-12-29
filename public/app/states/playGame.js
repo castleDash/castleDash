@@ -27,7 +27,7 @@ NinjaGame.GameState.prototype = {
           if(!isNaN(levelData)){
             that.levelData = 'level'+levelData;
           }
-          else if(levelData === undefined){
+          else if(levelData === undefined || levelData === null){
             that.levelData = 'level1';
           }
           else{
@@ -108,6 +108,7 @@ NinjaGame.GameState.prototype = {
     // game.debug.body(castleStage.enemies.children[0]);
     // game.debug.body(castleStage.enemies.children[1]);
     // game.debug.body(castleStage.enemies.children[2]);
+
   },
 
 

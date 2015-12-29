@@ -31,25 +31,17 @@ castlePause.prototype = {
     },
     exitLevel: function(){
       $.ajax({
-        method:"POST",
-        url:"/exitSave",
-        success:function(){
-          $.ajax({
-            method:"GET",
-            url:"/saveList",
-            success:function(saves){
-              newPause.unPause();
-              console.log("exiting");
-              newPlayer = new castlePlayer();
-              game.state.start('MainMenu',true,false, saves);
-            }
-          });
+        method:"GET",
+        url:"/saveList",
+        success:function(saves){
+          newPause.unPause();
+          newPlayer = new castlePlayer();
+          game.state.start('MainMenu',true,false, saves);
         }
       });
     },
     restartLevel: function(){
       newPause.unPause();
-      console.log("restarting");
       newPlayer.health = 6;
       newPlayer.gold = newPlayer.previousGold;
       $(".messages").html("");

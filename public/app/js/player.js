@@ -43,7 +43,7 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-            if(castleStage.levelName != "tutorial"){
+            if(castleStage.levelName !="tutorial"){
               this.currentLevel = this.currentLevel +1;
               this.previousGold = this.gold;
               if(this.currentLevel === 4){
@@ -55,7 +55,15 @@ castlePlayer.prototype = {
               }
             }
             else{
-              
+                  $.ajax({
+                    method:"GET",
+                    url:"/saveList",
+                    success:function(saves){
+                      newPause.unPause();
+                      newPlayer = new castlePlayer();
+                      game.state.start('MainMenu',true,false, saves);
+                    }
+                  });
             }
         }
         else{
@@ -91,7 +99,7 @@ castlePlayer.prototype = {
           }
           if (castleControl.muteMusic()){
             backgroundMusic.volume = 0;
-          } 
+          }
           if (castleControl.unMuteMusic()){
             backgroundMusic.volume = game.sound.volume;
           }
