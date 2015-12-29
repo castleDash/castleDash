@@ -18,7 +18,7 @@ NinjaGame.Preload.prototype ={
     this.preloadBar.scale.setTo(2);
     this.load.setPreloadSprite(this.preloadBar);
 
-    this.load.spritesheet('ninja','app/assets/sprites/NinjaCoverGirl.png', 32, 48, 9);
+    this.load.spritesheet('ninja','app/assets/sprites/NinjaCoverGirl2.png', 32, 48, 17);
     this.load.spritesheet('orc','app/assets/sprites/orc_piratess.png', 64, 64, 36);
     this.load.image('spike', 'app/assets/sprites/Spike_Pixel.png');
     //pulls json file of the level
