@@ -88,7 +88,9 @@ public class castleDashController {
     public String createUser(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         User user = users.findOneByUsername(username);
         if (user == null) {
-            if (password == null){
+            if (username == null || username == ""){
+                return "Empty username field";
+            } else if (password == null || password == ""){
                 return "Empty password field";
             } else {
                 user = new User();
