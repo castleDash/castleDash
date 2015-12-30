@@ -67,7 +67,7 @@ NinjaGame.GameState.prototype = {
       castleStage.createBack(this.levelData);
       backgroundMusic.loop = true;
       if(!newPlayer.muted){
-        backgroundMusic.play();
+        backgroundMusic.fadeIn(4000);
       }
 
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);

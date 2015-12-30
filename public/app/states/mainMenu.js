@@ -14,6 +14,7 @@ NinjaGame.MainMenu.prototype = {
     var saveFiles = [];
 
 
+
     _.each(that.saves, function(save){
 
       that.addFile(save, function(){NinjaGame.game.state.start("Game",true,false,save);});
@@ -63,7 +64,7 @@ NinjaGame.MainMenu.prototype = {
   },
 
   update:function(){
-
+      
   },
 
   addFile: function(fileName, callback){
@@ -103,7 +104,6 @@ NinjaGame.MainMenu.prototype = {
     t.events.onInputUp.add(callback);
     counter++;
   }
-
 
 
 };
