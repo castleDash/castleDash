@@ -25,7 +25,7 @@ NinjaGame.Preload.prototype ={
 
     //audio effects
 
-    this.load.audio('music', 'app/assets/audio/music/01 Running free.mp3');
+    this.load.audio('music', 'app/assets/audio/music/What a nice surprise.ogg');
     this.load.audio('level1Music', 'app/assets/audio/music/home.ogg');
     this.load.audio('level2Music', 'app/assets/audio/music/NorthernIsles.ogg');
     this.load.audio('level3Music', 'app/assets/audio/music/prepare_your_swords.ogg');
