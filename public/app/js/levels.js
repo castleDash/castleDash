@@ -20,6 +20,34 @@ mycastleStage.prototype = {
         // game.add.sprite(2400, 0, 'sky');
         // game.add.sprite(3600, 0, 'sky');
 
+        if(this.levelName === "tutorial"){
+
+          var mv = game.add.sprite(300,1000,'moveControl');
+          mv.animations.add('go',[0,0,1,0,0,2],5,true);
+          mv.scale.setTo(2,2);
+          mv.animations.play('go');
+
+          var jmp = game.add.sprite(900,1000,'jumperControl');
+          jmp.animations.add('go',[0,0,1,0,0,2],5,true);
+          jmp.scale.setTo(2,2);
+          jmp.animations.play('go');
+
+          var atk = game.add.sprite(1600,1000,'attackControl');
+          atk.animations.add('go',[0,0,1,0,0,2],5,true);
+          atk.scale.setTo(2,2);
+          atk.animations.play('go');
+
+          var tgl = game.add.sprite(2400,950,'toggleControl');
+          tgl.animations.add('go',[0,0,1,0,0,2],5,true);
+          tgl.scale.setTo(2,2);
+          tgl.animations.play('go');
+
+          var pos = game.add.sprite(2800,950,'pauseControl');
+          pos.animations.add('go',[0,0,1,0,0,2],5,true);
+          pos.scale.setTo(2,2);
+          pos.animations.play('go');
+        }
+
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
@@ -116,9 +144,9 @@ mycastleStage.prototype = {
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            if (ship!=null){
-            ship.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-          }
+          //   if (ship!=null){
+          //   ship.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+          // }
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
