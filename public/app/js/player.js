@@ -43,16 +43,28 @@ castlePlayer.prototype = {
 
     update: function() {
         if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
-          this.currentLevel = this.currentLevel +1;
-          this.previousGold = this.gold;
-          if(this.currentLevel === 4){
-            NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
-          }
-          else {
-            this.saveGame();
-            this.levelLoader();
-          }
-
+            if(castleStage.levelName !="tutorial"){
+              this.currentLevel = this.currentLevel +1;
+              this.previousGold = this.gold;
+              if(this.currentLevel === 4){
+                NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
+              }
+              else {
+                this.saveGame();
+                this.levelLoader();
+              }
+            }
+            else{
+                  $.ajax({
+                    method:"GET",
+                    url:"/saveList",
+                    success:function(saves){
+                      newPause.unPause();
+                      newPlayer = new castlePlayer();
+                      game.state.start('MainMenu',true,false, saves);
+                    }
+                  });
+            }
         }
         else{
           //MOVEMENT
@@ -87,7 +99,7 @@ castlePlayer.prototype = {
           }
           if (castleControl.muteMusic()){
             backgroundMusic.volume = 0;
-          } 
+          }
           if (castleControl.unMuteMusic()){
             backgroundMusic.volume = game.sound.volume;
           }
@@ -219,7 +231,13 @@ castlePlayer.prototype = {
       backgroundMusic.stop();
     },
     levelLoader: function(){
-      var leveldata = this.currentLevel;
+      var leveldata;
+      if(castleStage.levelName !="tutorial"){
+        leveldata = this.currentLevel;
+      }else{
+        leveldata = castleStage.levelName;
+      }
+
       NinjaGame.game.state.start('Game',true,false,leveldata);
       backgroundMusic.stop();
     },

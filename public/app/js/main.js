@@ -52,7 +52,6 @@ var login = {
     });
   },
   submitLogout: function(){
-    console.log("logging out");
     $.ajax({
       method:"POST",
       url:"/logout",

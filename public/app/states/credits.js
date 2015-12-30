@@ -24,7 +24,7 @@ NinjaGame.CreditState.prototype = {
     var GameArt = "ART SOURCES\n piskelapp.com\n opengameart.org";
     var Audio ="GAME SFX \n Graham \n Henry";
     var Instructors ="INFORMANTS\n Calvin Webster \n Nathan Hall \n Zach Oakes\n Matt McFarland\n Pablo Farias Navarro";
-    var SpecThanks ="SPECIAL THANKS TO\n Betsy Hare \n Dave Hinkle \n David Martinez\n Jared Harrison";
+    var SpecThanks ="SPECIAL THANKS TO\n Betsy Hare \n Dave Hinkle \n David Martinez\n Jared Harrison\n Nikki Hughes";
     var SpecThanks2 ="AND\n Dark Chocolate \n Wine \n Beer \n Coffee \n Cookies";
     var myText = Devs;
     var restart = "MAIN MENU";
@@ -36,9 +36,7 @@ NinjaGame.CreditState.prototype = {
     var t = NinjaGame.game.add.text(this.game.width/2, this.game.height/2,myText,style);
     t.anchor.set(0.5,0.5);
     var changeText = function(){
-      console.log("made it here");
       if(counter < credArr.length){
-        console.log("Should be changing text",credArr[counter]);
         t.text = credArr[counter];
         NinjaGame.game.time.events.add(1000,function(){
           counter++;
@@ -61,7 +59,6 @@ NinjaGame.CreditState.prototype = {
                 url:"/saveList",
                 success:function(saves){
                   newPause.unPause();
-                  console.log("exiting");
                   newPlayer = new castlePlayer();
                   game.state.start('MainMenu',true,false, saves);
                 }

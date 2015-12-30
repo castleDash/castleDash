@@ -32,6 +32,14 @@ NinjaGame.MainMenu.prototype = {
         })
       }
     }
+    var v = this.game.add.text(this.game.width/2, this.game.height/2,"Tutorial",{font:'30px Arial', fill:"#fff", align:"center"});
+    v.anchor.set(0.5, 3.5-counter*1.5);
+    v.inputEnabled = true;
+    v.events.onInputUp.add(function(){
+      NinjaGame.game.state.start("Game",true,false,"tutorial");
+    }
+
+    );
   },
 
   update:function(){
@@ -46,7 +54,7 @@ NinjaGame.MainMenu.prototype = {
     if(fileName != "New Game"){
       text = counter +". - level: "+ fileName.level;
       var u = this.game.add.text(this.game.width/2, this.game.height/2,"X",style2);
-      u.anchor.set(-12,3.5-counter*1.5);
+      u.anchor.set(-12,3.5-counter*1.2);
       u.inputEnabled = true;
       u.events.onInputUp.add(function(){
         $.ajax({
@@ -70,7 +78,7 @@ NinjaGame.MainMenu.prototype = {
     }
 
     var t = this.game.add.text(this.game.width/2, this.game.height/2,text,style);
-    t.anchor.set(0.5, 3.5-counter*1.5);
+    t.anchor.set(0.5, 3.5-counter*1.2);
     t.inputEnabled = true;
     t.events.onInputUp.add(callback);
     counter++;
