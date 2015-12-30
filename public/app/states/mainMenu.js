@@ -38,9 +38,29 @@ NinjaGame.MainMenu.prototype = {
     v.inputEnabled = true;
     v.events.onInputUp.add(function(){
       NinjaGame.game.state.start("Game",true,false,"tutorial");
-    }
-
-    );
+    });
+    var l = this.game.add.text(this.game.width/20, this.game.height/2,"Logout",{font:'30px Arial', fill:"#fff", align:"center"});
+    l.anchor.set(0, 3.5);
+    l.inputEnabled = true;
+    l.events.onInputUp.add(function(){
+      login.submitLogout();
+    });
+    var s = this.game.add.text(this.game.width/20, this.game.height/2,"Settings",{font:'30px Arial', fill:"#fff", align:"center"});
+    s.anchor.set(0, 2.5);
+    s.inputEnabled = true;
+    s.events.onInputUp.add(function(){
+      if(typeof newPause === 'undefined'){
+        var newPause = new castlePause();
+      }
+      // newPause = newPause || new castlePause();
+      newPlayer = newPlayer || new castlePlayer();
+      newPause.create();
+      newPause.update();
+      newPause.pause();
+      $("#exit").css('display','none');
+      $("#resume").text("Exit Menu");
+      $("#restart").css('display','none');
+    });
   },
 
   update:function(){
@@ -53,7 +73,7 @@ NinjaGame.MainMenu.prototype = {
     var style2 = {font:'30px Arial', fill:'#D64937', align:"center"};
     var text;
     if(fileName != "New Game"){
-      text = counter +". - level: "+ fileName.level;
+      text = counter +". - Level: "+ fileName.level;
       var u = this.game.add.text(this.game.width/2, this.game.height/2,"X",style2);
       u.anchor.set(-12,3.5-counter*1.2);
       u.inputEnabled = true;

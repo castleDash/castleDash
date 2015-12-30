@@ -18,9 +18,23 @@ castlePause.prototype = {
         game.onResume.add(this.setVolume);
     },
     update: function() {
-        if (castleControl.pauseCtrl()) {
+        if (game.state.getCurrentState().key!="MainMenu"){
+          if(castleControl.pauseCtrl()){
             newPause.pause();
+          }
         }
+        if(!newPlayer.muted){
+          $("#musicOn").css('display','none');
+          $("#musicOff").css('display','block');
+        }
+        else{
+          $("#musicOn").css('display','block');
+          $("#musicOff").css('display','none');
+        }
+        $("#resume").text("Resume Game");
+        $("#exit").css('display','block');
+        $("#restart").css('display','block');
+
     },
     pause: function(){
       game.paused = true;
@@ -34,32 +48,38 @@ castlePause.prototype = {
     },
     exitLevel: function(){
       if(castleStage.levelName !="tutorial"){
-      $.ajax({
-        method:"POST",
-        url:"/exitSave",
-        success:function(){
-          $.ajax({
-            method:"GET",
-            url:"/saveList",
-            success:function(saves){
-              newPause.unPause();
-              newPlayer = new castlePlayer();
-              game.state.start('MainMenu',true,false, saves);
-            }
-          });
-        }
-      });
-    }else{
-      $.ajax({
-        method:"GET",
-        url:"/saveList",
-        success:function(saves){
-          newPause.unPause();
-          newPlayer = new castlePlayer();
-          game.state.start('MainMenu',true,false, saves);
-        }
-      });
-    }
+        $.ajax({
+          method:"POST",
+          url:"/exitSave",
+          success:function(){
+            $.ajax({
+              method:"GET",
+              url:"/saveList",
+              success:function(saves){
+                newPause.unPause();
+                var muted = newPlayer.muted;
+                newPlayer = new castlePlayer();
+                newPlayer.muted = muted;
+                backgroundMusic.volume=0;
+                game.state.start('MainMenu',true,false, saves);
+              }
+            });
+          }
+        });
+      }else{
+        $.ajax({
+          method:"GET",
+          url:"/saveList",
+          success:function(saves){
+            newPause.unPause();
+            var muted = newPlayer.muted;
+            newPlayer = new castlePlayer();
+            newPlayer.muted = muted;
+            backgroundMusic.volume=0;
+            game.state.start('MainMenu',true,false, saves);
+          }
+        });
+      }
     },
     restartLevel: function(){
       newPause.unPause();
@@ -82,11 +102,15 @@ castlePause.prototype = {
     },
     musicOff: function(){
       castleControl.mute=true;
+      // castleControl.unMute=false;
+      // newPlayer.muted=true;
       $("#musicOff").css('display','none');
       $("#musicOn").css('display','block');
     },
     musicOn: function(){
       castleControl.unMute=true;
+      // castleControl.mute=false;
+      // newPlayer.muted=false;
       $("#musicOn").css('display','none');
       $("#musicOff").css('display','block');
     },
@@ -95,11 +119,9 @@ castlePause.prototype = {
       login.submitLogout();
     },
     setVolume: function () {
-      console.log("setting volume",volume);
       game.sound.volume=volume;
     },
     getVolume: function(){
-      console.log("getting volume",game.sound.volume);
       volume=game.sound.volume;
     }
 
