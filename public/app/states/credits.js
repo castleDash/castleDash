@@ -50,6 +50,8 @@ NinjaGame.CreditState.prototype = {
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
         u.events.onInputUp.add(function(){
+          backgroundMusic.stop();
+          that.playerRunning = true;
           $.ajax({
             method:"POST",
             url:"/exitSave",
