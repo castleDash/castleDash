@@ -21,6 +21,10 @@ castlePause.prototype = {
         if (castleControl.pauseCtrl()) {
             newPause.pause();
         }
+        if(backgroundMusic.volume!=0){
+          $("#musicOn").css('display','none');
+          $("#musicOff").css('display','block');
+        }
     },
     pause: function(){
       game.paused = true;
@@ -43,7 +47,9 @@ castlePause.prototype = {
             url:"/saveList",
             success:function(saves){
               newPause.unPause();
+              var muted = newPlayer.muted;
               newPlayer = new castlePlayer();
+              newPlayer.muted = muted;
               game.state.start('MainMenu',true,false, saves);
             }
           });
@@ -55,7 +61,9 @@ castlePause.prototype = {
         url:"/saveList",
         success:function(saves){
           newPause.unPause();
+          var muted = newPlayer.muted;
           newPlayer = new castlePlayer();
+          newPlayer.muted = muted;
           game.state.start('MainMenu',true,false, saves);
         }
       });
@@ -82,11 +90,13 @@ castlePause.prototype = {
     },
     musicOff: function(){
       castleControl.mute=true;
+      newPlayer.muted=true;
       $("#musicOff").css('display','none');
       $("#musicOn").css('display','block');
     },
     musicOn: function(){
       castleControl.unMute=true;
+      newPlayer.muted=false;
       $("#musicOn").css('display','none');
       $("#musicOff").css('display','block');
     },

@@ -59,7 +59,9 @@ NinjaGame.CreditState.prototype = {
                 url:"/saveList",
                 success:function(saves){
                   newPause.unPause();
+                  var muted = newPlayer.muted;
                   newPlayer = new castlePlayer();
+                  newPlayer.muted = muted;
                   game.state.start('MainMenu',true,false, saves);
                 }
               });

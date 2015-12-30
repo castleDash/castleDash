@@ -66,7 +66,9 @@ NinjaGame.GameState.prototype = {
       this.game.stage.backgroundColor="656565";
       castleStage.createBack(this.levelData);
       backgroundMusic.loop = true;
-      backgroundMusic.play();
+      if(!newPlayer.muted){
+        backgroundMusic.play();
+      }
 
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
@@ -110,7 +112,6 @@ NinjaGame.GameState.prototype = {
     // game.debug.body(castleStage.enemies.children[2]);
 
   },
-
 
   weapons: [],
 

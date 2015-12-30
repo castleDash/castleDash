@@ -5,7 +5,7 @@ var castleControl = {
 
 
 
-  create: function(){
+  create: function(muted){
     cursors = game.input.keyboard.createCursorKeys();
     keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
     keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -68,6 +68,7 @@ var castleControl = {
     pauseButton.onInputDown.add(this.buttonPause, this);
     pauseButton.onInputUp.add(this.releaseButtonPause, this);
 
+    this.mute=muted;
   },
   attack: false,
   jump: false,
@@ -196,12 +197,14 @@ var castleControl = {
   },
   muteMusic: function(){
     if (keyB.justDown || this.mute){
+      newPlayer.muted=true;
       this.mute=false;
       return true;
     }
   },
   unMuteMusic: function(){
     if (keyV.justDown||this.unMute){
+      newPlayer.muted=false;
       this.unMute=false;
       return true;
     }
