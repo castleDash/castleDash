@@ -59,7 +59,7 @@ mycastleStage.prototype = {
     if (this.levelName === 'level3'){
       backgroundMusic = game.add.audio('level3Music');
     }
-
+    backgroundMusic.loop=true;
     map = game.add.tilemap(this.levelName); //puts the level in the map varirable
     map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
     map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map

@@ -89,14 +89,12 @@ castlePause.prototype = {
       newPlayer.levelLoader();
     },
     volUp: function(){
-      console.log("increasing volume to ", volume);
       volume +=0.2;
       if (volume>1){
         volume=1;
       }
     },
     volDown: function(){
-      console.log("decreasing volume to ", volume);
       volume -=0.2;
       if(volume<0){
         volume=0;
@@ -121,11 +119,9 @@ castlePause.prototype = {
       login.submitLogout();
     },
     setVolume: function () {
-      console.log("setting volume",volume);
       game.sound.volume=volume;
     },
     getVolume: function(){
-      console.log("getting volume",game.sound.volume);
       volume=game.sound.volume;
     }
 
