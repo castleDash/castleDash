@@ -55,6 +55,7 @@ castlePlayer.prototype = {
               }
             }
             else{
+              backgroundMusic.stop();
                   $.ajax({
                     method:"GET",
                     url:"/saveList",
