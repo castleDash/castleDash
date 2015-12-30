@@ -206,7 +206,7 @@ var castleControl = {
   unMuteMusic: function(){
     if (keyV.justDown||this.unMute){
       newPlayer.muted=false;
-      this.unMute=true;
+      this.unMute=false;
       return true;
     }
 }

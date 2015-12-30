@@ -104,15 +104,15 @@ castlePause.prototype = {
     },
     musicOff: function(){
       castleControl.mute=true;
-      castleControl.unMute=false;
-      newPlayer.muted=true;
+      // castleControl.unMute=false;
+      // newPlayer.muted=true;
       $("#musicOff").css('display','none');
       $("#musicOn").css('display','block');
     },
     musicOn: function(){
       castleControl.unMute=true;
-      castleControl.mute=false;
-      newPlayer.muted=false;
+      // castleControl.mute=false;
+      // newPlayer.muted=false;
       $("#musicOn").css('display','none');
       $("#musicOff").css('display','block');
     },
