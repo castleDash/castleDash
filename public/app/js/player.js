@@ -231,7 +231,13 @@ castlePlayer.prototype = {
       backgroundMusic.stop();
     },
     levelLoader: function(){
-      var leveldata = this.currentLevel;
+      var leveldata;
+      if(castleStage.levelName !="tutorial"){
+        leveldata = this.currentLevel;
+      }else{
+        leveldata = castleStage.levelName;
+      }
+
       NinjaGame.game.state.start('Game',true,false,leveldata);
       backgroundMusic.stop();
     },
