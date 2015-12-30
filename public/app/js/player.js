@@ -7,7 +7,7 @@ var potionSound;
 var splashSound;
 var playerHurtSound;
 var playerDeathSound;
-
+var creditsMusic;
 castlePlayer.prototype = {
     preload: function() {
 
@@ -37,6 +37,7 @@ castlePlayer.prototype = {
         playerHurtSound = game.add.audio('playerHurt');
         playerDeathSound = game.add.audio('playerDeath');
         jumpSound = game.add.audio('playerJump');
+        creditsMusic = game.add.audio('creditsMusic');
 
 
     },
@@ -47,6 +48,8 @@ castlePlayer.prototype = {
               this.currentLevel = this.currentLevel +1;
               this.previousGold = this.gold;
               if(this.currentLevel === 4){
+                backgroundMusic.stop();
+                creditsMusic.play();
                 NinjaGame.game.state.start('Credits',true,false,this.currentLevel);
               }
               else {

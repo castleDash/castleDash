@@ -23,13 +23,14 @@ NinjaGame.CreditState.prototype = {
     var Testers = "QA TEAM\n Graham \n Henry \n Ayden \n Ellie";
     var GameArt = "ART SOURCES\n piskelapp.com\n opengameart.org";
     var Audio ="GAME SFX \n Graham \n Henry";
+    var Music = "MUSICIANS \n Erie \n Yubatake \n Bojidar Marinov \n Snabisch";
     var Instructors ="INFORMANTS\n Calvin Webster \n Nathan Hall \n Zach Oakes\n Matt McFarland\n Pablo Farias Navarro";
     var SpecThanks ="SPECIAL THANKS TO\n Betsy Hare \n Dave Hinkle \n David Martinez\n Jared Harrison\n Nikki Hughes";
     var SpecThanks2 ="AND\n Dark Chocolate \n Wine \n Beer \n Coffee \n Cookies";
     var myText = Devs;
     var restart = "MAIN MENU";
 
-    var credArr = [Devs,Creators,Testers,GameArt,Audio,Instructors,SpecThanks,SpecThanks2];
+    var credArr = [Devs,Creators,Testers,GameArt,Audio,Music,Instructors,SpecThanks,SpecThanks2];
 
     var counter = 0;
 
@@ -50,7 +51,7 @@ NinjaGame.CreditState.prototype = {
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
         u.events.onInputUp.add(function(){
-          backgroundMusic.stop();
+          creditsMusic.stop();
           that.playerRunning = true;
           $.ajax({
             method:"POST",
