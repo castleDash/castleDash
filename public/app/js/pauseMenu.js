@@ -33,6 +33,23 @@ castlePause.prototype = {
       castleControl.pause=false;
     },
     exitLevel: function(){
+      if(castleStage.levelName !="tutorial"){
+      $.ajax({
+        method:"POST",
+        url:"/exitSave",
+        success:function(){
+          $.ajax({
+            method:"GET",
+            url:"/saveList",
+            success:function(saves){
+              newPause.unPause();
+              newPlayer = new castlePlayer();
+              game.state.start('MainMenu',true,false, saves);
+            }
+          });
+        }
+      });
+    }else{
       $.ajax({
         method:"GET",
         url:"/saveList",
@@ -42,6 +59,7 @@ castlePause.prototype = {
           game.state.start('MainMenu',true,false, saves);
         }
       });
+    }
     },
     restartLevel: function(){
       newPause.unPause();
