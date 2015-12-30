@@ -69,6 +69,7 @@ var castleControl = {
     pauseButton.onInputUp.add(this.releaseButtonPause, this);
 
     this.mute=muted;
+    this.unMute=!muted;
   },
   attack: false,
   jump: false,
@@ -179,8 +180,8 @@ var castleControl = {
   releaseWeaponRight: function () {
     weaponRightButton.frame=0;
   },
-  mute:false,
-  unMute:false,
+  mute: false,
+  unMute: false,
   volumeDown: function(){
     if (keyN.justDown){
       while (game.sound.volume > 0){
@@ -205,7 +206,7 @@ var castleControl = {
   unMuteMusic: function(){
     if (keyV.justDown||this.unMute){
       newPlayer.muted=false;
-      this.unMute=false;
+      this.unMute=true;
       return true;
     }
 }
