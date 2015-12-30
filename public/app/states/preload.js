@@ -26,6 +26,9 @@ NinjaGame.Preload.prototype ={
     //audio effects
 
     this.load.audio('music', 'app/assets/audio/music/01 Running free.mp3');
+    this.load.audio('level1Music', 'app/assets/audio/music/01 Running free.mp3');
+    this.load.audio('level2Music', 'app/assets/audio/music/01 Running free.mp3');
+    this.load.audio('level3Music', 'app/assets/audio/music/01 Running free.mp3');
 
     this.load.audio('enemyHit', 'app/assets/audio/enemySound/hit5.mp3');
 

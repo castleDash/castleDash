@@ -46,6 +46,18 @@ mycastleStage.prototype = {
           pos.animations.add('go',[0,0,1,0,0,2],5,true);
           pos.scale.setTo(2,2);
           pos.animations.play('go');
+
+          backgroundMusic = game.add.audio('music');
+
+        }
+        if (this.levelName === 'level1'){
+          backgroundMusic = game.add.audio('level1Music');
+        }
+        if (this.levelName === 'level2'){
+          backgroundMusic = game.add.audio('level2Music');
+        }
+        if (this.levelName === 'level3'){
+          backgroundMusic = game.add.audio('level3Music');
         }
 
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
@@ -60,12 +72,6 @@ mycastleStage.prototype = {
         slopeMap = patFormKennyTiles; //assigns master array to slopeMap
         this.tiles = game.physics.ninja.convertTilemap(map, ground,
             slopeMap);
-
-        layer = map.createLayer('filler');
-        if (layer !=null){
-        layer.resizeWorld();
-      }
-
 
 
         layer = map.createLayer('background');
@@ -114,17 +120,6 @@ mycastleStage.prototype = {
         }
       }
 
-      backgroundMusic = game.add.audio('music');
-
-      // if (levelName === 'level3'){
-      //   ship = NinjaGame.game.add.sprite(5500,6908, 'ship');
-      //   //ship doesn't spawn in proper spot for some insane reason...Guess the image itself is too large
-      //   //ship.enableBody = true;
-      //   NinjaGame.game.physics.ninja.enableAABB(ship);
-      // }
-
-
-
 
     },
     createFront: function() {
@@ -135,11 +130,6 @@ mycastleStage.prototype = {
     },
 
     update: function() {
-
-
-
-
-
 
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
