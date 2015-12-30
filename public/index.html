@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Kninja Nights</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="app/css/styles.css" media="screen" title="no title" charset="utf-8">
   </head>
@@ -21,20 +22,31 @@
       <div id="game" class="hidden">
 
       </div>
+      <div id="pauseMenu">
+        <div>
+          <h3 id="resume">Resume Game</h3>
+          <h3 id="restart">Restart Level</h3>
+          <h3 id="exit">Exit to Main Menu</h3>
+          <h3 id="volUp"><i class="fa fa-volume-up"></i>  Volume Up</h3>
+          <h3 id="volDn"><i class="fa fa-volume-down"></i>  Volume Down</h3>
+          <h3 id="musicOff"><i class="fa fa-volume-off"></i>  Music Off</h3>
+          <h3 id="musicOn"><i class="fa fa-volume-up"></i>  Music On</h3>
+          <h3 id="logout">Logout</h3>
+        </div>
+      </div>
       <footer>
         <p>Created by Brandon, Doug, Holden, and Sally</p>
         <p>Designed by Graham and Henry</p>
         <br>
-        <button id="logout">logout</button>
       </footer>
 
     </div>
 
     <!--libs-->
 
-    <script src="bower_components/underscore/underscore.js" charset="utf-8"></script>
-    <script src="bower_components/jquery/dist/jquery.js" charset="utf-8"></script>
-    <script src="bower_components/phaser/build/custom/phaser-ninja-physics.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js" charset="utf-8"></script>
+    <script src="app/phaser-ninja-physics.js" charset="utf-8"></script>
 
     <!--gameScripts-->
 
@@ -44,6 +56,7 @@
     <script src="app/states/mainMenu.js" charset="utf-8"></script>
     <script src="app/states/playGame.js" charset="utf-8"></script>
     <script src="app/states/started.js" charset="utf-8"></script>
+    <script src="app/states/credits.js" charset="utf-8"></script>
     <script src="app/js/main.js" charset="utf-8"></script>
   </body>
 </html>

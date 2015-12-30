@@ -83,12 +83,14 @@ public class castleDashController {
             }
         }
     }
-
+///////HOLDEN CHANGE THIS!
     @RequestMapping(path = "/createUser", method = RequestMethod.POST)
     public String createUser(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         User user = users.findOneByUsername(username);
         if (user == null) {
-            if (password == null){
+            if (username == null || username.equals("")){
+                return "Empty username field";
+            } else if (password == null || password.equals("")){
                 return "Empty password field";
             } else {
                 user = new User();
@@ -150,6 +152,13 @@ public class castleDashController {
         return "success";
     }
 
+    @RequestMapping (path = "/deleteSave", method = RequestMethod.POST)
+    public String deleteSave(int id){
+        Save save = saves.findOneById(id);
+        saves.delete(save);
+        return "success";
+    }
+
     @RequestMapping(value = "/exitSave", method = RequestMethod.POST)
     public String exitSave(HttpSession saveSession) throws IOException {
         saveSession.setAttribute("id", null);
@@ -169,7 +178,7 @@ public class castleDashController {
     @RequestMapping (path = "/levelData", method = RequestMethod.GET)
     public List<Level> levelList(){
         List<Level> finalList = new ArrayList<>();
-        for (int i =1; i <4; i++){
+        for (int i =1; i <4; i++){ // i < x needs to be changed for the number of levels. i < 4 means there are 3 levels
             Random rn = new Random();
             int randVersion = rn.nextInt(2) + 1;
             List<Level> tempList = levels.findAllByLevelNumber(i);

@@ -14,6 +14,7 @@ NinjaGame.MainMenu.prototype = {
     var saveFiles = [];
 
 
+
     _.each(that.saves, function(save){
 
       that.addFile(save, function(){NinjaGame.game.state.start("Game",true,false,save);});
@@ -32,40 +33,57 @@ NinjaGame.MainMenu.prototype = {
         })
       }
     }
+    var v = this.game.add.text(this.game.width/2, this.game.height/2,"Tutorial",{font:'30px Arial', fill:"#fff", align:"center"});
+    v.anchor.set(0.5, 3.5-counter*1.5);
+    v.inputEnabled = true;
+    v.events.onInputUp.add(function(){
+      NinjaGame.game.state.start("Game",true,false,"tutorial");
+    }
 
-
-
-    // var t = this.game.add.text(this.game.width/2,this.game.height/2,textOne,style);
-    // t.anchor.set(1);
-    // var u = this.game.add.text(this.game.width/2,this.game.height/2,textTwo, style);
-    // u.anchor.set(0.5);
-    // var v = this.game.add.text(this.game.width/2,this.game.height/2,textThree, style);
-    // v.anchor.set(0.0);
-
+    );
   },
 
   update:function(){
-    if(this.game.input.activePointer.justPressed()){
-      this.game.state.start("Game");
-    }
+      
   },
 
   addFile: function(fileName, callback){
+    var that = this;
     var style = {font:'30px Arial', fill:"#fff", align:"center"};
+    var style2 = {font:'30px Arial', fill:'#D64937', align:"center"};
     var text;
     if(fileName != "New Game"){
       text = counter +". - level: "+ fileName.level;
-    }
+      var u = this.game.add.text(this.game.width/2, this.game.height/2,"X",style2);
+      u.anchor.set(-12,3.5-counter*1.2);
+      u.inputEnabled = true;
+      u.events.onInputUp.add(function(){
+        $.ajax({
+        method:"POST",
+        url:"/deleteSave",
+        data:{id:fileName.id},
+        success:function(data){
+          $.ajax({
+            method:"GET",
+            url:"/saveList",
+            success:function(saves){
+              that.state.start('MainMenu',true,false, saves);
+            }
+          });
+        }
+      });
+    });
+  }
     else{
       text = fileName;
     }
+
     var t = this.game.add.text(this.game.width/2, this.game.height/2,text,style);
-    t.anchor.set(0.5, 3.5-counter*1.5);
+    t.anchor.set(0.5, 3.5-counter*1.2);
     t.inputEnabled = true;
     t.events.onInputUp.add(callback);
     counter++;
   }
-
 
 
 };

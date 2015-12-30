@@ -1,8 +1,11 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
+var backgroundMusic;
+var ship;
+var originalY;
 
-//var COLORS = [#00FFFF];
 var mycastleStage = function(){};
+
 
 mycastleStage.prototype = {
 
@@ -11,16 +14,57 @@ mycastleStage.prototype = {
         this.spikes=[];
         this.enemies=[];
         //just some  nicer art that's not part of the level object
-        game.add.sprite(0, 0, 'sky');
-        game.add.sprite(800, 0, 'sky');
-        game.add.sprite(1600, 0, 'sky');
-        game.add.sprite(2400, 0, 'sky');
-        game.add.sprite(3600, 0, 'sky');
+        // game.add.sprite(0, 0, 'sky');
+        // game.add.sprite(800, 0, 'sky');
+        // game.add.sprite(1600, 0, 'sky');
+        // game.add.sprite(2400, 0, 'sky');
+        // game.add.sprite(3600, 0, 'sky');
 
+        if(this.levelName === "tutorial"){
+
+          var mv = game.add.sprite(300,1000,'moveControl');
+          mv.animations.add('go',[0,0,1,0,0,2],5,true);
+          mv.scale.setTo(2,2);
+          mv.animations.play('go');
+
+          var jmp = game.add.sprite(900,1000,'jumperControl');
+          jmp.animations.add('go',[0,0,1,0,0,2],5,true);
+          jmp.scale.setTo(2,2);
+          jmp.animations.play('go');
+
+          var atk = game.add.sprite(1600,1000,'attackControl');
+          atk.animations.add('go',[0,0,1,0,0,2],5,true);
+          atk.scale.setTo(2,2);
+          atk.animations.play('go');
+
+          var tgl = game.add.sprite(2400,950,'toggleControl');
+          tgl.animations.add('go',[0,0,1,0,0,2],5,true);
+          tgl.scale.setTo(2,2);
+          tgl.animations.play('go');
+
+          var pos = game.add.sprite(2800,950,'pauseControl');
+          pos.animations.add('go',[0,0,1,0,0,2],5,true);
+          pos.scale.setTo(2,2);
+          pos.animations.play('go');
+
+          backgroundMusic = game.add.audio('music');
+
+        }
+        if (this.levelName === 'level1'){
+          backgroundMusic = game.add.audio('level1Music');
+        }
+        if (this.levelName === 'level2'){
+          backgroundMusic = game.add.audio('level2Music');
+        }
+        if (this.levelName === 'level3'){
+          backgroundMusic = game.add.audio('level3Music');
+        }
 
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
+        map.addTilesetImage('pirateShip', 'ship');
+
 
         ground = map.createLayer('ground'); //creates layer called ground
         ground.resizeWorld();
@@ -28,12 +72,6 @@ mycastleStage.prototype = {
         slopeMap = patFormKennyTiles; //assigns master array to slopeMap
         this.tiles = game.physics.ninja.convertTilemap(map, ground,
             slopeMap);
-
-        layer = map.createLayer('filler');
-        if (layer !=null){
-        layer.resizeWorld();
-      }
-
 
 
         layer = map.createLayer('background');
@@ -57,7 +95,8 @@ mycastleStage.prototype = {
         spikeLayer.kill();
         var hazard = new castleHazards();
         for (var i = 0; i < this.spikeTiles.length; i++) {
-          spike = hazard.createSpike(this.spikeTiles[i].x, this.spikeTiles[i].y);
+          spike = hazard.createSpike(this.spikeTiles[i].x - 16 , this.spikeTiles[i].y);
+              //hazard is created at tile.x -16 because tile is drawn from left to right. at just x it draws halfway through a tile. this keeps everthing lined up nicely
              this.spikes.push(spike);
         }
       }
@@ -76,8 +115,7 @@ mycastleStage.prototype = {
         enemyLayer.kill();
         for (var i = 0; i< this.enemyTiles.length; i++){
           newEnemy = new castleEnemy();
-
-          newEnemy.create(this.enemyTiles[i].x, this.enemyTiles[i].y, DEFAULT_WEALTH);
+          newEnemy.create(this.enemyTiles[i].x-16, this.enemyTiles[i].y, DEFAULT_WEALTH);
           this.enemies.push(newEnemy);
         }
       }
@@ -90,12 +128,13 @@ mycastleStage.prototype = {
         layer.resizeWorld();
       }
     },
+
     update: function() {
 
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            // this.enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);
@@ -114,5 +153,6 @@ mycastleStage.prototype = {
     spikes: [],
     enemies: [],
     enemyTiles: [],
-    endTile: []
+    endTile: [],
+    shipTiles: []
 };

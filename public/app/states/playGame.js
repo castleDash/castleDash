@@ -22,32 +22,37 @@ NinjaGame.GameState.prototype = {
       var that = this;
       this.styling();
       this.levelData = levelData;
-      if(!isNaN(levelData)){
-        that.levelData = 'level'+levelData;
-      }
-      else if(levelData === undefined){
-        that.levelData = 'level1';
-      }
-      else{
-        that.levelData = 'level'+levelData.level;
-        that.SaveInfo = levelData;
-        saveInfo =levelData;
-        var saveId = that.SaveInfo.id;
+      if(levelData != "tutorial"){
 
-        $.ajax({
-          method:"POST",
-          url:"/selectSave",
-          data:{id:saveId},
-          success:function(){
-
+          if(!isNaN(levelData)){
+            that.levelData = 'level'+levelData;
           }
-        });
-      }
+          else if(levelData === undefined || levelData === null){
+            that.levelData = 'level1';
+          }
+          else{
+            that.levelData = 'level'+levelData.level;
+            that.SaveInfo = levelData;
+            saveInfo =levelData;
+            var saveId = that.SaveInfo.id;
+
+            $.ajax({
+              method:"POST",
+              url:"/selectSave",
+              data:{id:saveId},
+              success:function(){
+
+              }
+            });
+          }
+    }
   },
   styling: function() {
     newPlayer = newPlayer || new castlePlayer();
     newWeapon = new castleWeapon();
     castleStage = new mycastleStage();
+    newHud = new castleHUD();
+    newPause = new castlePause();
   },
 
   preload: function() {
@@ -58,16 +63,17 @@ NinjaGame.GameState.prototype = {
 
 
   create: function() {
-    var text = "Running Our Game";
-    var style = {font:'30px Arial', fill:"#fff", align:"center"};
-    var t = this.game.add.text(this.game.width/2,this.game.height/2,text,style);
-    t.anchor.set(0.5);
+      this.game.stage.backgroundColor="656565";
       castleStage.createBack(this.levelData);
+      backgroundMusic.loop = true;
+      backgroundMusic.fadeIn(4000);
+
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
         if(newPlayer.currentLevel < this.SaveInfo.level){
           newPlayer.currentLevel = this.SaveInfo.level;
           newPlayer.gold = this.SaveInfo.score;
+          newPlayer.previousGold = this.SaveInfo.score;
           newPlayer.loseImmunity();
         }
         if(newPlayer.immunity){
@@ -82,6 +88,8 @@ NinjaGame.GameState.prototype = {
       castleStage.createFront();
 
       castleControl.create();
+      newHud.create();
+      newPause.create();
 
 
   },
@@ -93,13 +101,14 @@ NinjaGame.GameState.prototype = {
       _.each(castleStage.enemies, function(enemy){
         enemy.update();
       });
-      castleControl.update();
-
+      newHud.update();
+      newPause.update();
   },
   render: function() {
     // game.debug.body(castleStage.enemies.children[0]);
     // game.debug.body(castleStage.enemies.children[1]);
     // game.debug.body(castleStage.enemies.children[2]);
+
   },
 
 
