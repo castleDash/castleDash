@@ -83,7 +83,7 @@ public class castleDashController {
             }
         }
     }
-
+///////HOLDEN CHANGE THIS!
     @RequestMapping(path = "/createUser", method = RequestMethod.POST)
     public String createUser(String username, String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         User user = users.findOneByUsername(username);

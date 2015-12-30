@@ -88,12 +88,12 @@ mycastleStage.prototype = {
 
       backgroundMusic = game.add.audio('music');
 
-      if (levelName === 'level3'){
-        ship = NinjaGame.game.add.sprite(5500,6908, 'ship');
-        //ship doesn't spawn in proper spot for some insane reason...Guess the image itself is too large
-        //ship.enableBody = true;
-        NinjaGame.game.physics.ninja.enableAABB(ship);
-      }
+      // if (levelName === 'level3'){
+      //   ship = NinjaGame.game.add.sprite(5500,6908, 'ship');
+      //   //ship doesn't spawn in proper spot for some insane reason...Guess the image itself is too large
+      //   //ship.enableBody = true;
+      //   NinjaGame.game.physics.ninja.enableAABB(ship);
+      // }
 
 
 
@@ -105,20 +105,17 @@ mycastleStage.prototype = {
         layer.resizeWorld();
       }
     },
-    counter:0,
+
     update: function() {
 
 
 
-        counter++;
+
 
 
         //Magic for loop for tile collision
         for (var i = 0; i < this.tiles.length; i++) {
             player.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-            if (ship!=null){
-            ship.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-          }
             if (this.spikes.length>0){
             for (var j = 0; j < this.spikes.length; j++) {
                 this.spikes[j].body.aabb.collideAABBVsTile(this.tiles[i].tile);

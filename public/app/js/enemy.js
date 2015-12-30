@@ -52,15 +52,14 @@ castleEnemy.prototype = {
     }
   },
   damageEnemy: function(enemy){
+    enemyHitSound.play();
       enemy.strength--;
       if(castleControl.weaponType===0){
         if (newPlayer.facingLeft()){
           enemy.body.x=enemy.body.x-32;
-          enemyHitSound.play();
         }
         else{
           enemy.body.x=enemy.body.x+32;
-          enemyHitSound.play();
         }
       }
       if(enemy.strength<=0){
