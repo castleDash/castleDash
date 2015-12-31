@@ -2,7 +2,7 @@ body, html{
   margin:0;
   padding:0;
   background-color: black;
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Press Start 2P', serif;
 }
 body{
   height:100%;
@@ -74,7 +74,7 @@ footer{
   height:100%;
   text-align:center;
   z-index: 1000;
-  div {
+  #options {
     width:300px;
     margin: 210px auto;
     background-color: #fff;
@@ -87,4 +87,13 @@ footer{
 
 #musicOn{
   display:none;
+}
+
+.volBlock{
+  width: 10px;
+  height: 20px;
+  background-color: gray;
+  display: inline-block;
+  margin:1px;
+  padding:0;
 }

@@ -126,8 +126,14 @@ castlePlayer.prototype = {
             NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
                 null, newPlayer);
           }, newPlayer);
+          _.each(castleStage.enemies, function(enemy){
+            NinjaGame.game.physics.ninja.overlap(enemy.enemy, castleStage.spikes, this.damageEnemy,
+              null, this);
+            }, newEnemy);
           NinjaGame.game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
+
+
 
 
 
@@ -190,7 +196,7 @@ castlePlayer.prototype = {
     damagePlayer: function(){
       if (!this.immunity){
         this.health--;
-      //  playerHurtSound.play();
+         playerHurtSound.play();
         if(this.health<=0){
           this.killPlayer();
         }else{

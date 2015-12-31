@@ -64,7 +64,7 @@ NinjaGame.MainMenu.prototype = {
   },
 
   update:function(){
-      
+
   },
 
   addFile: function(fileName, callback){
