@@ -1,6 +1,7 @@
 var ENEMY_SPEED = 15;
-var RAND_STRENGTH = (Math.floor(Math.random() * 6) + 1);
 var COLORS = [0x99FFFF, 0x99FF66, 0xFFCC66, 0xFF9966, 0xFF3333, 0x990000];
+var enemyHitSound;
+var enemyDeathSound;
 
 var castleEnemy = function () {};
 
@@ -16,16 +17,16 @@ castleEnemy.prototype = {
     this.enemy.scale.setTo(1,1);
     this.enemy.anchor.setTo(0.5,0.6);
     this.enemy.body.collideWorldBounds = true;
-    this.enemy.strength = (Math.floor(Math.random() * 6) + 1);
+    this.enemy.strength = (Math.floor(Math.random() * 3) + 1);
     this.enemy.wealth = wealth;
     this.enemy.immunity = false;
 
-    //this.enemy.tint = tint;
     this.enemy.tint = COLORS[this.enemy.strength - 1];
+    enemyHitSound = game.add.audio('enemyHit');
+
   },
 
   update: function(){
-    // this.enemy.body.collision()
     if(player.alive){
       var distX = this.enemy.body.x - player.body.x;
       var distY = this.enemy.body.y - player.body.y;
@@ -51,20 +52,20 @@ castleEnemy.prototype = {
     }
   },
   damageEnemy: function(enemy){
-      enemy.strength--;
-      if(castleControl.weaponType==0){
-        if (newPlayer.facingLeft()){
-          enemy.body.x=enemy.body.x-32;
-        }
-        else{
-          enemy.body.x=enemy.body.x+32;
-        }
+    enemyHitSound.play();
+    enemy.strength--;
+    if(castleControl.weaponType===0){
+      if (newPlayer.facingLeft()){
+        enemy.body.x=enemy.body.x-32;
       }
-      if(enemy.strength<=0){
-        enemy.kill();
-        newPlayer.gold = parseInt(newPlayer.gold)+enemy.wealth;
-        newPlayer.updateStatsDash();
+      else{
+        enemy.body.x=enemy.body.x+32;
       }
+    }
+    if(enemy.strength<=0){
+      enemy.kill();
+      newPlayer.gold = parseInt(newPlayer.gold)+enemy.wealth;
+    }
   },
   moveRight:function(){
     this.enemy.body.moveRight(ENEMY_SPEED);
