@@ -7,6 +7,7 @@ NinjaGame.MainMenu.prototype = {
   init:function(saves){
     this.saves = saves;
     counter = 1;
+    this.game.stage.backgroundColor = '#000000';
   },
 
   create: function(){
