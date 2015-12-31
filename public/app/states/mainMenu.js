@@ -10,6 +10,7 @@ NinjaGame.MainMenu.prototype = {
   },
 
   create: function(){
+  
     var that = this;
     var saveFiles = [];
 
@@ -45,22 +46,7 @@ NinjaGame.MainMenu.prototype = {
     l.events.onInputUp.add(function(){
       login.submitLogout();
     });
-    var s = this.game.add.text(this.game.width/20, this.game.height/2,"Settings",{font:'30px Arial', fill:"#fff", align:"center"});
-    s.anchor.set(0, 2.5);
-    s.inputEnabled = true;
-    s.events.onInputUp.add(function(){
-      if(typeof newPause === 'undefined'){
-        var newPause = new castlePause();
-      }
-      // newPause = newPause || new castlePause();
-      newPlayer = newPlayer || new castlePlayer();
-      newPause.create();
-      newPause.update();
-      newPause.pause();
-      $("#exit").css('display','none');
-      $("#resume").text("Exit Menu");
-      $("#restart").css('display','none');
-    });
+
   },
 
   update:function(){
