@@ -20,11 +20,7 @@ castlePause.prototype = {
     },
     fullscreen:function() {
       newPause.unPause();
-      if (game.scale.isFullScreen)
-      {
-          game.scale.stopFullScreen();
-      }
-      else
+      if (!game.scale.isFullScreen)
       {
           game.scale.startFullScreen(false);
       }
