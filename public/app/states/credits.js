@@ -15,9 +15,9 @@ NinjaGame.CreditState.prototype = {
     player.scale.setTo(3,3);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
     player.animations.add('stopped',[4,4,4,4,9,4,4,4,4],3,true);
-    this.game.stage.backgroundColor = '#222222';
+    this.game.stage.backgroundColor = '#000000';
     var that = this;
-    var style = {font:'25px VT323', fill:"#fff", align:"center"};
+    var style = {font:'30px VT323', fill:"#fff", align:"center"};
     var Devs = "DEVELOPERS\n Sally Kingston \nHolden Hughes \nDoug Scott \nBrandon Jones";
     var Creators = "FROM THE MINDS OF\n Henry Kingston\n Graham Kingston";
     var Testers = "QA TEAM\n Graham \n Henry \n Ayden \n Ellie";

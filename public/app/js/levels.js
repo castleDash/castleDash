@@ -38,6 +38,7 @@ mycastleStage.prototype = {
       atk.animations.play('go');
 
       var tgl = game.add.sprite(2400,950,'toggleControl');
+      var tgltxt = game.add.text(2450,925,"Toggle Weapon",{font:'20px VT323', fill:"#fff", align:"center"});
       tgl.animations.add('go',[0,0,1,0,0,2],5,true);
       tgl.scale.setTo(2,2);
       tgl.animations.play('go');
@@ -60,6 +61,7 @@ mycastleStage.prototype = {
       backgroundMusic = game.add.audio('level3Music');
     }
     backgroundMusic.loop=true;
+
     map = game.add.tilemap(this.levelName); //puts the level in the map varirable
     map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
     map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
