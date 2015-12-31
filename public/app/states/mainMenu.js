@@ -10,11 +10,9 @@ NinjaGame.MainMenu.prototype = {
   },
 
   create: function(){
-  
+
     var that = this;
     var saveFiles = [];
-
-
 
     _.each(that.saves, function(save){
 
@@ -34,13 +32,13 @@ NinjaGame.MainMenu.prototype = {
         })
       }
     }
-    var v = this.game.add.text(this.game.width/2, this.game.height/2,"Tutorial",{font:'30px Arial', fill:"#fff", align:"center"});
+    var v = this.game.add.text(this.game.width/2, this.game.height/2,"Tutorial",{font:"VT323",fontSize:'30px', fill:"#fff", align:"center"});
     v.anchor.set(0.5, 3.5-counter*1.5);
     v.inputEnabled = true;
     v.events.onInputUp.add(function(){
       NinjaGame.game.state.start("Game",true,false,"tutorial");
     });
-    var l = this.game.add.text(this.game.width/20, this.game.height/2,"Logout",{font:'30px Arial', fill:"#fff", align:"center"});
+    var l = this.game.add.text(this.game.width/20, this.game.height/2,"Logout",{font:"VT323",fontSize:'30px', fill:"#fff", align:"center"});
     l.anchor.set(0, 3.5);
     l.inputEnabled = true;
     l.events.onInputUp.add(function(){
@@ -55,11 +53,11 @@ NinjaGame.MainMenu.prototype = {
 
   addFile: function(fileName, callback){
     var that = this;
-    var style = {font:'30px Arial', fill:"#fff", align:"center"};
-    var style2 = {font:'30px Arial', fill:'#D64937', align:"center"};
+    var style = {font:"VT323",fontSize:'30px', fill:"#fff", align:"center"};
+    var style2 = {font:"VT323",fontSize:'30px' , fill:'#D64937', align:"center"};
     var text;
     if(fileName != "New Game"){
-      text = counter +". - Level: "+ fileName.level;
+      text = counter +". Level: "+ fileName.level;
       var u = this.game.add.text(this.game.width/2, this.game.height/2,"X",style2);
       u.anchor.set(-12,3.5-counter*1.2);
       u.inputEnabled = true;
