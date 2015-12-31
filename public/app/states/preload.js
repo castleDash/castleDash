@@ -98,7 +98,10 @@ NinjaGame.Preload.prototype ={
     });
   },
 
-  create:function(){},
+  create:function(){
+    newPause = new castlePause();
+    newPause.create();
+  },
 
   doThis:function(){
     this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);
