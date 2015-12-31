@@ -17,7 +17,7 @@ NinjaGame.CreditState.prototype = {
     player.animations.add('stopped',[4,4,4,4,9,4,4,4,4],3,true);
     this.game.stage.backgroundColor = '#222222';
     var that = this;
-    var style = {font:'25px Press Start 2P', fill:"#fff", align:"center"};
+    var style = {font:'25px VT323', fill:"#fff", align:"center"};
     var Devs = "DEVELOPERS\n Sally Kingston \nHolden Hughes \nDoug Scott \nBrandon Jones";
     var Creators = "FROM THE MINDS OF\n Henry Kingston\n Graham Kingston";
     var Testers = "QA TEAM\n Graham \n Henry \n Ayden \n Ellie";
@@ -46,7 +46,7 @@ NinjaGame.CreditState.prototype = {
       }
       else{
         that.playerRunning = false;
-        t.text = "The End\n thanks for playing";
+        t.text = "The End\n Thanks for Playing";
         var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -50, restart, style);
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
