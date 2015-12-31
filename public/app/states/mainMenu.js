@@ -69,7 +69,7 @@ NinjaGame.MainMenu.prototype = {
 
   addFile: function(fileName, callback){
     var that = this;
-    var style = {font:'30px Press Start 2P', fill:"#fff", align:"center"};
+    var style = {font:'30px Arial', fill:"#fff", align:"center"};
     var style2 = {font:'30px Arial', fill:'#D64937', align:"center"};
     var text;
     if(fileName != "New Game"){
