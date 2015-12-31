@@ -5,18 +5,29 @@ var castlePause = function() {};
 castlePause.prototype = {
 
     create: function() {
-        $("#resume").click(this.unPause);
-        $("#exit").click(this.exitLevel);
-        $("#restart").click(this.restartLevel);
-        $("#volUp").click(this.volUp);
-        $("#volDn").click(this.volDown);
-        $("#musicOff").click( this.musicOff);
-        $("#musicOn").click(this.musicOn);
-        $("#logout").click( this.logout);
+
+        $("#resume").on("click", this.unPause);
+        $("#exit").on("click",this.exitLevel);
+        $("#restart").on("click",this.restartLevel);
+        $("#volUp").on("click", this.volUp);
+        $("#volDn").on("click", this.volDown);
+        $("#musicOff").on("click", this.musicOff);
+        $("#musicOn").on("click",this.musicOn);
+        $("#logout").on("click", this.logout);
+        $("#fullscreen").on("click",this.fullscreen);
+
 
         game.onPause.add(this.getVolume);
         game.onResume.add(this.setVolume);
     },
+    fullscreen:function() {
+      newPause.unPause();
+      if (!game.scale.isFullScreen)
+      {
+          game.scale.startFullScreen(false);
+      }
+
+  },
     update: function() {
         if(castleControl.pauseCtrl()){
           newPause.pause();
@@ -32,6 +43,9 @@ castlePause.prototype = {
         }
     },
     pause: function(){
+      if(game.scale.isFullScreen){
+        game.scale.stopFullScreen();
+      }
       game.paused = true;
       $("#pauseMenu").css('display','block');
       newPause.displayVolume();
@@ -136,5 +150,6 @@ castlePause.prototype = {
         $("#vol5").css("background-color","green");
       }
     }
+
 
 };
