@@ -65,9 +65,7 @@ NinjaGame.GameState.prototype = {
       this.game.stage.backgroundColor="656565";
       castleStage.createBack(this.levelData);
       backgroundMusic.loop = true;
-      if(!newPlayer.muted){
-        backgroundMusic.fadeIn(4000);
-      }
+      backgroundMusic.play();
 
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
@@ -91,8 +89,10 @@ NinjaGame.GameState.prototype = {
       castleControl.create();
       newHud.create();
 
+      game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+      // game.input.onDown.add(this.gofull, this);
+    },
 
-  },
   update: function() {
 
       castleStage.update();
@@ -110,6 +110,7 @@ NinjaGame.GameState.prototype = {
     // game.debug.body(castleStage.enemies.children[2]);
 
   },
+
 
   weapons: [],
 
