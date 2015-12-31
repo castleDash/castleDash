@@ -29,14 +29,14 @@ NinjaGame.Preload.prototype ={
     this.load.audio('level1Music', 'app/assets/audio/music/home.ogg');
     this.load.audio('level2Music', 'app/assets/audio/music/NorthernIsles.ogg');
     this.load.audio('level3Music', 'app/assets/audio/music/prepare_your_swords.ogg');
-    this.load.audio('creditsMusic', 'app/assets/audio/music/What a nice surprise.ogg')
+    this.load.audio('creditsMusic', 'app/assets/audio/music/What a nice surprise.ogg');
 
-    this.load.audio('enemyHit', 'app/assets/audio/enemySound/hit5.mp3');
+    this.load.audio('enemyHit', 'app/assets/audio/enemySound/orcHurt.ogg');
 
     this.load.audio('step', 'app/assets/audio/playerSound/Ejimas1.m4a');
     this.load.audio('swordSound', 'app/assets/audio/playerSound/swish-13.wav');
-    this.load.audio('playerHurt', 'app/assets/audio/playerSound/pain-1.ogg');
-    this.load.audio('playerDeath', 'app/assets/audio/playerSound/pain-2.ogg');
+    this.load.audio('playerHurt', 'app/assets/audio/playerSound/playerHurt.ogg');
+    this.load.audio('playerDeath', 'app/assets/audio/playerSound/playerDeath.ogg');
     this.load.audio('playerJump', 'app/assets/audio/playerSound/SFX_Jump_24.wav');
 
 

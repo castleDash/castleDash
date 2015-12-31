@@ -188,7 +188,7 @@ castlePlayer.prototype = {
     damagePlayer: function(){
       if (!this.immunity){
         this.health--;
-      //  playerHurtSound.play();
+         playerHurtSound.play();
         if(this.health<=0){
           this.killPlayer();
         }else{
