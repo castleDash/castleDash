@@ -38,6 +38,7 @@ mycastleStage.prototype = {
       atk.animations.play('go');
 
       var tgl = game.add.sprite(2400,950,'toggleControl');
+      var tgltxt = game.add.text(2450,925,"toggle weapon",{font:'15px Arial', fill:"#fff", align:"center"});
       tgl.animations.add('go',[0,0,1,0,0,2],5,true);
       tgl.scale.setTo(2,2);
       tgl.animations.play('go');
