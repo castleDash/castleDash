@@ -39,6 +39,9 @@ castleEnemy.prototype = {
       else{
         this.standStill();
       }
+      if (this.enemy.body.touching.right || this.enemy.body.touching.left){
+        this.moveUp();
+      }
 
     }
     if(this.enemy.immunity){
@@ -75,6 +78,9 @@ castleEnemy.prototype = {
   moveLeft: function(){
     this.enemy.body.moveLeft(ENEMY_SPEED);
     this.enemy.animations.play('orcleft');
+  },
+  moveUp: function(){
+    this.enemy.body.moveUp(300);
   },
 
   standStill: function(){

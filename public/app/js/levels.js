@@ -1,8 +1,7 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var backgroundMusic;
-var ship;
-var originalY;
+
 
 var mycastleStage = function(){};
 
@@ -13,12 +12,6 @@ mycastleStage.prototype = {
         this.levelName = levelName;
         this.spikes=[];
         this.enemies=[];
-        //just some  nicer art that's not part of the level object
-        // game.add.sprite(0, 0, 'sky');
-        // game.add.sprite(800, 0, 'sky');
-        // game.add.sprite(1600, 0, 'sky');
-        // game.add.sprite(2400, 0, 'sky');
-        // game.add.sprite(3600, 0, 'sky');
 
         if(this.levelName === "tutorial"){
 
@@ -119,6 +112,18 @@ mycastleStage.prototype = {
           this.enemies.push(newEnemy);
         }
       }
+      toughEnemyLayer = map.createLayer('toughLayer');
+      if (toughEnemyLayer!=null){
+      toughEnemyLayer.resizeWorld();
+      this.toughTiles = game.physics.ninja.convertTilemap(map, toughEnemyLayer, slopeMap);
+      toughEnemyLayer.kill();
+      for (var i = 0; i< this.toughTiles.length; i++){
+        newEnemy = new castleEnemy();
+        newEnemy.create(this.toughTiles[i].x-16, this.toughTiles[i].y, DEFAULT_WEALTH);
+        newEnemy.strength = 100;
+        this.toughEnemies.push(newEnemy);
+      }
+    }
 
 
     },
@@ -145,6 +150,11 @@ mycastleStage.prototype = {
               this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
       }
+      if (this.toughEnemies.length > 0){
+        for (var e = 0; e<this.toughEnemies.length; e ++){
+          this.toughEnemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+        }
+      }
     }
   },
     tiles: [],
@@ -154,5 +164,5 @@ mycastleStage.prototype = {
     enemies: [],
     enemyTiles: [],
     endTile: [],
-    shipTiles: []
+    toughEnemies: []
 };
