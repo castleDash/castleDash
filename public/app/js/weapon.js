@@ -1,5 +1,6 @@
 var swordSound;
 var throwSound;
+var bottleBreak;
 var castleWeapon = function () {};
 
 castleWeapon.prototype = {
@@ -30,6 +31,7 @@ castleWeapon.prototype = {
 
    swordSound = game.add.audio('swordSound');
    throwSound = game.add.audio('throwSound');
+   bottleBreak = game.add.audio('bottleBreak');
  },
  swordExisted: false,
  update: function(){
@@ -58,9 +60,8 @@ castleWeapon.prototype = {
     if (this.weaponExists() && castleControl.weaponType===1){
       this.rangeCollide();
       if(this.weapon.body.touching.down){
-        swordSound.play();
         this.weapon.animations.play('splash');
-        swordSound.play();
+        bottleBreak.play();
         NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .1, this.killWeapon, this);
       }
      }

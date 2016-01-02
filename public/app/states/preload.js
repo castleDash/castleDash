@@ -36,6 +36,7 @@ NinjaGame.Preload.prototype ={
     this.load.audio('step', 'app/assets/audio/playerSound/Ejimas1.m4a');
     this.load.audio('swordSound', 'app/assets/audio/playerSound/swish-13.wav');
     this.load.audio('throwSound', 'app/assets/audio/playerSound/sfx_throw.wav');
+    this.load.audio('bottleBreak', 'app/assets/audio/playerSound/Bottle Break.wav');
     this.load.audio('playerHurt', 'app/assets/audio/playerSound/playerHurt.ogg');
     this.load.audio('playerDeath', 'app/assets/audio/playerSound/playerDeath.ogg');
     this.load.audio('playerJump', 'app/assets/audio/playerSound/SFX_Jump_24.wav');
