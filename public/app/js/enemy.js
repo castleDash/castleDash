@@ -53,6 +53,11 @@ castleEnemy.prototype = {
         this.enemy.body.sprite.visible = false;
       }
     }
+
+    _.each(castleStage.enemies, function(enemy){
+      NinjaGame.game.physics.ninja.overlap(enemy.enemy, castleStage.spikes, this.damageEnemy,
+        null, this);
+      }, newEnemy);
   },
   damageEnemy: function(enemy){
     enemyHitSound.play();

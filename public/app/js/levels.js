@@ -112,18 +112,18 @@ mycastleStage.prototype = {
           this.enemies.push(newEnemy);
         }
       }
-      toughEnemyLayer = map.createLayer('toughLayer');
-      if (toughEnemyLayer!=null){
-      toughEnemyLayer.resizeWorld();
-      this.toughTiles = game.physics.ninja.convertTilemap(map, toughEnemyLayer, slopeMap);
-      toughEnemyLayer.kill();
-      for (var i = 0; i< this.toughTiles.length; i++){
-        newEnemy = new castleEnemy();
-        newEnemy.create(this.toughTiles[i].x-16, this.toughTiles[i].y, DEFAULT_WEALTH);
-        newEnemy.strength = 100;
-        this.toughEnemies.push(newEnemy);
-      }
-    }
+    //   toughEnemyLayer = map.createLayer('toughLayer');
+    //   if (toughEnemyLayer!=null){
+    //   toughEnemyLayer.resizeWorld();
+    //   this.toughTiles = game.physics.ninja.convertTilemap(map, toughEnemyLayer, slopeMap);
+    //   toughEnemyLayer.kill();
+    //   for (var i = 0; i< this.toughTiles.length; i++){
+    //     newFriend = new castleEnemy();
+    //     newFriend.create(this.toughTiles[i].x-16, this.toughTiles[i].y, DEFAULT_WEALTH);
+    //     newFriend.strength = 100;
+    //     this.toughEnemies.push(newFriend);
+    //   }
+    // }
 
 
     },
@@ -150,11 +150,11 @@ mycastleStage.prototype = {
               this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
       }
-      if (this.toughEnemies.length > 0){
-        for (var e = 0; e<this.toughEnemies.length; e ++){
-          this.toughEnemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-        }
-      }
+      // if (this.toughEnemies.length > 0){
+      //   for (var t = 0; t<this.toughEnemies.length; t++){
+      //     this.toughEnemies[t].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+      //   }
+      // }
     }
   },
     tiles: [],
@@ -164,5 +164,6 @@ mycastleStage.prototype = {
     enemies: [],
     enemyTiles: [],
     endTile: [],
+    toughTiles: [],
     toughEnemies: []
 };
