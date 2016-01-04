@@ -1,7 +1,6 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var backgroundMusic;
-var toughEnemies;
 
 
 var mycastleStage = function(){};
@@ -58,6 +57,7 @@ mycastleStage.prototype = {
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
         map.addTilesetImage('pirateShip', 'ship');
+        map.addTilesetImage('starryNight', 'sky');
 
 
         ground = map.createLayer('ground'); //creates layer called ground
@@ -66,6 +66,15 @@ mycastleStage.prototype = {
         slopeMap = patFormKennyTiles; //assigns master array to slopeMap
         this.tiles = game.physics.ninja.convertTilemap(map, ground,
             slopeMap);
+
+       layer = map.createLayer('backgroundSky');
+        if (layer!=null){
+          layer.resizeWorld();
+        }
+        layer = map.createLayer('backgroundStars');
+        if (layer!=null){
+          layer.resizeWorld();
+        }
 
 
         layer = map.createLayer('background');
@@ -164,7 +173,5 @@ mycastleStage.prototype = {
     spikes: [],
     enemies: [],
     enemyTiles: [],
-    endTile: [],
-   // toughTiles: [],
-  //  toughEnemies: []
+    endTile: []
 };

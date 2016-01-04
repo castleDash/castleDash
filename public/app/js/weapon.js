@@ -60,9 +60,11 @@ castleWeapon.prototype = {
     if (this.weaponExists() && castleControl.weaponType===1){
       this.rangeCollide();
       if(this.weapon.body.touching.down){
-        bottleBreak.play();
+        if(!bottleBreak.isplaying){
+          bottleBreak.play();
+        }
         this.weapon.animations.play('splash');
-        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .1, this.killWeapon, this);
+        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.killWeapon, this);
       }
      }
 
