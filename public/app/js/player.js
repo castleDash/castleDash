@@ -42,7 +42,7 @@ castlePlayer.prototype = {
     },
 
     update: function() {
-        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.x <=(castleStage.endTile[0].x+16) && player.body.y<=(castleStage.endTile[0].y+32)){
+        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
             if(castleStage.levelName !="tutorial"){
               this.currentLevel = this.currentLevel +1;
               this.previousGold = this.gold;
@@ -139,7 +139,10 @@ castlePlayer.prototype = {
             NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
                 null, newPlayer);
           }, newPlayer);
-
+          _.each(castleStage.enemies, function(enemy){
+            NinjaGame.game.physics.ninja.overlap(enemy.enemy, castleStage.spikes, this.damageEnemy,
+              null, this);
+            }, newEnemy);
           NinjaGame.game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
 
@@ -207,7 +210,7 @@ castlePlayer.prototype = {
       if (!this.immunity){
         this.health--;
          playerHurtSound.play();
-        if(this.health<=0 && !this.playerDead){
+        if(this.health<=0){
           this.killPlayer();
         }else{
           this.immunity=true;
@@ -244,19 +247,15 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      this.playerDead = true;
+      this.health = 6;
       this.gold = this.previousGold;
       $(".messages").html("");
+      this.levelLoader();
       playerHurtSound.mute = true;
       playerDeathSound.play();
       backgroundMusic.stop();
-      NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 2.0, this.levelLoader, this);
     },
     levelLoader: function(){
-      if (this.health <=0){
-        this.playerDead = false;
-        this.health = 6;
-      }
       var leveldata;
       if(castleStage.levelName !="tutorial"){
         leveldata = this.currentLevel;
@@ -274,7 +273,6 @@ castlePlayer.prototype = {
     currentLevel:1,
     previousGold:0,
     nextlife:10,
-    playerDead : false,
     facingLeft: function(){
       if(player.frame<4){
         return true;
