@@ -8,7 +8,6 @@ var mycastleStage = function(){};
 
 mycastleStage.prototype = {
 
-<<<<<<< HEAD
     createBack: function(levelName) {
         this.levelName = levelName;
         this.spikes=[];
@@ -42,48 +41,6 @@ mycastleStage.prototype = {
           pos.animations.play('go');
 
           backgroundMusic = game.add.audio('music');
-=======
-  createBack: function(levelName) {
-    this.levelName = levelName;
-    this.spikes=[];
-    this.enemies=[];
-    //just some  nicer art that's not part of the level object
-    // game.add.sprite(0, 0, 'sky');
-    // game.add.sprite(800, 0, 'sky');
-    // game.add.sprite(1600, 0, 'sky');
-    // game.add.sprite(2400, 0, 'sky');
-    // game.add.sprite(3600, 0, 'sky');
-
-    if(this.levelName === "tutorial"){
-
-      var mv = game.add.sprite(300,1000,'moveControl');
-      mv.animations.add('go',[0,0,1,0,0,2],5,true);
-      mv.scale.setTo(2,2);
-      mv.animations.play('go');
-
-      var jmp = game.add.sprite(900,1000,'jumperControl');
-      jmp.animations.add('go',[0,0,1,0,0,2],5,true);
-      jmp.scale.setTo(2,2);
-      jmp.animations.play('go');
-
-      var atk = game.add.sprite(1600,1000,'attackControl');
-      atk.animations.add('go',[0,0,1,0,0,2],5,true);
-      atk.scale.setTo(2,2);
-      atk.animations.play('go');
-
-      var tgl = game.add.sprite(2400,950,'toggleControl');
-      var tgltxt = game.add.text(2450,925,"Toggle Weapon",{font:'20px VT323', fill:"#fff", align:"center"});
-      tgl.animations.add('go',[0,0,1,0,0,2],5,true);
-      tgl.scale.setTo(2,2);
-      tgl.animations.play('go');
-
-      var pos = game.add.sprite(2800,950,'pauseControl');
-      pos.animations.add('go',[0,0,1,0,0,2],5,true);
-      pos.scale.setTo(2,2);
-      pos.animations.play('go');
-
-      backgroundMusic = game.add.audio('music');
->>>>>>> 25926a0fe9065dd3448d8b5de922a191c9a8708a
 
     }
     if (this.levelName === 'level1'){
@@ -97,18 +54,11 @@ mycastleStage.prototype = {
     }
     backgroundMusic.loop=true;
 
-<<<<<<< HEAD
         map = game.add.tilemap(this.levelName); //puts the level in the map varirable
         map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
         map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
         map.addTilesetImage('pirateShip', 'ship');
         map.addTilesetImage('starryNight', 'sky');
-=======
-    map = game.add.tilemap(this.levelName); //puts the level in the map varirable
-    map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
-    map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
-    map.addTilesetImage('pirateShip', 'ship');
->>>>>>> 25926a0fe9065dd3448d8b5de922a191c9a8708a
 
 
     ground = map.createLayer('ground'); //creates layer called ground
@@ -171,23 +121,9 @@ mycastleStage.prototype = {
         newEnemy.create(this.enemyTiles[i].x-16, this.enemyTiles[i].y, DEFAULT_WEALTH);
         this.enemies.push(newEnemy);
       }
-<<<<<<< HEAD
-    //   toughEnemyLayer = map.createLayer('toughLayer');
-    //   if (toughEnemyLayer!=null){
-    //   toughEnemyLayer.resizeWorld();
-    //   this.toughTiles = game.physics.ninja.convertTilemap(map, toughEnemyLayer, slopeMap);
-    //   toughEnemyLayer.kill();
-    //   for (var i = 0; i< this.toughTiles.length; i++){
-    //     newFriend = new castleEnemy();
-    //     newFriend.create(this.toughTiles[i].x-16, this.toughTiles[i].y, DEFAULT_WEALTH);
-    //     newFriend.strength = 100;
-    //     this.toughEnemies.push(newFriend);
-    //   }
-    // }
-=======
+
     }
 
->>>>>>> 25926a0fe9065dd3448d8b5de922a191c9a8708a
 
   },
   createFront: function() {
@@ -220,7 +156,6 @@ mycastleStage.prototype = {
       // }
     }
   },
-<<<<<<< HEAD
     tiles: [],
     playerTile: [],
     spikeTiles: [],
@@ -228,14 +163,4 @@ mycastleStage.prototype = {
     enemies: [],
     enemyTiles: [],
     endTile: []
-=======
-  tiles: [],
-  playerTile: [],
-  spikeTiles: [],
-  spikes: [],
-  enemies: [],
-  enemyTiles: [],
-  endTile: [],
-  shipTiles: []
->>>>>>> 25926a0fe9065dd3448d8b5de922a191c9a8708a
 };
