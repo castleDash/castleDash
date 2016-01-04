@@ -1,6 +1,7 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var backgroundMusic;
+var toughEnemies;
 
 
 var mycastleStage = function(){};
@@ -164,6 +165,6 @@ mycastleStage.prototype = {
     enemies: [],
     enemyTiles: [],
     endTile: [],
-    toughTiles: [],
-    toughEnemies: []
+   // toughTiles: [],
+  //  toughEnemies: []
 };
