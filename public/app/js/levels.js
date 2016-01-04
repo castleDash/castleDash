@@ -61,11 +61,7 @@ mycastleStage.prototype = {
         map.addTilesetImage('starryNight', 'sky');
 
 
-    ground = map.createLayer('ground'); //creates layer called ground
-    ground.resizeWorld();
 
-    slopeMap = patFormKennyTiles; //assigns master array to slopeMap
-    this.tiles = game.physics.ninja.convertTilemap(map, ground, slopeMap);
 
        layer = map.createLayer('backgroundSky');
         if (layer!=null){
@@ -75,6 +71,12 @@ mycastleStage.prototype = {
         if (layer!=null){
           layer.resizeWorld();
         }
+
+        ground = map.createLayer('ground'); //creates layer called ground
+        ground.resizeWorld();
+
+        slopeMap = patFormKennyTiles; //assigns master array to slopeMap
+        this.tiles = game.physics.ninja.convertTilemap(map, ground, slopeMap);
 
 
     layer = map.createLayer('background');
@@ -149,11 +151,7 @@ mycastleStage.prototype = {
           this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
       }
-      // if (this.toughEnemies.length > 0){
-      //   for (var t = 0; t<this.toughEnemies.length; t++){
-      //     this.toughEnemies[t].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-      //   }
-      // }
+
     }
   },
     tiles: [],
