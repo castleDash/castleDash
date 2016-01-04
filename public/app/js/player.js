@@ -61,7 +61,7 @@ castlePlayer.prototype = {
                     method:"GET",
                     url:"/saveList",
                     success:function(saves){
-                      newPause.unPause();
+                      castlePause.unPause();
                       var muted = newPlayer.muted;
                       newPlayer = new castlePlayer();
                       newPlayer.muted = muted;
