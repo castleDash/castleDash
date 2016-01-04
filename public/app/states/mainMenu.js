@@ -60,8 +60,9 @@ NinjaGame.MainMenu.prototype = {
     var style = {font:"VT323",fontSize:'30px', fill:"#fff", align:"center"};
     var style2 = {font:"VT323",fontSize:'30px' , fill:'#D64937', align:"center"};
     var text;
+    var lvlnum = counter -1;
     if(fileName != "New Game"){
-      text = counter +". Level: "+ fileName.level;
+      text = lvlnum +". Level: "+ fileName.level;
       var u = this.game.add.text(this.game.width/2, this.game.height/2,"X",style2);
       u.anchor.set(-12,3.5-counter*1.2);
       u.inputEnabled = true;
