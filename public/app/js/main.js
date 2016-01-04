@@ -64,6 +64,7 @@ var login = {
       method:"POST",
       url:"/logout",
       success:function(){
+        NinjaGame.game.state.clearCurrentState();
         NinjaGame.game.cache.destroy();
         newPlayer = undefined;
         NinjaGame.game.world.shutdown();
