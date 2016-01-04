@@ -5,7 +5,7 @@ var castleControl = {
 
 
 
-  create: function(){
+  create: function(muted){
     cursors = game.input.keyboard.createCursorKeys();
     keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
     keyS = game.input.keyboard.addKey(Phaser.Keyboard.S);
@@ -21,53 +21,43 @@ var castleControl = {
     keyJump = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     keyPause = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
-    jumpButton = game.add.button(game.camera.width - 100, game.camera.height-100, 'jumpBtn');
+    jumpButton = game.add.button(game.camera.width - 80, game.camera.height-90, 'jumpBtn');
+    jumpButton.scale.setTo(1.5,1.5)
     jumpButton.fixedToCamera=true;
     jumpButton.onInputDown.add(this.buttonJump, this);
     jumpButton.onInputUp.add(this.releaseButtonJump, this);
 
-    attackButton = game.add.button(game.camera.width - 125, game.camera.height-75, 'attackBtn');
+    attackButton = game.add.button(game.camera.width - 135, game.camera.height-75, 'attackBtn');
+    attackButton.scale.setTo(1.5,1.5)
     attackButton.fixedToCamera=true;
     attackButton.onInputDown.add(this.buttonAttack, this);
     attackButton.onInputUp.add(this.releaseButtonAttack, this);
 
-    leftButton = game.add.button(99, game.camera.height-75, 'leftBtn');
+    leftButton = game.add.button(75, game.camera.height-75, 'leftBtn');
+    leftButton.scale.setTo(1.5,1.5)
     leftButton.fixedToCamera=true;
     leftButton.onInputDown.add(this.buttonLeft, this);
     leftButton.onInputUp.add(this.releaseButtonLeft, this);
 
-    rightButton = game.add.button(133, game.camera.height-75, 'rightBtn');
+    rightButton = game.add.button(153, game.camera.height-75, 'rightBtn');
+    rightButton.scale.setTo(1.5,1.5)
     rightButton.fixedToCamera=true;
     rightButton.onInputDown.add(this.buttonRight, this);
     rightButton.onInputUp.add(this.releaseButtonRight, this);
 
-    upButton = game.add.button(116, game.camera.height-93, 'upBtn');
+    upButton = game.add.button(116, game.camera.height-115, 'upBtn');
+    upButton.scale.setTo(1.5,1.5)
     upButton.fixedToCamera=true;
     upButton.onInputDown.add(this.buttonUp, this);
     upButton.onInputUp.add(this.releaseButtonUp, this);
-
-    downButton = game.add.button(116, game.camera.height-58, 'downBtn');
-    downButton.fixedToCamera=true;
-    downButton.onInputDown.add(this.buttonDown, this);
-    downButton.onInputUp.add(this.releaseButtonDown, this);
-
-    weaponLeftButton = game.add.button(110, game.camera.height-115, 'leftBtn');
-    weaponLeftButton.fixedToCamera=true;
-    weaponLeftButton.onInputDown.add(this.weaponLeft, this);
-    weaponLeftButton.scale.setTo(.5,.5);
-    weaponLeftButton.onInputUp.add(this.releaseWeaponLeft, this);
-
-    weaponRightButton = game.add.button(138, game.camera.height-115, 'rightBtn');
-    weaponRightButton.fixedToCamera=true;
-    weaponRightButton.onInputDown.add(this.weaponRight, this);
-    weaponRightButton.scale.setTo(.5,.5);
-    weaponRightButton.onInputUp.add(this.releaseWeaponRight, this);
 
     pauseButton = game.add.button(game.camera.width/2, game.camera.height-75, 'pauseBtn');
     pauseButton.fixedToCamera=true;
     pauseButton.onInputDown.add(this.buttonPause, this);
     pauseButton.onInputUp.add(this.releaseButtonPause, this);
 
+    this.mute=muted;
+    this.unMute=!muted;
   },
   attack: false,
   jump: false,
@@ -124,10 +114,6 @@ var castleControl = {
     this.up=true;
     this.changeWeaponType();
   },
-  buttonDown: function(){
-    downButton.frame=1;
-    this.down=true;
-  },
   buttonPause: function(){
     this.pause=true;
   },
@@ -166,20 +152,8 @@ var castleControl = {
       this.weaponType=0;
     }
   },
-  weaponLeft: function(){
-    weaponLeftButton.frame=1;
-  },
-  weaponRight: function(){
-    weaponRightButton.frame=1;
-  },
-  releaseWeaponLeft:function(){
-    weaponLeftButton.frame=0;
-  },
-  releaseWeaponRight: function () {
-    weaponRightButton.frame=0;
-  },
-  mute:false,
-  unMute:false,
+  mute: false,
+  unMute: false,
   volumeDown: function(){
     if (keyN.justDown){
       while (game.sound.volume > 0){
@@ -196,12 +170,14 @@ var castleControl = {
   },
   muteMusic: function(){
     if (keyB.justDown || this.mute){
+      newPlayer.muted=true;
       this.mute=false;
       return true;
     }
   },
   unMuteMusic: function(){
     if (keyV.justDown||this.unMute){
+      newPlayer.muted=false;
       this.unMute=false;
       return true;
     }

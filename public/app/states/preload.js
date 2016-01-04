@@ -1,7 +1,13 @@
 var NinjaGame = NinjaGame || {};
 NinjaGame.Preload = function(){};
 var levelArr = [];
+WebFontConfig = {
+    active: function() {  },
+    google: {
+      families: ["VT323"]
+    }
 
+};
 
 NinjaGame.Preload.prototype ={
   init:function(){
@@ -41,7 +47,8 @@ NinjaGame.Preload.prototype ={
     this.load.audio('playerDeath', 'app/assets/audio/playerSound/playerDeath.ogg');
     this.load.audio('playerJump', 'app/assets/audio/playerSound/SFX_Jump_24.wav');
 
-
+    //fonts
+    this.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
 
     //pulls tileset art
@@ -100,7 +107,10 @@ NinjaGame.Preload.prototype ={
     });
   },
 
-  create:function(){},
+  create:function(){
+    newPause = new castlePause();
+    newPause.create();
+  },
 
   doThis:function(){
     this.load.tilemap('level1', null, levelArr[0],  Phaser.Tilemap.TILED_JSON);

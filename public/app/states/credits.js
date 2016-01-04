@@ -15,9 +15,9 @@ NinjaGame.CreditState.prototype = {
     player.scale.setTo(3,3);
     player.animations.add('right', [5, 6, 7, 8], 10, true);
     player.animations.add('stopped',[4,4,4,4,9,4,4,4,4],3,true);
-    this.game.stage.backgroundColor = '#222222';
+    this.game.stage.backgroundColor = '#000000';
     var that = this;
-    var style = {font:'25px Arial', fill:"#fff", align:"center"};
+    var style = {font:'30px VT323', fill:"#fff", align:"center"};
     var Devs = "DEVELOPERS\n Sally Kingston \nHolden Hughes \nDoug Scott \nBrandon Jones";
     var Creators = "FROM THE MINDS OF\n Henry Kingston\n Graham Kingston";
     var Testers = "QA TEAM\n Graham \n Henry \n Ayden \n Ellie";
@@ -46,7 +46,7 @@ NinjaGame.CreditState.prototype = {
       }
       else{
         that.playerRunning = false;
-        t.text = "The End\n thanks for playing";
+        t.text = "The End\n Thanks for Playing";
         var u = NinjaGame.game.add.text(this.game.width/2, this.game.height -50, restart, style);
         u.anchor.set(0.5,0.5);
         u.inputEnabled = true;
@@ -62,7 +62,9 @@ NinjaGame.CreditState.prototype = {
                 url:"/saveList",
                 success:function(saves){
                   newPause.unPause();
+                  var muted = newPlayer.muted;
                   newPlayer = new castlePlayer();
+                  newPlayer.muted = muted;
                   game.state.start('MainMenu',true,false, saves);
                 }
               });

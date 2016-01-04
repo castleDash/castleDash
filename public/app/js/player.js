@@ -12,7 +12,7 @@ castlePlayer.prototype = {
     preload: function() {
 
     },
-
+    muted:false,
     create: function(x,y) {
         player = NinjaGame.game.add.sprite(x,y, 'ninja');
         player.animations.add('left', [0, 1, 2, 3], 10, true);
@@ -63,7 +63,9 @@ castlePlayer.prototype = {
                     url:"/saveList",
                     success:function(saves){
                       newPause.unPause();
+                      var muted = newPlayer.muted;
                       newPlayer = new castlePlayer();
+                      newPlayer.muted = muted;
                       game.state.start('MainMenu',true,false, saves);
                     }
                   });

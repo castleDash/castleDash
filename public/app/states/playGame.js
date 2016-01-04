@@ -3,12 +3,12 @@ NinjaGame = NinjaGame || {};
 NinjaGame.GameState = function(){};
 
 
-//SWORD
+// //SWORD
 var SWORD_SCALE = 1;
 var SWORD_Y = -15;
 var SWORD_X = 20;
 var SWORD_ANCHOR = 0.5;
-//OTHER
+// //OTHER
 var NINJA_GRAVITY = 0.5;
 var WORLD_DEATH = 270;
 var newPlayer;
@@ -52,7 +52,6 @@ NinjaGame.GameState.prototype = {
     newWeapon = new castleWeapon();
     castleStage = new mycastleStage();
     newHud = new castleHUD();
-    newPause = new castlePause();
   },
 
   preload: function() {
@@ -66,7 +65,8 @@ NinjaGame.GameState.prototype = {
       this.game.stage.backgroundColor="656565";
       castleStage.createBack(this.levelData);
       backgroundMusic.loop = true;
-      backgroundMusic.fadeIn(4000);
+      backgroundMusic.play();
+      this.game.sound.volume = 0.4;
 
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
@@ -89,12 +89,12 @@ NinjaGame.GameState.prototype = {
 
       castleControl.create();
       newHud.create();
-      newPause.create();
 
+      game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+    },
 
-  },
   update: function() {
-
+      backgroundMusic.loop = true;
       castleStage.update();
       newPlayer.update();
       newWeapon.update();
@@ -108,9 +108,7 @@ NinjaGame.GameState.prototype = {
       newPause.update();
   },
   render: function() {
-    // game.debug.body(castleStage.enemies.children[0]);
-    // game.debug.body(castleStage.enemies.children[1]);
-    // game.debug.body(castleStage.enemies.children[2]);
+
 
   },
 

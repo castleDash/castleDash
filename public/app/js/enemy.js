@@ -61,19 +61,19 @@ castleEnemy.prototype = {
   },
   damageEnemy: function(enemy){
     enemyHitSound.play();
-      enemy.strength--;
-      if(castleControl.weaponType===0){
-        if (newPlayer.facingLeft()){
-          enemy.body.x=enemy.body.x-32;
-        }
-        else{
-          enemy.body.x=enemy.body.x+32;
-        }
+    enemy.strength--;
+    if(castleControl.weaponType===0){
+      if (newPlayer.facingLeft()){
+        enemy.body.x=enemy.body.x-32;
       }
-      if(enemy.strength<=0){
-        enemy.kill();
-        newPlayer.gold = parseInt(newPlayer.gold)+enemy.wealth;
+      else{
+        enemy.body.x=enemy.body.x+32;
       }
+    }
+    if(enemy.strength<=0){
+      enemy.kill();
+      newPlayer.gold = parseInt(newPlayer.gold)+enemy.wealth;
+    }
   },
   moveRight:function(){
     this.enemy.body.moveRight(ENEMY_SPEED);
