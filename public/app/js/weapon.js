@@ -1,4 +1,6 @@
 var swordSound;
+var throwSound;
+var bottleBreak;
 var castleWeapon = function () {};
 
 castleWeapon.prototype = {
@@ -28,6 +30,8 @@ castleWeapon.prototype = {
    this.weapon.visible=true;
 
    swordSound = game.add.audio('swordSound');
+   throwSound = game.add.audio('throwSound');
+   bottleBreak = game.add.audio('bottleBreak');
  },
  swordExisted: false,
  update: function(){
@@ -56,8 +60,11 @@ castleWeapon.prototype = {
     if (this.weaponExists() && castleControl.weaponType===1){
       this.rangeCollide();
       if(this.weapon.body.touching.down){
+        if(!bottleBreak.isplaying){
+          bottleBreak.play();
+        }
         this.weapon.animations.play('splash');
-        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .1, this.killWeapon, this);
+        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.killWeapon, this);
       }
      }
 
@@ -95,6 +102,7 @@ castleWeapon.prototype = {
          }
          this.weapon.body.moveUp(200);
          this.weapon.animations.play('throw');
+         throwSound.play();
        }
      }
    }

@@ -41,6 +41,8 @@ NinjaGame.Preload.prototype ={
 
     this.load.audio('step', 'app/assets/audio/playerSound/Ejimas1.m4a');
     this.load.audio('swordSound', 'app/assets/audio/playerSound/swish-13.wav');
+    this.load.audio('throwSound', 'app/assets/audio/playerSound/sfx_throw.wav');
+    this.load.audio('bottleBreak', 'app/assets/audio/playerSound/Bottle Break.wav');
     this.load.audio('playerHurt', 'app/assets/audio/playerSound/playerHurt.ogg');
     this.load.audio('playerDeath', 'app/assets/audio/playerSound/playerDeath.ogg');
     this.load.audio('playerJump', 'app/assets/audio/playerSound/SFX_Jump_24.wav');
@@ -60,7 +62,7 @@ NinjaGame.Preload.prototype ={
     this.load.image('tiles','app/assets/tiledMaps/patformkenney-32-4x39.png');
     this.load.image('tree', 'app/assets/tiledMaps/PineTree.png');
     this.load.image('ship', 'app/assets/tiledMaps/2nd_ship_new_4.png');
-    this.load.image('sky', 'app/assets/backgroundArt/sky.png');
+    this.load.image('sky', 'app/assets/tiledMaps/platformertiles.png');
     this.load.image('coin', 'app/assets/sprites/coin.png');
     this.load.image('fullheart', 'app/assets/sprites/fullheart.png');
     this.load.image('halfheart', 'app/assets/sprites/halfheart.png');
