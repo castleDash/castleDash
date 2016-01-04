@@ -81,6 +81,15 @@ footer{
     border:1px solid #000;
     padding:15px;
     text-align:left;
+    h3{
+      padding:3px;
+      border:1px solid white;
+      &:hover{
+        cursor: pointer;
+        border: 1px solid black;
+      }
+    }
+
   }
 }
 
