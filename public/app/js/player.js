@@ -2,7 +2,6 @@ var PLAYER_SPEED = 50;
 var castlePlayer = function(){};
 var jumpSound;
 var walkSound;
-//var swordSound;
 var potionSound;
 var splashSound;
 var playerHurtSound;
