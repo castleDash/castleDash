@@ -34,21 +34,29 @@ var login = {
       $(".messages").html("");
       var username = $("input[type='username']").val();
       var password = $("input[type='password']").val();
-      $.ajax({
-        method: "POST",
-        url: "/createUser",
-        data: { username: username, password: password}
-      })
-      .then(function(data) {
+      if(username.length>=4&&password.length>=4){
+        $.ajax({
+          method: "POST",
+          url: "/createUser",
+          data: { username: username, password: password}
+        })
+        .then(function(data) {
 
-        //check for successful login
-        if(data==="success"){
-          that.submitLogin();
-        }
-        else{
-          $(".messages").html("Username invalid");
-        }
-      });
+          //check for successful login
+          if(data==="success"){
+            that.submitLogin();
+          }
+          else{
+            $(".messages").html("Username invalid");
+          }
+        });
+      }
+      else{
+        $(".messages").html("Username and password must both have between 4 and 10 characters.");
+        $("input[type='username']").val("");
+        $("input[type='password']").val("");
+      }
+
     });
   },
   submitLogout: function(){
@@ -85,6 +93,7 @@ var login = {
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
+          $(".messages").html("");
           loggedIn();
         }
         else{
