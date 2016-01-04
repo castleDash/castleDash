@@ -1,54 +1,46 @@
 var game = NinjaGame.game;
 var DEFAULT_STRENGTH=3, DEFAULT_WEALTH=3;
 var backgroundMusic;
-var ship;
-var originalY;
+
 
 var mycastleStage = function(){};
 
 
 mycastleStage.prototype = {
 
-  createBack: function(levelName) {
-    this.levelName = levelName;
-    this.spikes=[];
-    this.enemies=[];
-    //just some  nicer art that's not part of the level object
-    // game.add.sprite(0, 0, 'sky');
-    // game.add.sprite(800, 0, 'sky');
-    // game.add.sprite(1600, 0, 'sky');
-    // game.add.sprite(2400, 0, 'sky');
-    // game.add.sprite(3600, 0, 'sky');
+    createBack: function(levelName) {
+        this.levelName = levelName;
+        this.spikes=[];
+        this.enemies=[];
 
-    if(this.levelName === "tutorial"){
+        if(this.levelName === "tutorial"){
 
-      var mv = game.add.sprite(300,1000,'moveControl');
-      mv.animations.add('go',[0,0,1,0,0,2],5,true);
-      mv.scale.setTo(2,2);
-      mv.animations.play('go');
+          var mv = game.add.sprite(300,1000,'moveControl');
+          mv.animations.add('go',[0,0,1,0,0,2],5,true);
+          mv.scale.setTo(2,2);
+          mv.animations.play('go');
 
-      var jmp = game.add.sprite(900,1000,'jumperControl');
-      jmp.animations.add('go',[0,0,1,0,0,2],5,true);
-      jmp.scale.setTo(2,2);
-      jmp.animations.play('go');
+          var jmp = game.add.sprite(900,1000,'jumperControl');
+          jmp.animations.add('go',[0,0,1,0,0,2],5,true);
+          jmp.scale.setTo(2,2);
+          jmp.animations.play('go');
 
-      var atk = game.add.sprite(1600,1000,'attackControl');
-      atk.animations.add('go',[0,0,1,0,0,2],5,true);
-      atk.scale.setTo(2,2);
-      atk.animations.play('go');
+          var atk = game.add.sprite(1600,1000,'attackControl');
+          atk.animations.add('go',[0,0,1,0,0,2],5,true);
+          atk.scale.setTo(2,2);
+          atk.animations.play('go');
 
-      var tgl = game.add.sprite(2400,950,'toggleControl');
-      var tgltxt = game.add.text(2450,925,"Toggle Weapon",{font:'20px VT323', fill:"#fff", align:"center"});
-      tgl.animations.add('go',[0,0,1,0,0,2],5,true);
-      tgl.scale.setTo(2,2);
-      tgl.animations.play('go');
+          var tgl = game.add.sprite(2400,950,'toggleControl');
+          tgl.animations.add('go',[0,0,1,0,0,2],5,true);
+          tgl.scale.setTo(2,2);
+          tgl.animations.play('go');
 
-      var pos = game.add.sprite(2800,950,'pauseControl');
-      pos.animations.add('go',[0,0,1,0,0,2],5,true);
-      pos.scale.setTo(2,2);
-      pos.animations.play('go');
+          var pos = game.add.sprite(2800,950,'pauseControl');
+          pos.animations.add('go',[0,0,1,0,0,2],5,true);
+          pos.scale.setTo(2,2);
+          pos.animations.play('go');
 
-      backgroundMusic = game.add.audio('music');
+          backgroundMusic = game.add.audio('music');
 
     }
     if (this.levelName === 'level1'){
@@ -62,10 +54,11 @@ mycastleStage.prototype = {
     }
     backgroundMusic.loop=true;
 
-    map = game.add.tilemap(this.levelName); //puts the level in the map varirable
-    map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
-    map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
-    map.addTilesetImage('pirateShip', 'ship');
+        map = game.add.tilemap(this.levelName); //puts the level in the map varirable
+        map.addTilesetImage('groundLayer', 'tiles'); //adds tileSet art into the map
+        map.addTilesetImage('PineTree', 'tree'); //adds the pinetree art into map
+        map.addTilesetImage('pirateShip', 'ship');
+        map.addTilesetImage('starryNight', 'sky');
 
 
     ground = map.createLayer('ground'); //creates layer called ground
@@ -73,6 +66,15 @@ mycastleStage.prototype = {
 
     slopeMap = patFormKennyTiles; //assigns master array to slopeMap
     this.tiles = game.physics.ninja.convertTilemap(map, ground, slopeMap);
+
+       layer = map.createLayer('backgroundSky');
+        if (layer!=null){
+          layer.resizeWorld();
+        }
+        layer = map.createLayer('backgroundStars');
+        if (layer!=null){
+          layer.resizeWorld();
+        }
 
 
     layer = map.createLayer('background');
@@ -119,6 +121,7 @@ mycastleStage.prototype = {
         newEnemy.create(this.enemyTiles[i].x-16, this.enemyTiles[i].y, DEFAULT_WEALTH);
         this.enemies.push(newEnemy);
       }
+
     }
 
 
@@ -146,14 +149,18 @@ mycastleStage.prototype = {
           this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
       }
+      // if (this.toughEnemies.length > 0){
+      //   for (var t = 0; t<this.toughEnemies.length; t++){
+      //     this.toughEnemies[t].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
+      //   }
+      // }
     }
   },
-  tiles: [],
-  playerTile: [],
-  spikeTiles: [],
-  spikes: [],
-  enemies: [],
-  enemyTiles: [],
-  endTile: [],
-  shipTiles: []
+    tiles: [],
+    playerTile: [],
+    spikeTiles: [],
+    spikes: [],
+    enemies: [],
+    enemyTiles: [],
+    endTile: []
 };

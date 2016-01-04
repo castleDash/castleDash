@@ -42,7 +42,7 @@ castlePlayer.prototype = {
     },
 
     update: function() {
-        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
+        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.x <=(castleStage.endTile[0].x+16) && player.body.y<=(castleStage.endTile[0].y+32)){
             if(castleStage.levelName !="tutorial"){
               this.currentLevel = this.currentLevel +1;
               this.previousGold = this.gold;
@@ -139,10 +139,7 @@ castlePlayer.prototype = {
             NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
                 null, newPlayer);
           }, newPlayer);
-          _.each(castleStage.enemies, function(enemy){
-            NinjaGame.game.physics.ninja.overlap(enemy.enemy, castleStage.spikes, this.damageEnemy,
-              null, this);
-            }, newEnemy);
+
           NinjaGame.game.physics.ninja.overlap(player, castleStage.spikes, this.damagePlayer,
               null, this);
 
