@@ -2,7 +2,6 @@ var PLAYER_SPEED = 50;
 var castlePlayer = function(){};
 var jumpSound;
 var walkSound;
-//var swordSound;
 var potionSound;
 var splashSound;
 var playerHurtSound;
@@ -33,7 +32,6 @@ castlePlayer.prototype = {
         player.canBeAttacked=true;
 
         walkSound = game.add.audio('step');
-        //swordSound = game.add.audio('swordSound');
         playerHurtSound = game.add.audio('playerHurt');
         playerDeathSound = game.add.audio('playerDeath');
         jumpSound = game.add.audio('playerJump');
@@ -119,6 +117,20 @@ castlePlayer.prototype = {
             }
             else{
               player.body.sprite.visible = false;
+            }
+          }
+
+
+          if(this.gold >= this.nextlife){
+            if(this.health >=4 && this.health < 6){
+              this.health = 6;
+              this.nextlife = this.nextlife +10;
+            }
+            else if(this.health < 4){
+              this.health = this.health +2;
+              this.nextlife = this.nextlife +10;
+            }else{
+              this.nextlife = this.nextlife +10;
             }
           }
 
@@ -259,6 +271,7 @@ castlePlayer.prototype = {
     potion: 1,
     currentLevel:1,
     previousGold:0,
+    nextlife:10,
     facingLeft: function(){
       if(player.frame<4){
         return true;
