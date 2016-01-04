@@ -101,9 +101,6 @@ NinjaGame.GameState.prototype = {
       _.each(castleStage.enemies, function(enemy){
         enemy.update();
       });
-      // _.each(castleStage.toughEnemies, function(enemy){
-      //   enemy.update();
-      // });
       newHud.update();
       newPause.update();
   },
