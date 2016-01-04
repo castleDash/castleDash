@@ -65,9 +65,9 @@ castleWeapon.prototype = {
           this.brokenbottle = true;
           bottleBreak.play();
           NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.4, this.unbreak, this);
+          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.4, this.killWeapon, this);
         }
         this.weapon.animations.play('splash');
-        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.4, this.killWeapon, this);
       }
      }
 
