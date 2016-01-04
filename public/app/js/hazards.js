@@ -14,4 +14,4 @@ castleHazards.prototype = {
 
 
 
-  }//end prototype
+  };

@@ -82,7 +82,6 @@ var login = {
         $(".messages").html("Incorrect Password");
       })
       .then(function(data) {
-        //check for successful login
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");

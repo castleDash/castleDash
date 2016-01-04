@@ -149,7 +149,6 @@ mycastleStage.prototype = {
           this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
       }
-
     }
   },
     tiles: [],
