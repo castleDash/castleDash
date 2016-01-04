@@ -22,6 +22,9 @@ NinjaGame.GameState.prototype = {
       var that = this;
       this.styling();
       this.levelData = levelData;
+      if(levelData === "tutorial"){
+        this.game.stage.backgroundColor ='#20274B';
+      }
       if(levelData != "tutorial"){
 
           if(!isNaN(levelData)){

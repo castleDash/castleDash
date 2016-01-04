@@ -14,7 +14,7 @@ mycastleStage.prototype = {
         this.enemies=[];
 
         if(this.levelName === "tutorial"){
-
+          
           var mv = game.add.sprite(300,1000,'moveControl');
           mv.animations.add('go',[0,0,1,0,0,2],5,true);
           mv.scale.setTo(2,2);
