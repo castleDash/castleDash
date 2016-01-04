@@ -180,7 +180,7 @@ public class castleDashController {
         List<Level> finalList = new ArrayList<>();
         for (int i =1; i <4; i++){ // i < x needs to be changed for the number of levels. i < 4 means there are 3 levels
             Random rn = new Random();
-            int randVersion = rn.nextInt(2) + 1;
+            int randVersion = rn.nextInt(3);
             List<Level> tempList = levels.findAllByLevelNumber(i);
             Level randomLevel = tempList.get(randVersion);
             finalList.add(randomLevel);
