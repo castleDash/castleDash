@@ -93,6 +93,7 @@ var login = {
         if(data==="success"){
           $("#login").addClass("hidden");
           $("#game").removeClass("hidden");
+          $(".messages").html("");
           loggedIn();
         }
         else{
