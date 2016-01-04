@@ -33,7 +33,6 @@ castlePlayer.prototype = {
         player.canBeAttacked=true;
 
         walkSound = game.add.audio('step');
-        //swordSound = game.add.audio('swordSound');
         playerHurtSound = game.add.audio('playerHurt');
         playerDeathSound = game.add.audio('playerDeath');
         jumpSound = game.add.audio('playerJump');

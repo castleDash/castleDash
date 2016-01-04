@@ -57,7 +57,7 @@ castleWeapon.prototype = {
       this.rangeCollide();
       if(this.weapon.body.touching.down){
         this.weapon.animations.play('splash');
-        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .1, this.killWeapon, this);
+        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.killWeapon, this);
       }
      }
 
