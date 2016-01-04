@@ -244,15 +244,18 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-      this.health = 6;
+
       this.gold = this.previousGold;
       $(".messages").html("");
-      this.levelLoader();
       playerHurtSound.mute = true;
       playerDeathSound.play();
       backgroundMusic.stop();
+      NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 2.0, this.levelLoader, this);
     },
     levelLoader: function(){
+      if (this.health <=0){
+        this.health = 6;
+      }
       var leveldata;
       if(castleStage.levelName !="tutorial"){
         leveldata = this.currentLevel;

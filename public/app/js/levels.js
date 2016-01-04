@@ -149,11 +149,6 @@ mycastleStage.prototype = {
           this.enemies[e].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
         }
       }
-      // if (this.toughEnemies.length > 0){
-      //   for (var t = 0; t<this.toughEnemies.length; t++){
-      //     this.toughEnemies[t].enemy.body.aabb.collideAABBVsTile(this.tiles[i].tile);
-      //   }
-      // }
     }
   },
     tiles: [],
