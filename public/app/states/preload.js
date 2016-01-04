@@ -108,8 +108,7 @@ NinjaGame.Preload.prototype ={
   },
 
   create:function(){
-    newPause = new castlePause();
-    newPause.create();
+    castlePause.create();
   },
 
   doThis:function(){

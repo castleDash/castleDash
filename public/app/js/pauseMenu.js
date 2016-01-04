@@ -1,27 +1,25 @@
 var game = NinjaGame.game;
 var volume=0;
-var castlePause = function() {};
-
-castlePause.prototype = {
+var castlePause =  {
 
     create: function() {
 
-        $("#resume").on("click", this.unPause);
-        $("#exit").on("click",this.exitLevel);
-        $("#restart").on("click",this.restartLevel);
-        $("#volUp").on("click", this.volUp);
-        $("#volDn").on("click", this.volDown);
-        $("#musicOff").on("click", this.musicOff);
-        $("#musicOn").on("click",this.musicOn);
-        $("#logout").on("click", this.logout);
-        $("#fullscreen").on("click",this.fullscreen);
+        $("#resume").on("click", castlePause.unPause);
+        $("#exit").on("click",castlePause.exitLevel);
+        $("#restart").on("click",castlePause.restartLevel);
+        $("#volUp").on("click", castlePause.volUp);
+        $("#volDn").on("click", castlePause.volDown);
+        $("#musicOff").on("click", castlePause.musicOff);
+        $("#musicOn").on("click",castlePause.musicOn);
+        $("#logout").on("click", castlePause.logout);
+        $("#fullscreen").on("click",castlePause.fullscreen);
 
 
-        game.onPause.add(this.getVolume);
-        game.onResume.add(this.setVolume);
+        game.onPause.add(castlePause.getVolume);
+        game.onResume.add(castlePause.setVolume);
     },
     fullscreen:function() {
-      newPause.unPause();
+      castlePause.unPause();
       if (!game.scale.isFullScreen)
       {
           game.scale.startFullScreen(false);
@@ -30,8 +28,8 @@ castlePause.prototype = {
   },
     update: function() {
         if(castleControl.pauseCtrl()){
-          newPause.pause();
-          newPause.displayVolume();
+          castlePause.pause();
+          castlePause.displayVolume();
         }
         if(!newPlayer.muted){
           $("#musicOn").css('display','none');
@@ -48,7 +46,7 @@ castlePause.prototype = {
       }
       game.paused = true;
       $("#pauseMenu").css('display','block');
-      newPause.displayVolume();
+      castlePause.displayVolume();
       castleControl.pause=false;
     },
     unPause: function() {
@@ -66,11 +64,11 @@ castlePause.prototype = {
               method:"GET",
               url:"/saveList",
               success:function(saves){
-                newPause.unPause();
+                castlePause.unPause();
                 var muted = newPlayer.muted;
                 newPlayer = new castlePlayer();
                 newPlayer.muted = muted;
-                backgroundMusic.volume=0;
+                backgroundMusic.stop();
                 game.state.start('MainMenu',true,false, saves);
               }
             });
@@ -81,18 +79,18 @@ castlePause.prototype = {
           method:"GET",
           url:"/saveList",
           success:function(saves){
-            newPause.unPause();
+            castlePause.unPause();
             var muted = newPlayer.muted;
             newPlayer = new castlePlayer();
             newPlayer.muted = muted;
-            backgroundMusic.volume=0;
+            backgroundMusic.stop();
             game.state.start('MainMenu',true,false, saves);
           }
         });
       }
     },
     restartLevel: function(){
-      newPause.unPause();
+      castlePause.unPause();
       newPlayer.health = 6;
       newPlayer.gold = newPlayer.previousGold;
       $(".messages").html("");
@@ -103,14 +101,14 @@ castlePause.prototype = {
       if (volume>1){
         volume=1;
       }
-      newPause.displayVolume();
+      castlePause.displayVolume();
     },
     volDown: function(){
       volume -=0.2;
       if(volume<0){
         volume=0;
       }
-      newPause.displayVolume();
+      castlePause.displayVolume();
     },
     musicOff: function(){
       castleControl.mute=true;
@@ -123,7 +121,7 @@ castlePause.prototype = {
       $("#musicOff").css('display','block');
     },
     logout: function(){
-      newPause.unPause();
+      castlePause.unPause();
       login.submitLogout();
     },
     setVolume: function () {

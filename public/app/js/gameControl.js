@@ -22,31 +22,31 @@ var castleControl = {
     keyPause = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
 
     jumpButton = game.add.button(game.camera.width - 80, game.camera.height-90, 'jumpBtn');
-    jumpButton.scale.setTo(1.5,1.5)
+    jumpButton.scale.setTo(1.5,1.5);
     jumpButton.fixedToCamera=true;
     jumpButton.onInputDown.add(this.buttonJump, this);
     jumpButton.onInputUp.add(this.releaseButtonJump, this);
 
     attackButton = game.add.button(game.camera.width - 135, game.camera.height-75, 'attackBtn');
-    attackButton.scale.setTo(1.5,1.5)
+    attackButton.scale.setTo(1.5,1.5);
     attackButton.fixedToCamera=true;
     attackButton.onInputDown.add(this.buttonAttack, this);
     attackButton.onInputUp.add(this.releaseButtonAttack, this);
 
     leftButton = game.add.button(75, game.camera.height-75, 'leftBtn');
-    leftButton.scale.setTo(1.5,1.5)
+    leftButton.scale.setTo(1.5,1.5);
     leftButton.fixedToCamera=true;
     leftButton.onInputDown.add(this.buttonLeft, this);
     leftButton.onInputUp.add(this.releaseButtonLeft, this);
 
     rightButton = game.add.button(153, game.camera.height-75, 'rightBtn');
-    rightButton.scale.setTo(1.5,1.5)
+    rightButton.scale.setTo(1.5,1.5);
     rightButton.fixedToCamera=true;
     rightButton.onInputDown.add(this.buttonRight, this);
     rightButton.onInputUp.add(this.releaseButtonRight, this);
 
     upButton = game.add.button(116, game.camera.height-115, 'upBtn');
-    upButton.scale.setTo(1.5,1.5)
+    upButton.scale.setTo(1.5,1.5);
     upButton.fixedToCamera=true;
     upButton.onInputDown.add(this.buttonUp, this);
     upButton.onInputUp.add(this.releaseButtonUp, this);

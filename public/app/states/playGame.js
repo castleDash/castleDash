@@ -101,7 +101,7 @@ NinjaGame.GameState.prototype = {
         enemy.update();
       });
       newHud.update();
-      newPause.update();
+      castlePause.update();
   },
   render: function() {
 
