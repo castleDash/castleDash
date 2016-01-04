@@ -22,7 +22,7 @@ castleWeapon.prototype = {
      this.weapon.animations.add('splash', [4,5,6,7,8], 2, true, true);
      NinjaGame.game.physics.ninja.enableAABB(this.weapon);
      this.weapon.enableBody = true;
-     this.weapon.body.friction = 0.1;
+     this.weapon.body.friction = 0.5;
      this.weapon.collideWorldBounds = true;
    }
    this.weapon.anchor.setTo(0.5,0.5);
@@ -34,6 +34,7 @@ castleWeapon.prototype = {
    bottleBreak = game.add.audio('bottleBreak');
  },
  swordExisted: false,
+ brokenbottle:false,
  update: function(){
    if(keyW.justDown && !castleControl.attackCtrl()){
      castleControl.changeWeaponType();
@@ -60,16 +61,21 @@ castleWeapon.prototype = {
     if (this.weaponExists() && castleControl.weaponType===1){
       this.rangeCollide();
       if(this.weapon.body.touching.down){
-        if(!bottleBreak.isplaying){
+        if(!this.brokenbottle){
+          this.brokenbottle = true;
           bottleBreak.play();
+          NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.4, this.unbreak, this);
         }
         this.weapon.animations.play('splash');
-        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * .5, this.killWeapon, this);
+        NinjaGame.game.time.events.add(Phaser.Timer.SECOND * 0.4, this.killWeapon, this);
       }
      }
 
  },
  duration: 0,
+ unbreak:function(){
+   this.brokenbottle = false;
+ },
  weaponAttack: function(direction,type){
    if(player.canAttack){
      if (!this.weaponExists()){

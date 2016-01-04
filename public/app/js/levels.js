@@ -61,8 +61,6 @@ mycastleStage.prototype = {
         map.addTilesetImage('starryNight', 'sky');
 
 
-
-
        layer = map.createLayer('backgroundSky');
         if (layer!=null){
           layer.resizeWorld();

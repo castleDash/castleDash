@@ -121,6 +121,20 @@ castlePlayer.prototype = {
             }
           }
 
+
+          if(this.gold >= this.nextlife){
+            if(this.health >=4 && this.health < 6){
+              this.health = 6;
+              this.nextlife = this.nextlife +10;
+            }
+            else if(this.health < 4){
+              this.health = this.health +2;
+              this.nextlife = this.nextlife +10;
+            }else{
+              this.nextlife = this.nextlife +10;
+            }
+          }
+
           _.each(castleStage.enemies, function(enemy){
             NinjaGame.game.physics.ninja.overlap(player, enemy.enemy, this.fightEnemy,
                 null, newPlayer);
@@ -255,6 +269,7 @@ castlePlayer.prototype = {
     potion: 1,
     currentLevel:1,
     previousGold:0,
+    nextlife:10,
     facingLeft: function(){
       if(player.frame<4){
         return true;
