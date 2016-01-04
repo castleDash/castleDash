@@ -68,7 +68,7 @@ var castlePause =  {
                 var muted = newPlayer.muted;
                 newPlayer = new castlePlayer();
                 newPlayer.muted = muted;
-                backgroundMusic.volume=0;
+                backgroundMusic.stop();
                 game.state.start('MainMenu',true,false, saves);
               }
             });
@@ -83,7 +83,7 @@ var castlePause =  {
             var muted = newPlayer.muted;
             newPlayer = new castlePlayer();
             newPlayer.muted = muted;
-            backgroundMusic.volume=0;
+            backgroundMusic.stop();
             game.state.start('MainMenu',true,false, saves);
           }
         });
