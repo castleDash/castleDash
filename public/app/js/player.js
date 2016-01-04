@@ -207,7 +207,7 @@ castlePlayer.prototype = {
       if (!this.immunity){
         this.health--;
          playerHurtSound.play();
-        if(this.health<=0){
+        if(this.health<=0 && !this.playerDead){
           this.killPlayer();
         }else{
           this.immunity=true;
@@ -244,7 +244,7 @@ castlePlayer.prototype = {
         }
     },
     killPlayer: function(){
-
+      this.playerDead = true;
       this.gold = this.previousGold;
       $(".messages").html("");
       playerHurtSound.mute = true;
@@ -254,6 +254,7 @@ castlePlayer.prototype = {
     },
     levelLoader: function(){
       if (this.health <=0){
+        this.playerDead = false;
         this.health = 6;
       }
       var leveldata;
@@ -273,6 +274,7 @@ castlePlayer.prototype = {
     currentLevel:1,
     previousGold:0,
     nextlife:10,
+    playerDead : false,
     facingLeft: function(){
       if(player.frame<4){
         return true;
