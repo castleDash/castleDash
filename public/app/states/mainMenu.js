@@ -29,7 +29,7 @@ NinjaGame.MainMenu.prototype = {
     });
 
 
-    if(counter<4){
+    if(counter<=4){
       for (var i = counter; i <= 4; i++) {
         that.addFile("New Game",function(){
           $.ajax({
