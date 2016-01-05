@@ -51,6 +51,7 @@ NinjaGame.GameState.prototype = {
     }
   },
   styling: function() {
+
     newPlayer = newPlayer || new castlePlayer();
     newWeapon = new castleWeapon();
     castleStage = new mycastleStage();
