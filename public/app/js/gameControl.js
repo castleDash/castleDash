@@ -56,8 +56,8 @@ var castleControl = {
     pauseButton.onInputDown.add(this.buttonPause, this);
     pauseButton.onInputUp.add(this.releaseButtonPause, this);
 
-    this.mute=muted;
-    this.unMute=!muted;
+    this.mute=false;
+    this.unMute=false;
   },
   attack: false,
   jump: false,
@@ -177,6 +177,8 @@ var castleControl = {
   },
   unMuteMusic: function(){
     if (keyV.justDown||this.unMute){
+      console.log("this.unMute:",this.unMute);
+      console.log("keyV.justDown",keyV.justDown);
       newPlayer.muted=false;
       this.unMute=false;
       return true;
