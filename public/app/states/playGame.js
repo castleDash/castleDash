@@ -51,6 +51,7 @@ NinjaGame.GameState.prototype = {
     }
   },
   styling: function() {
+
     newPlayer = newPlayer || new castlePlayer();
     newWeapon = new castleWeapon();
     castleStage = new mycastleStage();
@@ -68,8 +69,11 @@ NinjaGame.GameState.prototype = {
       castleStage.createBack(this.levelData);
       backgroundMusic.loop = true;
       backgroundMusic.play();
-      this.game.sound.volume = 0.4;
 
+      this.game.sound.volume = this.game.sound.volume || 0.4;
+      if(newPlayer.muted){
+        backgroundMusic.volume=0;
+      }
       newPlayer.create(castleStage.playerTile[0].x, castleStage.playerTile[0].y);
       if(this.SaveInfo !== undefined){
         if(newPlayer.currentLevel < this.SaveInfo.level){
