@@ -41,7 +41,8 @@ castlePlayer.prototype = {
     },
 
     update: function() {
-        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y && player.body.y<=(castleStage.endTile[0].y+32)){
+        if (player.body.x>=castleStage.endTile[0].x && player.body.y>=castleStage.endTile[0].y &&
+           player.body.x <=(castleStage.endTile[0].x+5) && player.body.y<=(castleStage.endTile[0].y+32)){
             if(castleStage.levelName !="tutorial"){
               this.currentLevel = this.currentLevel +1;
               this.previousGold = this.gold;
